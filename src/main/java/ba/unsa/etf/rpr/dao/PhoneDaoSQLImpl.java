@@ -5,6 +5,7 @@ import ba.unsa.etf.rpr.domain.Buyer;
 import ba.unsa.etf.rpr.domain.Phone;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PhoneDaoSQLImpl implements PhoneDao{
@@ -94,7 +95,26 @@ public class PhoneDaoSQLImpl implements PhoneDao{
 
     @Override
     public List<Phone> getAll() {
-        return null;
+        String query = "SELECT * FROM phones";
+        List<Phone> phones = new ArrayList<Phone>();
+        try{
+            PreparedStatement stmt = this.connection.prepareStatement(query);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()){ // result set is iterator.
+                Phone phone=new Phone();
+                phone.setId(rs.getInt("id"));
+                phone.setBrand(new BrandDaoSQLImpl().getById(rs.getInt(2)));
+                phone.setVersion(rs.getString("version"));
+                phone.setPrice(rs.getInt("price"));
+                phone.setIn_stock(rs.getInt("in_stock"));
+                phone.setRelease_date(rs.getDate("release_date"));
+                phones.add(phone);
+            }
+            rs.close();
+        }catch (SQLException e){
+            e.printStackTrace(); // poor error handling
+        }
+        return phones;
     }
 
     @Override
