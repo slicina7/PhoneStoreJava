@@ -42,6 +42,17 @@ public class PurchaseDaoSQLImpl implements PurchaseDao {
 
     @Override
     public Purchase insert(Purchase item) {
+        String insert = "INSERT INTO purchases VALUES(?,?)";
+        try{
+            PreparedStatement stmt=this.connection.prepareStatement(insert);
+            stmt.setInt(1,item.getId());
+            stmt.setInt(2, item.getBuyer().getId());
+            stmt.setInt(3,item.getPhone().getId());
+            stmt.executeUpdate();
+            return item;
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
         return null;
     }
 
