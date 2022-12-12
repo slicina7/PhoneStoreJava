@@ -39,7 +39,7 @@ public class BrandDaoSQLImpl implements BrandDao{
     }
 
     @Override
-    public Brand add(Brand item) {
+    public Brand insert(Brand item) {
         String insert = "INSERT INTO brands(name) VALUES(?)";
         try{
             PreparedStatement stmt=this.connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);

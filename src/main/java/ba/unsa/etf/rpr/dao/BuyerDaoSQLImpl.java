@@ -4,6 +4,7 @@ import ba.unsa.etf.rpr.domain.Brand;
 import ba.unsa.etf.rpr.domain.Buyer;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class BuyerDaoSQLImpl implements BuyerDao{
@@ -99,11 +100,37 @@ public class BuyerDaoSQLImpl implements BuyerDao{
 
     @Override
     public void delete(int id) {
-
+        String insert = "DELETE FROM buyers WHERE id = ?";
+        try{
+            PreparedStatement stmt = this.connection.prepareStatement(insert);
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public List<Buyer> getAll() {
-        return null;
+        String query = "SELECT * FROM buyers";
+        List<Buyer> buyers = new ArrayList<Buyer>();
+        try{
+            PreparedStatement stmt = this.connection.prepareStatement(query);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()){ // result set is iterator.
+                Buyer buyer=new Buyer();
+                buyer.setId(rs.getInt("id"));
+                buyer.setName(rs.getString("name"));
+                buyer.setSurname(rs.getString("surname"));
+                buyer.setAccount_number(rs.getString("account_number"));
+                buyer.setPassword(rs.getInt("password"));
+                buyer.setAccount_balance(rs.getInt("account_balance"));
+                buyers.add(buyer);
+            }
+            rs.close();
+        }catch (SQLException e){
+            e.printStackTrace(); // poor error handling
+        }
+        return buyers;
     }
 }
