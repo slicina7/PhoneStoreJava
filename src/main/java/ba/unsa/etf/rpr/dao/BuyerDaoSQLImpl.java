@@ -3,9 +3,11 @@ package ba.unsa.etf.rpr.dao;
 import ba.unsa.etf.rpr.domain.Brand;
 import ba.unsa.etf.rpr.domain.Buyer;
 
+import java.io.FileReader;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 public class BuyerDaoSQLImpl implements BuyerDao{
 
@@ -13,7 +15,10 @@ public class BuyerDaoSQLImpl implements BuyerDao{
 
     public BuyerDaoSQLImpl(){
         try{
-            this.connection= DriverManager.getConnection("url","user","password");
+            FileReader reader=new FileReader("db.properties");
+            Properties p=new Properties();
+            p.load(reader);
+            this.connection= DriverManager.getConnection("jdbc:mysql://sql7.freemysqlhosting.net:3306/"+p.getProperty("user"),p.getProperty("user"),p.getProperty("password"));
         }catch(Exception e){
             e.printStackTrace();
         }
