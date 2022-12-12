@@ -2,6 +2,7 @@ package ba.unsa.etf.rpr.dao;
 
 import ba.unsa.etf.rpr.domain.Brand;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class BrandDaoSQLImpl implements BrandDao{
@@ -18,7 +19,7 @@ public class BrandDaoSQLImpl implements BrandDao{
 
     @Override
     public Brand getById(int id) {
-        String query = "SELECT * FROM brand WHERE id = ?";
+        String query = "SELECT * FROM brands WHERE id = ?";
         try{
             PreparedStatement stmt=this.connection.prepareStatement(query);
             stmt.setInt(1,id);
@@ -39,7 +40,7 @@ public class BrandDaoSQLImpl implements BrandDao{
 
     @Override
     public Brand add(Brand item) {
-        String insert = "INSERT INTO brand(name) VALUES(?)";
+        String insert = "INSERT INTO brands(name) VALUES(?)";
         try{
             PreparedStatement stmt=this.connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, item.getName());
@@ -57,7 +58,7 @@ public class BrandDaoSQLImpl implements BrandDao{
 
     @Override
     public Brand update(Brand item) {
-        String insert = "UPDATE categories SET name = ? WHERE id = ?";
+        String insert = "UPDATE brands SET name = ? WHERE id = ?";
         try{
             PreparedStatement stmt = this.connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
             stmt.setObject(1, item.getName());
@@ -72,7 +73,7 @@ public class BrandDaoSQLImpl implements BrandDao{
 
     @Override
     public void delete(int id) {
-        String insert = "DELETE FROM categories WHERE id = ?";
+        String insert = "DELETE FROM brands WHERE id = ?";
         try{
             PreparedStatement stmt = this.connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
             stmt.setObject(1, id);
@@ -84,7 +85,22 @@ public class BrandDaoSQLImpl implements BrandDao{
 
     @Override
     public List<Brand> getAll() {
-        return null;
+        String query = "SELECT * FROM brands";
+        List<Brand> brands = new ArrayList<Brand>();
+        try{
+            PreparedStatement stmt = this.connection.prepareStatement(query);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()){ // result set is iterator.
+                Brand brand=new Brand();
+                brand.setId(rs.getInt("id"));
+                brand.setName(rs.getString("name"));
+                brands.add(brand);
+            }
+            rs.close();
+        }catch (SQLException e){
+            e.printStackTrace(); // poor error handling
+        }
+        return brands;
     }
 
 }
