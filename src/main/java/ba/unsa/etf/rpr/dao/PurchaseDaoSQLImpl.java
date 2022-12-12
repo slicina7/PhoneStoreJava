@@ -74,7 +74,14 @@ public class PurchaseDaoSQLImpl implements PurchaseDao {
 
     @Override
     public void delete(int id) {
-
+        String insert = "DELETE FROM purchases WHERE id = ?";
+        try{
+            PreparedStatement stmt = this.connection.prepareStatement(insert);
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
