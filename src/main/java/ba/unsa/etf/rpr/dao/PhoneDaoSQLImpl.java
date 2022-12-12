@@ -44,7 +44,7 @@ public class PhoneDaoSQLImpl implements PhoneDao{
 
     @Override
     public Phone insert(Phone item) {
-        String insert = "INSERT INTO buyers VALUES(?,?,?,?,?,?)";
+        String insert = "INSERT INTO phones VALUES(?,?,?,?,?,?)";
         try{
             PreparedStatement stmt=this.connection.prepareStatement(insert);
             stmt.setInt(1,item.getId());
@@ -63,6 +63,20 @@ public class PhoneDaoSQLImpl implements PhoneDao{
 
     @Override
     public Phone update(Phone item) {
+        String insert = "UPDATE phones SET version=? WHERE id = ?";
+        try{
+            PreparedStatement stmt = this.connection.prepareStatement(insert);
+            stmt.setInt(1, item.getId());
+            stmt.setInt(2, item.getBrand().getId());
+            stmt.setString(3,item.getVersion());
+            stmt.setInt(4,item.getPrice());
+            stmt.setInt(5,item.getIn_stock());
+            stmt.setDate(6, (Date) item.getRelease_date());
+            stmt.executeUpdate();
+            return item;
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
         return null;
     }
 
