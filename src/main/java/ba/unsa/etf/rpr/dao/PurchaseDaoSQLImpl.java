@@ -5,6 +5,7 @@ import ba.unsa.etf.rpr.domain.Phone;
 import ba.unsa.etf.rpr.domain.Purchase;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PurchaseDaoSQLImpl implements PurchaseDao {
@@ -86,7 +87,23 @@ public class PurchaseDaoSQLImpl implements PurchaseDao {
 
     @Override
     public List<Purchase> getAll() {
-        return null;
+        String query = "SELECT * FROM phones";
+        List<Purchase> purchases = new ArrayList<Purchase>();
+        try{
+            PreparedStatement stmt = this.connection.prepareStatement(query);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()){                              // result set is iterator.
+                Purchase purchase=new Purchase();
+                purchase.setId(rs.getInt("id"));
+                purchase.setBuyer(new BuyerDaoSQLImpl().getById(rs.getInt(1)));
+                purchase.setPhone(new PhoneDaoSQLImpl().getById(rs.getInt(1)));
+                purchases.add(purchase);
+            }
+            rs.close();
+        }catch (SQLException e){
+            e.printStackTrace(); // poor error handling
+        }
+        return purchases;
     }
 
     @Override
