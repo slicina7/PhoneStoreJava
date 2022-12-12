@@ -1,0 +1,60 @@
+package ba.unsa.etf.rpr.dao;
+
+import ba.unsa.etf.rpr.domain.Brand;
+import java.sql.*;
+import java.util.List;
+
+public class BrandDaoSQLImpl implements BrandDao{
+
+    private Connection connection;
+
+    public BrandDaoSQLImpl(){
+        try{
+            this.connection=DriverManager.getConnection("url","user","password");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public Brand getById(int id) {
+        String query = "SELECT * FROM brand WHERE id = ?";
+        try{
+            PreparedStatement stmt=this.connection.prepareStatement(query);
+            stmt.setInt(1,id);
+            ResultSet rs=stmt.executeQuery();  // rs is iterator
+            if(rs.next()){
+                Brand brand=new Brand();
+                brand.setId(rs.getInt("id"));
+                brand.setName(rs.getString("name"));
+                rs.close();
+                return brand;
+            }else
+                return null; // no elements in rs
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public Brand add(Brand item) {
+        return null;
+    }
+
+    @Override
+    public Brand update(Brand item) {
+        return null;
+    }
+
+    @Override
+    public void delete(int id) {
+
+    }
+
+    @Override
+    public List<Brand> getAll() {
+        return null;
+    }
+
+}
