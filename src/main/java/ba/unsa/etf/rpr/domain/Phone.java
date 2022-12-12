@@ -3,6 +3,12 @@ package ba.unsa.etf.rpr.domain;
 import java.util.Date;
 import java.util.Objects;
 
+/**
+ * Holds different types of phone versions
+ *
+ * @author Selma Licina
+ */
+
 public class Phone {
     private int id;
     private Brand brand;
