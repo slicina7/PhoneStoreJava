@@ -2,6 +2,12 @@ package ba.unsa.etf.rpr.domain;
 
 import java.util.Objects;
 
+/**
+ * List of buyers
+ *
+ * @author Selma Licina
+ */
+
 public class Buyer {
     private int id;
     private String name;
