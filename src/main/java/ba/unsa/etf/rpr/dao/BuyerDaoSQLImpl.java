@@ -42,10 +42,26 @@ public class BuyerDaoSQLImpl implements BuyerDao{
         }
         return null;
     }
+    private int getMaxId(){
+        int id=1;
+        try {
+            PreparedStatement statement = this.connection.prepareStatement("SELECT MAX(id)+1 FROM buyers");
+            ResultSet rs = statement.executeQuery();
+            if(rs.next()) {
+                id = rs.getInt(1);
+                rs.close();
+                return id;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return id;
+    }
 
     @Override
-    public Buyer add(Buyer item) {
-        String insert = "INSERT INTO buyers(id,name,surname,account_number,password,account_balance) VALUES(?,?,?,?,?,?)";
+    public Buyer insert(Buyer item) {
+        int id=getMaxId();
+        String insert = "INSERT INTO buyers VALUES(?,?,?,?,?,?)";
         try{
             PreparedStatement stmt=this.connection.prepareStatement(insert);
             stmt.setInt(1,item.getId());
@@ -64,6 +80,20 @@ public class BuyerDaoSQLImpl implements BuyerDao{
 
     @Override
     public Buyer update(Buyer item) {
+        String insert = "UPDATE buyers SET name = ?,surname=? WHERE id = ?";
+        try{
+            PreparedStatement stmt = this.connection.prepareStatement(insert);
+            stmt.setInt(1, item.getId());
+            stmt.setString(2, item.getName());
+            stmt.setString(3,item.getSurname());
+            stmt.setString(4,item.getAccount_number());
+            stmt.setInt(5,item.getPassword());
+            stmt.setInt(6,item.getAccount_balance());
+            stmt.executeUpdate();
+            return item;
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
         return null;
     }
 
