@@ -12,15 +12,6 @@ import java.util.List;
  */
 
 public interface PhoneDao extends Dao<Phone>{
-
-    /**
-     * Returns all phones that contains given text.
-     *
-     * @param text search string for phones
-     * @return list of phones
-     */
-    List<Phone> searchByText(String text);
-
     /**
      * Returns all phones that are given brand.
      *
