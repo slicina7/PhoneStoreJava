@@ -2,6 +2,12 @@ package ba.unsa.etf.rpr.domain;
 
 import java.util.Objects;
 
+/**
+ * Holds different types of phone brands
+ *
+ * @author Selma Licina
+ */
+
 public class Brand {
     private int id;
     private String name;
