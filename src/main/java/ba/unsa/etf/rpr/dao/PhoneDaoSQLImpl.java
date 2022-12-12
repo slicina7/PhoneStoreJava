@@ -82,7 +82,14 @@ public class PhoneDaoSQLImpl implements PhoneDao{
 
     @Override
     public void delete(int id) {
-
+        String insert = "DELETE FROM phones WHERE id = ?";
+        try{
+            PreparedStatement stmt = this.connection.prepareStatement(insert);
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
