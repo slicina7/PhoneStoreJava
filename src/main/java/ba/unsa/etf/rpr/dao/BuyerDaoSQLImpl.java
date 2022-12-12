@@ -45,6 +45,20 @@ public class BuyerDaoSQLImpl implements BuyerDao{
 
     @Override
     public Buyer add(Buyer item) {
+        String insert = "INSERT INTO buyers(id,name,surname,account_number,password,account_balance) VALUES(?,?,?,?,?,?)";
+        try{
+            PreparedStatement stmt=this.connection.prepareStatement(insert);
+            stmt.setInt(1,item.getId());
+            stmt.setString(2, item.getName());
+            stmt.setString(3,item.getSurname());
+            stmt.setString(4, item.getAccount_number());
+            stmt.setInt(5,item.getPassword());
+            stmt.setInt(6,item.getAccount_balance());
+            stmt.executeUpdate();
+            return item;
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
         return null;
     }
 
