@@ -15,7 +15,7 @@ public class Phone {
     private String version;
     private int price;
     private int in_stock;
-    private Date release_date;
+    private java.sql.Date release_date;
 
     public int getId() {
         return id;
@@ -57,11 +57,11 @@ public class Phone {
         this.in_stock = in_stock;
     }
 
-    public Date getRelease_date() {
+    public java.sql.Date getRelease_date() {
         return release_date;
     }
 
-    public void setRelease_date(Date release_date) {
+    public void setRelease_date(java.sql.Date release_date) {
         this.release_date = release_date;
     }
     @Override
