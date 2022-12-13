@@ -43,18 +43,13 @@ public class BrandDaoSQLImpl implements BrandDao{
         }
         return null;
     }
-
     @Override
     public Brand insert(Brand item) {
         String insert = "INSERT INTO brands(name) VALUES(?)";
         try{
-            PreparedStatement stmt=this.connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement stmt=this.connection.prepareStatement(insert);
             stmt.setString(1, item.getName());
             stmt.executeUpdate();
-
-            ResultSet rs=stmt.getGeneratedKeys();;  // rs is iterator
-            rs.next(); // we know that there is one key
-            item.setId(rs.getInt(1)); //set id to return it back
             return item;
         }catch (SQLException e){
             e.printStackTrace();
@@ -66,7 +61,7 @@ public class BrandDaoSQLImpl implements BrandDao{
     public Brand update(Brand item) {
         String insert = "UPDATE brands SET name = ? WHERE id = ?";
         try{
-            PreparedStatement stmt = this.connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement stmt = this.connection.prepareStatement(insert);
             stmt.setObject(1, item.getName());
             stmt.setObject(2, item.getId());
             stmt.executeUpdate();
@@ -81,8 +76,8 @@ public class BrandDaoSQLImpl implements BrandDao{
     public void delete(int id) {
         String insert = "DELETE FROM brands WHERE id = ?";
         try{
-            PreparedStatement stmt = this.connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
-            stmt.setObject(1, id);
+            PreparedStatement stmt = this.connection.prepareStatement(insert);
+            stmt.setInt(1, id);
             stmt.executeUpdate();
         }catch (SQLException e) {
             e.printStackTrace();
@@ -107,6 +102,20 @@ public class BrandDaoSQLImpl implements BrandDao{
             e.printStackTrace(); // poor error handling
         }
         return brands;
+    }
+    public void tableView() {
+        String query="SELECT * FROM brands";
+        try {
+            PreparedStatement stmt = this.connection.prepareStatement(query);
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()){
+                int id=rs.getInt("id");
+                String name=rs.getString("name");
+                System.out.println(id+" "+name);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
 }
