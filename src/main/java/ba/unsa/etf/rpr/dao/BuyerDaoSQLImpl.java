@@ -17,7 +17,7 @@ public class BuyerDaoSQLImpl implements BuyerDao{
             FileReader reader=new FileReader("db.properties");
             Properties p=new Properties();
             p.load(reader);
-            this.connection= DriverManager.getConnection("jdbc:mysql://sql7.freemysqlhosting.net:3306/"+p.getProperty("user"),p.getProperty("user"),p.getProperty("password"));
+            this.connection= DriverManager.getConnection(p.getProperty("url"),p.getProperty("user"),p.getProperty("password"));
         }catch(Exception e){
             e.printStackTrace();
         }
