@@ -48,7 +48,7 @@ public class PurchaseDaoSQLImpl implements PurchaseDao {
 
     @Override
     public Purchase insert(Purchase item) {
-        String insert = "INSERT INTO purchases VALUES(?,?)";
+        String insert = "INSERT INTO purchases VALUES(?,?,?)";
         try{
             PreparedStatement stmt=this.connection.prepareStatement(insert);
             stmt.setInt(1,item.getId());
@@ -113,11 +113,43 @@ public class PurchaseDaoSQLImpl implements PurchaseDao {
 
     @Override
     public List<Purchase> searchByPhone(Phone phone) {
-        return null;
+        String query = "SELECT * FROM phones WHERE phone_id = ?";
+        List<Purchase> purchases = new ArrayList<Purchase>();
+        try{
+            PreparedStatement stmt = this.connection.prepareStatement(query);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()){                              // result set is iterator.
+                Purchase purchase=new Purchase();
+                purchase.setId(rs.getInt("id"));
+                purchase.setBuyer(new BuyerDaoSQLImpl().getById(rs.getInt(1)));
+                purchase.setPhone(new PhoneDaoSQLImpl().getById(rs.getInt(1)));
+                purchases.add(purchase);
+            }
+            rs.close();
+        }catch (SQLException e){
+            e.printStackTrace(); // poor error handling
+        }
+        return purchases;
     }
 
     @Override
     public List<Purchase> searchByBuyer(Buyer buyer) {
-        return null;
+        String query = "SELECT * FROM phones WHERE buyer_id = ?";
+        List<Purchase> purchases = new ArrayList<Purchase>();
+        try{
+            PreparedStatement stmt = this.connection.prepareStatement(query);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()){                              // result set is iterator.
+                Purchase purchase=new Purchase();
+                purchase.setId(rs.getInt("id"));
+                purchase.setBuyer(new BuyerDaoSQLImpl().getById(rs.getInt(1)));
+                purchase.setPhone(new PhoneDaoSQLImpl().getById(rs.getInt(1)));
+                purchases.add(purchase);
+            }
+            rs.close();
+        }catch (SQLException e){
+            e.printStackTrace(); // poor error handling
+        }
+        return purchases;
     }
 }
