@@ -1,6 +1,5 @@
 package ba.unsa.etf.rpr.dao;
 
-import ba.unsa.etf.rpr.domain.Brand;
 import ba.unsa.etf.rpr.domain.Buyer;
 
 import java.io.FileReader;
@@ -48,25 +47,9 @@ public class BuyerDaoSQLImpl implements BuyerDao{
         }
         return null;
     }
-    private int getMaxId(){
-        int id=1;
-        try {
-            PreparedStatement statement = this.connection.prepareStatement("SELECT MAX(id)+1 FROM buyers");
-            ResultSet rs = statement.executeQuery();
-            if(rs.next()) {
-                id = rs.getInt(1);
-                rs.close();
-                return id;
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return id;
-    }
 
     @Override
     public Buyer insert(Buyer item) {
-        int id=getMaxId();
         String insert = "INSERT INTO buyers VALUES(?,?,?,?,?,?)";
         try{
             PreparedStatement stmt=this.connection.prepareStatement(insert);
@@ -86,15 +69,12 @@ public class BuyerDaoSQLImpl implements BuyerDao{
 
     @Override
     public Buyer update(Buyer item) {
-        String insert = "UPDATE buyers SET name = ?,surname=? WHERE id = ?";
+        String insert = "UPDATE buyers SET account_balance = ? WHERE id = ?";
         try{
             PreparedStatement stmt = this.connection.prepareStatement(insert);
-            stmt.setInt(1, item.getId());
-            stmt.setString(2, item.getName());
-            stmt.setString(3,item.getSurname());
-            stmt.setString(4,item.getAccount_number());
-            stmt.setInt(5,item.getPassword());
-            stmt.setInt(6,item.getAccount_balance());
+
+            stmt.setInt(1,item.getAccount_balance());
+            stmt.setInt(2, item.getId());
             stmt.executeUpdate();
             return item;
         }catch (SQLException e){
@@ -137,5 +117,23 @@ public class BuyerDaoSQLImpl implements BuyerDao{
             e.printStackTrace(); // poor error handling
         }
         return buyers;
+    }
+    public void tableView() {
+        String query="SELECT * FROM buyers";
+        try {
+            PreparedStatement stmt = this.connection.prepareStatement(query);
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()){
+                int id=rs.getInt("id");
+                String name=rs.getString("name");
+                String surname=rs.getString("surname");
+                String account_number=rs.getString("account_number");
+                int password=rs.getInt("password");
+                int balance=rs.getInt("account_balance");
+                System.out.println(id+" "+name+" "+surname+" "+account_number+" "+password+" "+balance);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }
