@@ -64,12 +64,11 @@ public class PurchaseDaoSQLImpl implements PurchaseDao {
 
     @Override
     public Purchase update(Purchase item) {
-        String insert = "UPDATE purchases SET version=? WHERE id = ?";
+        String insert = "UPDATE purchases SET phone_id=? WHERE id = ?";
         try{
             PreparedStatement stmt = this.connection.prepareStatement(insert);
-            stmt.setInt(1, item.getId());
-            stmt.setInt(2, item.getBuyer().getId());
-            stmt.setInt(3,item.getPhone().getId());
+            stmt.setInt(1,item.getPhone().getId());
+            stmt.setInt(2, item.getId());
             stmt.executeUpdate();
             return item;
         }catch (SQLException e){
@@ -92,7 +91,7 @@ public class PurchaseDaoSQLImpl implements PurchaseDao {
 
     @Override
     public List<Purchase> getAll() {
-        String query = "SELECT * FROM phones";
+        String query = "SELECT * FROM purchases";
         List<Purchase> purchases = new ArrayList<Purchase>();
         try{
             PreparedStatement stmt = this.connection.prepareStatement(query);
@@ -113,7 +112,7 @@ public class PurchaseDaoSQLImpl implements PurchaseDao {
 
     @Override
     public List<Purchase> searchByPhone(Phone phone) {
-        String query = "SELECT * FROM phones WHERE phone_id = ?";
+        String query = "SELECT * FROM purchases WHERE phone_id = ?";
         List<Purchase> purchases = new ArrayList<Purchase>();
         try{
             PreparedStatement stmt = this.connection.prepareStatement(query);
@@ -134,7 +133,7 @@ public class PurchaseDaoSQLImpl implements PurchaseDao {
 
     @Override
     public List<Purchase> searchByBuyer(Buyer buyer) {
-        String query = "SELECT * FROM phones WHERE buyer_id = ?";
+        String query = "SELECT * FROM purchases WHERE buyer_id = ?";
         List<Purchase> purchases = new ArrayList<Purchase>();
         try{
             PreparedStatement stmt = this.connection.prepareStatement(query);
@@ -151,5 +150,20 @@ public class PurchaseDaoSQLImpl implements PurchaseDao {
             e.printStackTrace(); // poor error handling
         }
         return purchases;
+    }
+    public void tableView() {
+        String query="SELECT * FROM purchases";
+        try {
+            PreparedStatement stmt = this.connection.prepareStatement(query);
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()){
+                int id=rs.getInt("id");
+                int buyer=rs.getInt("buyer_id");
+                int phone=rs.getInt("phone_id");
+                System.out.println(id+" "+buyer+" "+phone);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }
