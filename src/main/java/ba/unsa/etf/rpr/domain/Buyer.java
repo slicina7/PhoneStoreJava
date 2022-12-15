@@ -71,7 +71,7 @@ public class Buyer {
                 ", surname=" +  surname +
                 ", account_number=" + account_number +
                 ", password=" + password +
-                ", account_number=" + account_balance +
+                ", account_balance=" + account_balance +
                 '}';
     }
 
