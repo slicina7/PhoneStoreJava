@@ -12,7 +12,7 @@ public class Buyer {
     private int id;
     private String name;
     private String surname;
-    private String account_number;
+    private String email;
     private int password;
     private int account_balance;
 
@@ -40,12 +40,12 @@ public class Buyer {
         this.surname = surname;
     }
 
-    public String getAccount_number() {
-        return account_number;
+    public String getEmail() {
+        return email;
     }
 
-    public void setAccount_number(String account_number) {
-        this.account_number = account_number;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public int getPassword() {
@@ -69,7 +69,7 @@ public class Buyer {
                 "id=" + id +
                 ", name=" +  name +
                 ", surname=" +  surname +
-                ", account_number=" + account_number +
+                ", email=" + email +
                 ", password=" + password +
                 ", account_balance=" + account_balance +
                 '}';
@@ -85,6 +85,6 @@ public class Buyer {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, surname, account_number, password, account_balance);
+        return Objects.hash(id, name, surname, email, password, account_balance);
     }
 }

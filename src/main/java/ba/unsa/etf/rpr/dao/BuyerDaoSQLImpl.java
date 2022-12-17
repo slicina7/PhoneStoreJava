@@ -35,7 +35,7 @@ public class BuyerDaoSQLImpl implements BuyerDao{
                 buyer.setId(rs.getInt("id"));
                 buyer.setName(rs.getString("name"));
                 buyer.setSurname(rs.getString("surname"));
-                buyer.setAccount_number(rs.getString("account_number"));
+                buyer.setEmail(rs.getString("email"));
                 buyer.setPassword(rs.getInt("password"));
                 buyer.setAccount_balance(rs.getInt("account_balance"));
                 rs.close();
@@ -56,7 +56,7 @@ public class BuyerDaoSQLImpl implements BuyerDao{
             stmt.setInt(1,item.getId());
             stmt.setString(2, item.getName());
             stmt.setString(3,item.getSurname());
-            stmt.setString(4, item.getAccount_number());
+            stmt.setString(4, item.getEmail());
             stmt.setInt(5,item.getPassword());
             stmt.setInt(6,item.getAccount_balance());
             stmt.executeUpdate();
@@ -107,7 +107,7 @@ public class BuyerDaoSQLImpl implements BuyerDao{
                 buyer.setId(rs.getInt("id"));
                 buyer.setName(rs.getString("name"));
                 buyer.setSurname(rs.getString("surname"));
-                buyer.setAccount_number(rs.getString("account_number"));
+                buyer.setEmail(rs.getString("email"));
                 buyer.setPassword(rs.getInt("password"));
                 buyer.setAccount_balance(rs.getInt("account_balance"));
                 buyers.add(buyer);
@@ -127,10 +127,10 @@ public class BuyerDaoSQLImpl implements BuyerDao{
                 int id=rs.getInt("id");
                 String name=rs.getString("name");
                 String surname=rs.getString("surname");
-                String account_number=rs.getString("account_number");
+                String email=rs.getString("email");
                 int password=rs.getInt("password");
                 int balance=rs.getInt("account_balance");
-                System.out.println(id+" "+name+" "+surname+" "+account_number+" "+password+" "+balance);
+                System.out.println(id+" "+name+" "+surname+" "+email+" "+password+" "+balance);
             }
         }catch (Exception e){
             e.printStackTrace();
