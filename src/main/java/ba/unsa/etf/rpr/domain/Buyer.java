@@ -13,7 +13,7 @@ public class Buyer {
     private String name;
     private String surname;
     private String email;
-    private int password;
+    private String password;
     private int account_balance;
 
     public int getId() {
@@ -48,11 +48,11 @@ public class Buyer {
         this.email = email;
     }
 
-    public int getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(int password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 

@@ -36,7 +36,7 @@ public class BuyerDaoSQLImpl implements BuyerDao{
                 buyer.setName(rs.getString("name"));
                 buyer.setSurname(rs.getString("surname"));
                 buyer.setEmail(rs.getString("email"));
-                buyer.setPassword(rs.getInt("password"));
+                buyer.setPassword(rs.getString("password"));
                 buyer.setAccount_balance(rs.getInt("account_balance"));
                 rs.close();
                 return buyer;
@@ -57,7 +57,7 @@ public class BuyerDaoSQLImpl implements BuyerDao{
             stmt.setString(2, item.getName());
             stmt.setString(3,item.getSurname());
             stmt.setString(4, item.getEmail());
-            stmt.setInt(5,item.getPassword());
+            stmt.setString(5,item.getPassword());
             stmt.setInt(6,item.getAccount_balance());
             stmt.executeUpdate();
             return item;
@@ -108,7 +108,7 @@ public class BuyerDaoSQLImpl implements BuyerDao{
                 buyer.setName(rs.getString("name"));
                 buyer.setSurname(rs.getString("surname"));
                 buyer.setEmail(rs.getString("email"));
-                buyer.setPassword(rs.getInt("password"));
+                buyer.setPassword(rs.getString("password"));
                 buyer.setAccount_balance(rs.getInt("account_balance"));
                 buyers.add(buyer);
             }
