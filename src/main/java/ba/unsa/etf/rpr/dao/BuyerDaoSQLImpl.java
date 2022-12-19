@@ -60,8 +60,8 @@ public class BuyerDaoSQLImpl implements BuyerDao{
             stmt.setString(3,item.getSurname());
             stmt.setString(4, item.getEmail());
             stmt.setString(5,item.getAccount_number());
-            stmt.setString(5,item.getPassword());
-            stmt.setInt(6,item.getAccount_balance());
+            stmt.setString(6,item.getPassword());
+            stmt.setInt(7,item.getAccount_balance());
             stmt.executeUpdate();
             return item;
         }catch (SQLException e){
@@ -111,6 +111,7 @@ public class BuyerDaoSQLImpl implements BuyerDao{
                 buyer.setName(rs.getString("name"));
                 buyer.setSurname(rs.getString("surname"));
                 buyer.setEmail(rs.getString("email"));
+                buyer.setAccount_number(rs.getString("account_number"));
                 buyer.setPassword(rs.getString("password"));
                 buyer.setAccount_balance(rs.getInt("account_balance"));
                 buyers.add(buyer);
@@ -132,9 +133,10 @@ public class BuyerDaoSQLImpl implements BuyerDao{
                 String name=rs.getString("name");
                 String surname=rs.getString("surname");
                 String email=rs.getString("email");
+                String account_number=rs.getString("account_number");
                 String password=rs.getString("password");
                 int balance=rs.getInt("account_balance");
-                System.out.println(id+" "+name+" "+surname+" "+email+" "+password+" "+balance);
+                System.out.println(id+" "+name+" "+surname+" "+email+" "+account_number+" "+password+" "+balance);
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -155,6 +157,7 @@ public class BuyerDaoSQLImpl implements BuyerDao{
                 buyer.setName(rs.getString("name"));
                 buyer.setSurname(rs.getString("surname"));
                 buyer.setEmail(rs.getString("email"));
+                buyer.setAccount_number(rs.getString("account_number"));
                 buyer.setPassword(rs.getString("password"));
                 buyer.setAccount_balance(rs.getInt("account_balance"));
             }
