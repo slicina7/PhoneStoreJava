@@ -13,6 +13,8 @@ public class MainController {
     public Button idLogin;
 
     public void emailAction(ActionEvent actionEvent) {
+
+
     }
 
     public void passwordAction(ActionEvent actionEvent) {
@@ -20,7 +22,6 @@ public class MainController {
 
     public void loginButtonAction(ActionEvent actionEvent) {
         BuyerDaoSQLImpl daobuyer=new BuyerDaoSQLImpl();
-
         Buyer buyer=daobuyer.searchByEmailAndPassword(idEmail.getText(),idPassword.getText());
         System.out.println(buyer);
     }
