@@ -13,7 +13,7 @@ public class Buyer {
     private String name;
     private String surname;
     private String email;
-    private String account_nuber;
+    private String account_number;
     private String password;
     private int account_balance;
 
@@ -49,12 +49,12 @@ public class Buyer {
         this.email = email;
     }
 
-    public String getAccount_nuber() {
-        return account_nuber;
+    public String getAccount_nuber () {
+        return account_number;
     }
 
     public void setAccount_nuber(String account_nuber) {
-        this.account_nuber = account_nuber;
+        this.account_number = account_nuber;
     }
 
     public String getPassword() {
@@ -79,6 +79,7 @@ public class Buyer {
                 ", name=" +  name +
                 ", surname=" +  surname +
                 ", email=" + email +
+                ",account_number="+account_number+
                 ", password=" + password +
                 ", account_balance=" + account_balance +
                 '}';
@@ -94,6 +95,6 @@ public class Buyer {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, surname, email, password, account_balance);
+        return Objects.hash(id, name, surname, email, password,account_number, account_balance);
     }
 }
