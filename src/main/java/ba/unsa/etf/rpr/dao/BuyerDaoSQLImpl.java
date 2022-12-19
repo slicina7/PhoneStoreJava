@@ -1,6 +1,7 @@
 package ba.unsa.etf.rpr.dao;
 
 import ba.unsa.etf.rpr.domain.Buyer;
+import ba.unsa.etf.rpr.domain.Purchase;
 
 import java.io.FileReader;
 import java.sql.*;
@@ -118,6 +119,7 @@ public class BuyerDaoSQLImpl implements BuyerDao{
         }
         return buyers;
     }
+    @Override
     public void tableView() {
         String query="SELECT * FROM buyers";
         try {
@@ -128,12 +130,36 @@ public class BuyerDaoSQLImpl implements BuyerDao{
                 String name=rs.getString("name");
                 String surname=rs.getString("surname");
                 String email=rs.getString("email");
-                int password=rs.getInt("password");
+                String password=rs.getString("password");
                 int balance=rs.getInt("account_balance");
                 System.out.println(id+" "+name+" "+surname+" "+email+" "+password+" "+balance);
             }
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public Buyer searchByEmailAndPassword(String email,String password) {
+        String query = "SELECT * FROM buyers WHERE email = ? AND password = ?";
+        Buyer buyer=new Buyer();
+        try{
+            PreparedStatement stmt = this.connection.prepareStatement(query);
+            stmt.setString(1,email);
+            stmt.setString(2,password);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()){
+                buyer.setId(rs.getInt("id"));
+                buyer.setName(rs.getString("name"));
+                buyer.setSurname(rs.getString("surname"));
+                buyer.setEmail(rs.getString("email"));
+                buyer.setPassword(rs.getString("password"));
+                buyer.setAccount_balance(rs.getInt("account_balance"));
+            }
+            rs.close();
+        }catch (SQLException e){
+            e.printStackTrace(); // poor error handling
+        }
+        return buyer;
     }
 }
