@@ -1,5 +1,7 @@
 package ba.unsa.etf.rpr.controllers;
 
+import ba.unsa.etf.rpr.dao.BuyerDaoSQLImpl;
+import ba.unsa.etf.rpr.domain.Buyer;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
@@ -10,12 +12,16 @@ public class MainController {
     public PasswordField idPassword;
     public Button idLogin;
 
-    public void akcijaEmail(ActionEvent actionEvent) {
+    public void emailAction(ActionEvent actionEvent) {
     }
 
-    public void akcijaPassworda(ActionEvent actionEvent) {
+    public void passwordAction(ActionEvent actionEvent) {
     }
 
-    public void akcijaLoginDugme(ActionEvent actionEvent) {
+    public void loginButtonAction(ActionEvent actionEvent) {
+        BuyerDaoSQLImpl daobuyer=new BuyerDaoSQLImpl();
+
+        Buyer buyer=daobuyer.searchByEmailAndPassword(idEmail.getText(),idPassword.getText());
+        System.out.println(buyer);
     }
 }
