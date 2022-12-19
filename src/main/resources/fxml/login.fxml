@@ -11,18 +11,19 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #2196f3;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.controllers.MainController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #2196f3;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.controllers.LoginController">
+
    <children>
       <VBox layoutX="150.0" layoutY="50.0" prefHeight="300.0" prefWidth="300.0" style="-fx-background-color: #ffffff;">
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="68.0" prefWidth="300.0" text="Access your account" textFill="#2196f3">
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="52.0" prefWidth="300.0" text="Access your account" textFill="#2196f3">
                <font>
                   <Font size="29.0" />
                </font>
             </Label>
             <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: transparent; -fx-border-color: #151928; -fx-border-width: 0px 0px 1px 0px;">
                <children>
-                  <TextField fx:id="idEmail" onAction="#emailAction" prefHeight="26.0" prefWidth="257.0" promptText="Email" style="-fx-background-color: transparent;">
+                  <TextField fx:id="idEmail" prefHeight="26.0" prefWidth="257.0" promptText="Email" style="-fx-background-color: transparent;">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -36,7 +37,7 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: transparent; -fx-border-color: #151928; -fx-border-width: 0px 0px 1px 0px;">
                <children>
-                  <PasswordField fx:id="idPassword" onAction="#passwordAction" prefHeight="26.0" prefWidth="246.0" promptText="Password" style="-fx-background-color: transparent;">
+                  <PasswordField fx:id="idPassword" prefHeight="26.0" prefWidth="246.0" promptText="Password" style="-fx-background-color: transparent;">
                      <font>
                         <Font size="16.0" />
                      </font></PasswordField>
@@ -50,9 +51,17 @@
                   <Insets left="15.0" right="15.0" top="20.0" />
                </VBox.margin>
             </Button>
-            <Button fx:id="idLogin1" mnemonicParsing="false" onAction="#loginButtonAction" prefHeight="26.0" prefWidth="270.0" style="-fx-background-color: #2196f3;" text="Sing up" textFill="WHITE">
+            <Label text="Don't have an account ?" textFill="#2196f3">
+               <font>
+                  <Font size="17.0" />
+               </font>
+               <padding>
+                  <Insets left="15.0" right="15.0" top="15.0" />
+               </padding>
+            </Label>
+            <Button fx:id="idSignup" mnemonicParsing="false" onAction="#signupButtonAction" prefHeight="26.0" prefWidth="270.0" style="-fx-background-color: #2196f3;" text="Sing up" textFill="WHITE">
                <VBox.margin>
-                  <Insets left="15.0" right="15.0" top="20.0" />
+                  <Insets left="15.0" right="15.0" top="10.0" />
                </VBox.margin>
             </Button>
          </children>
