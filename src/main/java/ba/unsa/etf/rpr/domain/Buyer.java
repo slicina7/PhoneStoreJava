@@ -49,12 +49,12 @@ public class Buyer {
         this.email = email;
     }
 
-    public String getAccount_nuber () {
+    public String getAccount_number () {
         return account_number;
     }
 
-    public void setAccount_nuber(String account_nuber) {
-        this.account_number = account_nuber;
+    public void setAccount_number(String account_number) {
+        this.account_number = account_number;
     }
 
     public String getPassword() {
