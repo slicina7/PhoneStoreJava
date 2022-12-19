@@ -9,4 +9,5 @@ import ba.unsa.etf.rpr.domain.Buyer;
  */
 
 public interface BuyerDao extends Dao<Buyer>{
+    Buyer searchByEmailAndPassword(String email,String password);
 }
