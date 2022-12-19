@@ -13,6 +13,7 @@ public class Buyer {
     private String name;
     private String surname;
     private String email;
+    private String account_nuber;
     private String password;
     private int account_balance;
 
@@ -46,6 +47,14 @@ public class Buyer {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getAccount_nuber() {
+        return account_nuber;
+    }
+
+    public void setAccount_nuber(String account_nuber) {
+        this.account_nuber = account_nuber;
     }
 
     public String getPassword() {
