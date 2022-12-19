@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="600.0" style="-fx-background-color: #2196f3;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.controllers.LoginController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="600.0" style="-fx-background-color: #2196f3;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.controllers.SignupController">
    <children>
       <VBox layoutX="150.0" layoutY="50.0" prefHeight="450.0" prefWidth="300.0" style="-fx-background-color: #ffffff;">
          <children>
@@ -22,7 +22,7 @@
             </Label>
             <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: transparent; -fx-border-color: #151928; -fx-border-width: 0px 0px 1px 0px;">
                <children>
-                  <TextField fx:id="idEmail2" prefHeight="26.0" prefWidth="257.0" promptText="First name" style="-fx-background-color: transparent;">
+                  <TextField fx:id="idName" prefHeight="26.0" prefWidth="257.0" promptText="First name" style="-fx-background-color: transparent;">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -37,7 +37,7 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: transparent; -fx-border-color: #151928; -fx-border-width: 0px 0px 1px 0px;">
                <children>
-                  <TextField fx:id="idEmail1" prefHeight="26.0" prefWidth="257.0" promptText="Last name" style="-fx-background-color: transparent;">
+                  <TextField fx:id="idSurname" prefHeight="26.0" prefWidth="257.0" promptText="Last name" style="-fx-background-color: transparent;">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -67,7 +67,7 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: transparent; -fx-border-color: #151928; -fx-border-width: 0px 0px 1px 0px;">
                <children>
-                  <TextField fx:id="idEmail21" prefHeight="26.0" prefWidth="257.0" promptText="Account number" style="-fx-background-color: transparent;">
+                  <TextField fx:id="idAccountNumber" prefHeight="26.0" prefWidth="257.0" promptText="Account number" style="-fx-background-color: transparent;">
                      <font>
                         <Font size="16.0" />
                      </font>
