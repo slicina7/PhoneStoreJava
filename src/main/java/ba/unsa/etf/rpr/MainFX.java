@@ -16,9 +16,9 @@ public class MainFX extends Application {
         MainController mainController=new MainController();
         fxmlLoader.setController(mainController);
         Scene scene = new Scene(root, 600, 500);
+        stage.getIcons().add(new Image("file:///C:/Users/pc/Downloads/user.png"));
         stage.setResizable(false);
-        stage.setTitle("Login");
-        //stage.getIcons().add(new Image(""));
+        stage.setTitle("Log in");
         stage.setScene(scene);
         stage.show();
     }
