@@ -145,6 +145,7 @@ public class PhoneDaoSQLImpl implements PhoneDao{
         }
         return phones;
     }
+    @Override
     public void tableView() {
         String query="SELECT * FROM phones";
         try {

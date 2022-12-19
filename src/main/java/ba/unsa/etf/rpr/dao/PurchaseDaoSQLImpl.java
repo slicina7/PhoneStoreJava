@@ -151,6 +151,7 @@ public class PurchaseDaoSQLImpl implements PurchaseDao {
         }
         return purchases;
     }
+    @Override
     public void tableView() {
         String query="SELECT * FROM purchases";
         try {

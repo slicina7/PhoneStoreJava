@@ -103,6 +103,7 @@ public class BrandDaoSQLImpl implements BrandDao{
         }
         return brands;
     }
+    @Override
     public void tableView() {
         String query="SELECT * FROM brands";
         try {
