@@ -1,6 +1,6 @@
 package ba.unsa.etf.rpr;
 
-import ba.unsa.etf.rpr.controllers.MainController;
+import ba.unsa.etf.rpr.controllers.LoginController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,7 +13,7 @@ public class MainFX extends Application {
     public void start(Stage stage) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/login.fxml"));
         Parent root = fxmlLoader.load();
-        MainController mainController=new MainController();
+        LoginController mainController=new LoginController();
         fxmlLoader.setController(mainController);
         Scene scene = new Scene(root, 600, 500);
         stage.getIcons().add(new Image("file:///C:/Users/pc/Downloads/user.png"));
