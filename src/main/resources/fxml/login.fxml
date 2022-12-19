@@ -21,7 +21,7 @@
             </Label>
             <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: transparent; -fx-border-color: #ffffff; -fx-border-width: 0px 0px 1px 0px;">
                <children>
-                  <TextField fx:id="idEmail" onAction="#akcijaEmail" prefHeight="26.0" prefWidth="257.0" promptText="Email" style="-fx-background-color: transparent;">
+                  <TextField fx:id="idEmail" onAction="#emailAction" prefHeight="26.0" prefWidth="257.0" promptText="Email" style="-fx-background-color: transparent;">
                      <font>
                         <Font size="16.0" />
                      </font></TextField>
@@ -32,7 +32,7 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: transparent; -fx-border-color: #ffffff; -fx-border-width: 0px 0px 1px 0px;">
                <children>
-                  <PasswordField fx:id="idPassword" onAction="#akcijaPassworda" prefHeight="26.0" prefWidth="246.0" promptText="Password" style="-fx-background-color: transparent;">
+                  <PasswordField fx:id="idPassword" onAction="#passwordAction" prefHeight="26.0" prefWidth="246.0" promptText="Password" style="-fx-background-color: transparent;">
                      <font>
                         <Font size="16.0" />
                      </font></PasswordField>
@@ -41,7 +41,7 @@
                   <Insets left="15.0" right="15.0" top="15.0" />
                </VBox.margin>
             </HBox>
-            <Button fx:id="idLogin" mnemonicParsing="false" onAction="#akcijaLoginDugme" prefHeight="26.0" prefWidth="270.0" style="-fx-background-color: #1dc1b1;" text="Login" textFill="WHITE">
+            <Button fx:id="idLogin" mnemonicParsing="false" onAction="#loginButtonAction" prefHeight="26.0" prefWidth="270.0" style="-fx-background-color: #1dc1b1;" text="Login" textFill="WHITE">
                <VBox.margin>
                   <Insets left="15.0" right="15.0" top="20.0" />
                </VBox.margin>
