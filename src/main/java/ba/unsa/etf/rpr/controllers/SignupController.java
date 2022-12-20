@@ -1,6 +1,9 @@
 package ba.unsa.etf.rpr.controllers;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -23,7 +26,25 @@ public class SignupController {
     public Button idSignup;
     public Button idLogin;
 
+    @FXML
+    public void initialize() {
+        idName.getStyleClass().add("rightTextField");
+        idName.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String o, String n) {
+                if (idName.getText().trim().isEmpty()) {
+                    idName.getStyleClass().removeAll("rightTextField");
+                    idName.getStyleClass().add("wrongTextField");
+                } else {
+                    idName.getStyleClass().removeAll("wrongTextField");
+                    idName.getStyleClass().add("rightTextField");
+                }
+            }
+        });
+    }
+
     public void signupButtonAction(ActionEvent actionEvent) {
+
     }
     public void loginButtonAction(ActionEvent actionEvent) throws IOException{
         try {
