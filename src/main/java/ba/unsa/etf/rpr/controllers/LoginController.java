@@ -40,6 +40,21 @@ public class LoginController {
             alert.showAndWait();
             return;
         }
+        try {
+            Stage stage = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/search_phones.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root,USE_COMPUTED_SIZE,USE_COMPUTED_SIZE);
+            stage.setTitle("Search");
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.show();
+            Stage primaryStage = (Stage) idLogin.getScene().getWindow();
+            primaryStage.hide();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
 
     }
 
