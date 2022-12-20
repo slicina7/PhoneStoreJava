@@ -29,6 +29,7 @@ public class SignupController {
     @FXML
     public void initialize() {
         idName.getStyleClass().add("rightTextField");
+        idSurname.getStyleClass().add("rightTextField");
         idName.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String o, String n) {
@@ -38,6 +39,18 @@ public class SignupController {
                 } else {
                     idName.getStyleClass().removeAll("wrongTextField");
                     idName.getStyleClass().add("rightTextField");
+                }
+            }
+        });
+        idSurname.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String o, String n) {
+                if (idSurname.getText().trim().isEmpty()) {
+                    idSurname.getStyleClass().removeAll("rightTextField");
+                    idSurname.getStyleClass().add("wrongTextField");
+                } else {
+                    idSurname.getStyleClass().removeAll("wrongTextField");
+                    idSurname.getStyleClass().add("rightTextField");
                 }
             }
         });
