@@ -29,15 +29,24 @@ public class LoginController {
 
     @FXML
     public void initialize() {
+        idEmail.getStyleClass().add("rightTextField");
+        idPassword.getStyleClass().add("rightTextField");
         idEmail.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String o, String n) {
                 if (idEmail.getText().trim().isEmpty()) {
-                    idEmail.getStyleClass().removeAll("poljeJeIspravno");
-                    idEmail.getStyleClass().add("poljeNijeIspravno");
+                    idEmail.getStyleClass().removeAll("rightTextField");
+                    idEmail.getStyleClass().add("wrongTextField");
                 } else {
-                    idEmail.getStyleClass().removeAll("poljeNijeIspravno");
-                    idEmail.getStyleClass().add("poljeJeIspravno");
+                    idEmail.getStyleClass().removeAll("wrongTextField");
+                    idEmail.getStyleClass().add("rightTextField");
+                }
+                if (idPassword.getText().trim().isEmpty()) {
+                    idPassword.getStyleClass().removeAll("rightTextField");
+                    idPassword.getStyleClass().add("wrongTextField");
+                } else {
+                    idPassword.getStyleClass().removeAll("wrongTextField");
+                    idPassword.getStyleClass().add("rightTextField");
                 }
             }
         });
