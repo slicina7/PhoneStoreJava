@@ -163,6 +163,8 @@ public class BuyerDaoSQLImpl implements BuyerDao{
                 buyer.setAccount_balance(rs.getInt("account_balance"));
             }
             rs.close();
+            if(buyer.getName()==null || buyer.getSurname()==null) throw new BuyerException(("Account doesn't exist!"));
+            return buyer;
         }catch (SQLException e){
             e.printStackTrace(); // poor error handling
         }
