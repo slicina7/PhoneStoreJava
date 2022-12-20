@@ -27,8 +27,24 @@ public class LoginController {
     public Button idLogin;
     public Button idSignup;
 
+    @FXML
+    public void initialize() {
+        idEmail.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String o, String n) {
+                if (idEmail.getText().trim().isEmpty()) {
+                    idEmail.getStyleClass().removeAll("poljeJeIspravno");
+                    idEmail.getStyleClass().add("poljeNijeIspravno");
+                } else {
+                    idEmail.getStyleClass().removeAll("poljeNijeIspravno");
+                    idEmail.getStyleClass().add("poljeJeIspravno");
+                }
+            }
+        });
+    }
 
     public void loginButtonAction(ActionEvent actionEvent) throws BuyerException {
+
         Buyer buyer=null;
         try {
             buyer = new BuyerDaoSQLImpl().searchByEmailAndPassword(idEmail.getText(), idPassword.getText());
