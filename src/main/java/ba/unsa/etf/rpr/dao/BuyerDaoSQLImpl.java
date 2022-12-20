@@ -2,6 +2,7 @@ package ba.unsa.etf.rpr.dao;
 
 import ba.unsa.etf.rpr.domain.Buyer;
 import ba.unsa.etf.rpr.domain.Purchase;
+import ba.unsa.etf.rpr.exception.BuyerException;
 
 import java.io.FileReader;
 import java.sql.*;
@@ -144,7 +145,7 @@ public class BuyerDaoSQLImpl implements BuyerDao{
     }
 
     @Override
-    public Buyer searchByEmailAndPassword(String email,String password) {
+    public Buyer searchByEmailAndPassword(String email,String password) throws BuyerException {
         String query = "SELECT * FROM buyers WHERE email = ? AND password = ?";
         Buyer buyer=new Buyer();
         try{
