@@ -32,6 +32,7 @@ public class SignupController {
         idSurname.getStyleClass().add("rightTextField");
         idEmail.getStyleClass().add("rightTextField");
         idPassword.getStyleClass().add("rightTextField");
+        idAccountNumber.getStyleClass().add("rightTextField");
         idName.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String o, String n) {
@@ -77,6 +78,18 @@ public class SignupController {
                 } else {
                     idPassword.getStyleClass().removeAll("wrongTextField");
                     idPassword.getStyleClass().add("rightTextField");
+                }
+            }
+        });
+        idAccountNumber.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String o, String n) {
+                if (idAccountNumber.getText().trim().isEmpty()) {
+                    idAccountNumber.getStyleClass().removeAll("rightTextField");
+                    idAccountNumber.getStyleClass().add("wrongTextField");
+                } else {
+                    idAccountNumber.getStyleClass().removeAll("wrongTextField");
+                    idAccountNumber.getStyleClass().add("rightTextField");
                 }
             }
         });
