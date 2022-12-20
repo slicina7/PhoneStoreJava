@@ -1,0 +1,6 @@
+.rightTextField {
+   -fx-background-color: transparent;
+}
+.wrongTextField {
+   -fx-background-color: lightpink;
+}
