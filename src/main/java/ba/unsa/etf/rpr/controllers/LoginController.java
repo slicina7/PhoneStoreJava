@@ -2,14 +2,20 @@ package ba.unsa.etf.rpr.controllers;
 
 import ba.unsa.etf.rpr.dao.BuyerDaoSQLImpl;
 import ba.unsa.etf.rpr.domain.Buyer;
+import ba.unsa.etf.rpr.exception.BuyerException;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import jdk.jshell.spi.ExecutionControl;
 
 import java.io.IOException;
 
@@ -22,22 +28,17 @@ public class LoginController {
     public Button idSignup;
 
 
-    
-    public void emailAction(ActionEvent actionEvent) {
-
-    }
-
-    public void passwordAction(ActionEvent actionEvent) {
-    }
-
-    public void loginButtonAction(ActionEvent actionEvent) throws IOException {
-        BuyerDaoSQLImpl dao=new BuyerDaoSQLImpl();
-        Buyer buyer=dao.searchByEmailAndPassword(idEmail.getText(),idPassword.getText());
-        if(buyer.getName()==null){
-            System.out.println("Greska");
-        }else {
-            System.out.println(buyer);
-
+    public void loginButtonAction(ActionEvent actionEvent) throws BuyerException {
+        Buyer buyer=null;
+        try {
+            buyer = new BuyerDaoSQLImpl().searchByEmailAndPassword(idEmail.getText(), idPassword.getText());
+        }catch(BuyerException message){
+            Alert alert=new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(message.getMessage());
+            alert.setContentText("Try again");
+            alert.showAndWait();
+            return;
         }
 
     }
