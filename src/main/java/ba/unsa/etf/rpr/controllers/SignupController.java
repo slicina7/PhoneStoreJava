@@ -95,16 +95,6 @@ public class SignupController {
         });
     }
 
-    public void signupButtonAction(ActionEvent actionEvent) {
-        boolean tacan_unos=true;
-        if(!idName.getText().matches("^[a-zA-ZčćđžšČĆŽŠĐ\\d]{2,20}$") || idName.getText().isEmpty()) tacan_unos=false;
-        if(!idSurname.getText().matches("^[a-zA-ZčćđžšČĆŽŠĐ\\d]{2,20}$") || idSurname.getText().isEmpty()) tacan_unos=false;
-        if(!idEmail.getText().matches("^[\\w-]+(?:\\.[a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:\\.[a-zA-Z0-9]+)*$") || idEmail.getText().isEmpty()) tacan_unos=false;
-        if(!idAccountNumber.getText().matches("^[0-9]{5,30}$") || idAccountNumber.getText().isEmpty()) tacan_unos=false;
-        if(idPassword.getText().length()<8) tacan_unos=false;
-        if(tacan_unos) System.out.println("Tacno");
-        else System.out.println("Netacno");
-    }
 
     public void loginButtonAction(ActionEvent actionEvent) throws IOException{
         try {
@@ -121,5 +111,15 @@ public class SignupController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+    public void signupButtonAction(ActionEvent actionEvent) {
+        boolean tacan_unos=true;
+        if(!idName.getText().matches("^[a-zA-ZčćđžšČĆŽŠĐ\\d]{2,20}$") || idName.getText().isEmpty()) tacan_unos=false;
+        if(!idSurname.getText().matches("^[a-zA-ZčćđžšČĆŽŠĐ\\d]{2,20}$") || idSurname.getText().isEmpty()) tacan_unos=false;
+        if(!idEmail.getText().matches("^[\\w-]+(?:\\.[a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:\\.[a-zA-Z0-9]+)*$") || idEmail.getText().isEmpty()) tacan_unos=false;
+        if(!idAccountNumber.getText().matches("^[0-9]{5,30}$") || idAccountNumber.getText().isEmpty()) tacan_unos=false;
+        if(idPassword.getText().length()<8) tacan_unos=false;
+        if(tacan_unos) System.out.println("Tacno");
+        else System.out.println("Netacno");
     }
 }
