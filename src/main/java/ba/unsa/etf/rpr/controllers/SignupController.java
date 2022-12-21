@@ -1,5 +1,6 @@
 package ba.unsa.etf.rpr.controllers;
 
+import ba.unsa.etf.rpr.domain.Buyer;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -13,6 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Random;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
@@ -119,7 +121,32 @@ public class SignupController {
         if(!idEmail.getText().matches("^[\\w-]+(?:\\.[a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:\\.[a-zA-Z0-9]+)*$") || idEmail.getText().isEmpty()) tacan_unos=false;
         if(!idAccountNumber.getText().matches("^[0-9]{5,30}$") || idAccountNumber.getText().isEmpty()) tacan_unos=false;
         if(idPassword.getText().length()<8) tacan_unos=false;
-        if(tacan_unos) System.out.println("Tacno");
+        if(tacan_unos){
+            Buyer buyer=new Buyer();
+            buyer.setName(idName.getText());
+            buyer.setSurname(idSurname.getText());
+            buyer.setEmail(idEmail.getText());
+            buyer.setAccount_number(idAccountNumber.getText());
+            buyer.setPassword(idPassword.getText());
+            Random random=new Random();
+            buyer.setAccount_balance(random.nextInt(5000));
+            try {
+                Stage stage = new Stage();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/search_phones.fxml"));
+                Parent root = loader.load();
+                Scene scene = new Scene(root,USE_COMPUTED_SIZE,USE_COMPUTED_SIZE);
+                stage.setTitle("Search");
+                stage.setScene(scene);
+                stage.setResizable(false);
+                SearchPhonesController searchPhonesController=new SearchPhonesController(buyer);
+                loader.setController(searchPhonesController);
+                stage.show();
+                Stage primaryStage = (Stage) idSignup.getScene().getWindow();
+                primaryStage.hide();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
         else System.out.println("Netacno");
     }
 }

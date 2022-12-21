@@ -41,6 +41,11 @@ public class LoginController {
                     idEmail.getStyleClass().removeAll("wrongTextField");
                     idEmail.getStyleClass().add("rightTextField");
                 }
+            }
+        });
+        idPassword.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String o, String n) {
                 if (idPassword.getText().trim().isEmpty()) {
                     idPassword.getStyleClass().removeAll("rightTextField");
                     idPassword.getStyleClass().add("wrongTextField");
@@ -73,6 +78,8 @@ public class LoginController {
             stage.setTitle("Search");
             stage.setScene(scene);
             stage.setResizable(false);
+            SearchPhonesController searchPhonesController=new SearchPhonesController(buyer);
+            loader.setController(searchPhonesController);
             stage.show();
             Stage primaryStage = (Stage) idLogin.getScene().getWindow();
             primaryStage.hide();
