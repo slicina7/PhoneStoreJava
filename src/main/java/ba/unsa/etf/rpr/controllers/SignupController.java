@@ -105,6 +105,7 @@ public class SignupController {
         if(tacan_unos) System.out.println("Tacno");
         else System.out.println("Netacno");
     }
+
     public void loginButtonAction(ActionEvent actionEvent) throws IOException{
         try {
             Stage stage = new Stage();
