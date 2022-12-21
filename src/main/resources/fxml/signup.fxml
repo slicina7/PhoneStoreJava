@@ -13,8 +13,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
+<?import java.net.URL?>
 <GridPane prefHeight="590.0" prefWidth="568.0" style="-fx-background-color: #2196f3;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.controllers.SignupController">
+   <stylesheets>
+      <URL value="@/css/login.css" />
+   </stylesheets>
    <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="120.0" />
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="300.0" />
@@ -35,13 +38,10 @@
             </Label>
             <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: transparent; -fx-border-color: #151928; -fx-border-width: 0px 0px 1px 0px;">
                <children>
-                  <TextField fx:id="idName" prefHeight="26.0" prefWidth="300.0" promptText="First name" style="-fx-background-color: transparent;">
+                  <TextField fx:id="idName" prefHeight="26.0" prefWidth="280.0" promptText="First name">
                      <font>
                         <Font size="16.0" />
                      </font>
-                     <effect>
-                        <ColorAdjust saturation="0.09" />
-                     </effect>
                   </TextField>
                </children>
                <VBox.margin>
@@ -50,13 +50,10 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: transparent; -fx-border-color: #151928; -fx-border-width: 0px 0px 1px 0px;">
                <children>
-                  <TextField fx:id="idSurname" prefHeight="26.0" prefWidth="257.0" promptText="Last name" style="-fx-background-color: transparent;">
+                  <TextField fx:id="idSurname" prefHeight="37.0" prefWidth="280.0" promptText="Last name">
                      <font>
                         <Font size="16.0" />
                      </font>
-                     <effect>
-                        <ColorAdjust saturation="0.09" />
-                     </effect>
                   </TextField>
                </children>
                <VBox.margin>
@@ -65,13 +62,10 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: transparent; -fx-border-color: #151928; -fx-border-width: 0px 0px 1px 0px;">
                <children>
-                  <TextField fx:id="idEmail" prefHeight="26.0" prefWidth="257.0" promptText="Email" style="-fx-background-color: transparent;">
+                  <TextField fx:id="idEmail" prefHeight="26.0" prefWidth="280.0" promptText="Email">
                      <font>
                         <Font size="16.0" />
                      </font>
-                     <effect>
-                        <ColorAdjust saturation="0.09" />
-                     </effect>
                   </TextField>
                </children>
                <VBox.margin>
@@ -80,13 +74,10 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: transparent; -fx-border-color: #151928; -fx-border-width: 0px 0px 1px 0px;">
                <children>
-                  <TextField fx:id="idAccountNumber" prefHeight="26.0" prefWidth="257.0" promptText="Account number" style="-fx-background-color: transparent;">
+                  <TextField fx:id="idAccountNumber" prefHeight="26.0" prefWidth="280.0" promptText="Account number">
                      <font>
                         <Font size="16.0" />
                      </font>
-                     <effect>
-                        <ColorAdjust saturation="0.09" />
-                     </effect>
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
@@ -98,7 +89,7 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: transparent; -fx-border-color: #151928; -fx-border-width: 0px 0px 1px 0px;">
                <children>
-                  <PasswordField fx:id="idPassword" prefHeight="26.0" prefWidth="246.0" promptText="Password" style="-fx-background-color: transparent;">
+                  <PasswordField fx:id="idPassword" prefHeight="26.0" prefWidth="280.0" promptText="Password">
                      <font>
                         <Font size="16.0" />
                      </font>
