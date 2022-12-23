@@ -1,0 +1,9 @@
+#cartButton{
+    -fx-graphic: url("/img/cart.png");
+}
+#searchButton{
+    -fx-graphic: url("/img/search.png");
+}
+#userButton{
+    -fx-graphic: url("/img/user.png");
+}
