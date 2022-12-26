@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.net.URL?>
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.ToolBar?>
@@ -56,29 +56,30 @@
             </MenuBar>
             <ToolBar prefHeight="40.0" prefWidth="200.0">
               <items>
-                  <Button fx:id="searchButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" />
                   <Button fx:id="userButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" />
                 <Button fx:id="cartButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" />
+                  <Separator orientation="VERTICAL" prefHeight="30.0" />
+                  <Button fx:id="searchButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" />
               </items>
             </ToolBar>
          </children>
       </VBox>
    </top>
    <center>
-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="303.0" prefWidth="590.0" BorderPane.alignment="CENTER">
          <children>
             <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="22.0" prefWidth="501.0" text="All phones available">
                <font>
                   <Font size="15.0" />
                </font>
             </Label>
-            <TableView fx:id="phonesTableView" prefHeight="310.0" prefWidth="477.0">
+            <TableView fx:id="phonesTableView" prefHeight="290.0" prefWidth="592.0">
               <columns>
-                <TableColumn prefWidth="36.79998779296875" text="ID" />
-                <TableColumn minWidth="1.5999755859375" prefWidth="107.99998474121094" text="Version" />
-                  <TableColumn prefWidth="114.4000244140625" text="Release Date" />
-                  <TableColumn prefWidth="69.60003662109375" text="In stock" />
-                  <TableColumn prefWidth="73.60003662109375" text="Price" />
+                <TableColumn fx:id="colPhonesId" prefWidth="36.79998779296875" text="ID" />
+                <TableColumn fx:id="colPhonesVersion" minWidth="1.5999755859375" prefWidth="107.99998474121094" text="Version" />
+                  <TableColumn fx:id="colPhonesDate" prefWidth="114.4000244140625" text="Release Date" />
+                  <TableColumn fx:id="colPhonesStock" prefWidth="69.60003662109375" text="In stock" />
+                  <TableColumn fx:id="colPhonesPrice" prefWidth="73.60003662109375" text="Price" />
               </columns>
             </TableView>
          </children>
@@ -87,15 +88,7 @@
    <left>
       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <Label prefHeight="22.0" prefWidth="102.0" text="Phone brands">
-               <font>
-                  <Font size="15.0" />
-               </font>
-               <VBox.margin>
-                  <Insets left="3.0" />
-               </VBox.margin>
-            </Label>
-            <ListView prefHeight="294.0" prefWidth="133.0" />
+            <ListView fx:id="brandsListView" prefHeight="200.0" prefWidth="200.0" />
          </children>
       </VBox>
    </left>
