@@ -6,16 +6,18 @@ import ba.unsa.etf.rpr.domain.Brand;
 import ba.unsa.etf.rpr.domain.Buyer;
 import ba.unsa.etf.rpr.domain.Phone;
 import ba.unsa.etf.rpr.exception.BuyerException;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class HomeController {
     public ListView<Brand> brandsListView;
+    public Spinner<Integer> minPrice;
+    public Spinner<Integer> maxPrice;
     private BrandDaoSQLImpl brandDaoSQL;
     private ObservableList<Brand> brands;
     private PhoneDaoSQLImpl phoneDaoSQL;
@@ -36,6 +38,10 @@ public class HomeController {
     }
     @FXML
     public void initialize(){
+        SpinnerValueFactory<Integer> minvalueFactory=new SpinnerValueFactory.IntegerSpinnerValueFactory(0,3900,0,100);
+        minPrice.setValueFactory(minvalueFactory);
+        SpinnerValueFactory<Integer> maxvalueFactory=new SpinnerValueFactory.IntegerSpinnerValueFactory(100,4000,4000,100);
+        maxPrice.setValueFactory(maxvalueFactory);
         brandsListView.setItems(brands);
         colPhonesId.setCellValueFactory(new PropertyValueFactory<>("id"));
         colPhonesVersion.setCellValueFactory(new PropertyValueFactory<>("version"));
@@ -51,6 +57,18 @@ public class HomeController {
             } catch (BuyerException e) {
                 System.out.println("Something went wrong with searchByCategory method from quoteDaoSQlImpl");
                 throw new RuntimeException(e);
+            }
+        });
+        minPrice.valueProperty().addListener(new ChangeListener<Integer>() {
+            @Override
+            public void changed(ObservableValue<? extends Integer> observableValue, Integer integer, Integer t1) {
+
+            }
+        });
+        maxPrice.valueProperty().addListener(new ChangeListener<Integer>() {
+            @Override
+            public void changed(ObservableValue<? extends Integer> observableValue, Integer integer, Integer t1) {
+
             }
         });
     }
