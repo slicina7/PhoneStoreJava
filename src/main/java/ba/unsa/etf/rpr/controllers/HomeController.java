@@ -62,13 +62,29 @@ public class HomeController {
         minPrice.valueProperty().addListener(new ChangeListener<Integer>() {
             @Override
             public void changed(ObservableValue<? extends Integer> observableValue, Integer integer, Integer t1) {
-
+                try {
+                    phonesTableView.getItems().clear();
+                    phones.addAll(phoneDaoSQL.searchByPrice(minPrice.getValue(),maxPrice.getValue()));
+                    phonesTableView.refresh();
+                    phonesTableView.setItems(phones);
+                } catch (BuyerException e) {
+                    System.out.println("Something went wrong with searchByCategory method from quoteDaoSQlImpl");
+                    throw new RuntimeException(e);
+                }
             }
         });
         maxPrice.valueProperty().addListener(new ChangeListener<Integer>() {
             @Override
             public void changed(ObservableValue<? extends Integer> observableValue, Integer integer, Integer t1) {
-
+                try {
+                    phonesTableView.getItems().clear();
+                    phones.addAll(phoneDaoSQL.searchByPrice(minPrice.getValue(),maxPrice.getValue()));
+                    phonesTableView.refresh();
+                    phonesTableView.setItems(phones);
+                } catch (BuyerException e) {
+                    System.out.println("Something went wrong with searchByCategory method from quoteDaoSQlImpl");
+                    throw new RuntimeException(e);
+                }
             }
         });
     }

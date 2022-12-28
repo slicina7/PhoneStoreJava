@@ -2,6 +2,7 @@ package ba.unsa.etf.rpr.dao;
 
 import ba.unsa.etf.rpr.domain.Brand;
 import ba.unsa.etf.rpr.domain.Phone;
+import ba.unsa.etf.rpr.exception.BuyerException;
 
 import java.io.FileReader;
 import java.sql.*;
@@ -122,7 +123,7 @@ public class PhoneDaoSQLImpl implements PhoneDao{
     }
 
     @Override
-    public List<Phone> searchByBrand(Brand brand) {
+    public List<Phone> searchByBrand(Brand brand) throws BuyerException {
         String query="SELECT * FROM phones WHERE brand_id=?";
         List<Phone> phones = new ArrayList<Phone>();
         try{
@@ -141,11 +142,37 @@ public class PhoneDaoSQLImpl implements PhoneDao{
             }
             rs.close();
         }catch (SQLException e){
-            e.printStackTrace();
+            throw new BuyerException(e.getMessage(),e);
         }
         return phones;
     }
+
     @Override
+    public List<Phone> searchByPrice(Integer min, Integer max) throws BuyerException {
+        String query="SELECT * FROM phones WHERE price BETWEEN ? AND ?";
+        List<Phone> phones = new ArrayList<Phone>();
+        try{
+            PreparedStatement stmt = this.connection.prepareStatement(query);
+            stmt.setInt(1,min);
+            stmt.setInt(2,max);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()){ // result set is iterator.
+                Phone phone=new Phone();
+                phone.setId(rs.getInt("id"));
+                phone.setBrand(new BrandDaoSQLImpl().getById(rs.getInt(2)));
+                phone.setVersion(rs.getString("version"));
+                phone.setPrice(rs.getInt("price"));
+                phone.setIn_stock(rs.getInt("in_stock"));
+                phone.setRelease_date(rs.getDate("release_date"));
+                phones.add(phone);
+            }
+            rs.close();
+        }catch (SQLException e){
+            throw new BuyerException(e.getMessage(),e);
+        }
+        return phones;
+    }
+
     public void tableView() {
         String query="SELECT * FROM phones";
         try {
