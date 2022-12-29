@@ -1,6 +1,7 @@
 package ba.unsa.etf.rpr.controllers;
 
 import ba.unsa.etf.rpr.dao.BrandDaoSQLImpl;
+import ba.unsa.etf.rpr.dao.BuyerDao;
 import ba.unsa.etf.rpr.dao.PhoneDaoSQLImpl;
 import ba.unsa.etf.rpr.domain.Brand;
 import ba.unsa.etf.rpr.domain.Buyer;
@@ -38,16 +39,28 @@ public class HomeController {
     public TableColumn<Phone,String> colPhonesDate;
     public TableColumn<Phone,String> colPhonesStock;
     public TableColumn<Phone,String> colPhonesPrice;
-
+    public Buyer buyer;
 
     public HomeController(){
         brandDaoSQL=new BrandDaoSQLImpl();
         phoneDaoSQL=new PhoneDaoSQLImpl();
         brands=FXCollections.observableArrayList(brandDaoSQL.getAll());
         phones=FXCollections.observableArrayList();
+        buyer=new Buyer();
+
     }
+    public void setBuyer(Buyer b) {
+        this.buyer = b;
+
+    }
+
+    public Buyer getBuyer() {
+        return buyer;
+    }
+
     @FXML
     public void initialize(){
+
         SpinnerValueFactory<Integer> minvalueFactory=new SpinnerValueFactory.IntegerSpinnerValueFactory(0,3900,0,100);
         minPrice.setValueFactory(minvalueFactory);
         SpinnerValueFactory<Integer> maxvalueFactory=new SpinnerValueFactory.IntegerSpinnerValueFactory(100,4000,4000,100);
@@ -132,6 +145,47 @@ public class HomeController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void exitAction(ActionEvent actionEvent) {
+    }
+
+    public void userButtonAction(ActionEvent actionEvent) {
+        try {
+            Stage stage = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/user_profile.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
+            stage.setTitle("User profile");
+            stage.setScene(scene);
+            stage.setResizable(false);
+            UserProfileController userProfileController=new UserProfileController();
+            userProfileController.setBuyer(buyer);
+            loader.setController(userProfileController);
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void cartButtonAction(ActionEvent actionEvent) {
+        try {
+            Stage stage = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/cart.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
+            stage.setTitle("User profile");
+            stage.setScene(scene);
+            stage.setResizable(false);
+            CartController cartController=new CartController();
+            loader.setController(cartController);
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void searchButtonAction(ActionEvent actionEvent) {
     }
 }
 
