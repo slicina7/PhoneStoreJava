@@ -10,14 +10,24 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+
+import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 public class HomeController {
     public ListView<Brand> brandsListView;
     public Spinner<Integer> minPrice;
     public Spinner<Integer> maxPrice;
+    public MenuItem IdBrandsEdit;
     private BrandDaoSQLImpl brandDaoSQL;
     private ObservableList<Brand> brands;
     private PhoneDaoSQLImpl phoneDaoSQL;
@@ -87,6 +97,27 @@ public class HomeController {
                 }
             }
         });
+    }
+
+    public void brandsEdit(ActionEvent actionEvent) {
+        try {
+            Stage stage = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/edit_brands.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
+            stage.setTitle("Edit brands");
+            stage.setScene(scene);
+            stage.setResizable(false);
+            EditBrandsController editBrandsController=new EditBrandsController();
+            loader.setController(editBrandsController);
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public void phonesEdit(ActionEvent actionEvent) {
     }
 }
 
