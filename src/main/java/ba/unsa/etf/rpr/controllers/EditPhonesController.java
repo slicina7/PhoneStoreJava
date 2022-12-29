@@ -14,8 +14,8 @@ public class EditPhonesController {
     private ObservableList<Brand> brands;
     public TextField versionTextField;
     public DatePicker releaseDate;
-    public Spinner priceSpinner;
-    public Spinner stockSpinner;
+    public Spinner<Integer> priceSpinner;
+    public Spinner<Integer> stockSpinner;
 
     public EditPhonesController() {
         brandDaoSQL=new BrandDaoSQLImpl();
@@ -25,6 +25,10 @@ public class EditPhonesController {
     @FXML
     public void initialize() {
         brandChoiceBox.setItems(brands);
+        SpinnerValueFactory<Integer> priceFactory=new SpinnerValueFactory.IntegerSpinnerValueFactory(0,4000,0,100);
+        priceSpinner.setValueFactory(priceFactory);
+        SpinnerValueFactory<Integer> stockFactory=new SpinnerValueFactory.IntegerSpinnerValueFactory(0,100,0);
+        stockSpinner.setValueFactory(stockFactory);
     }
     public void addButtonAction(ActionEvent actionEvent) {
     }

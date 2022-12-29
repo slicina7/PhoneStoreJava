@@ -118,6 +118,20 @@ public class HomeController {
     }
 
     public void phonesEdit(ActionEvent actionEvent) {
+        try {
+            Stage stage = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/edit_phones.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
+            stage.setTitle("Edit phones");
+            stage.setScene(scene);
+            stage.setResizable(false);
+            EditPhonesController editPhonesController=new EditPhonesController();
+            loader.setController(editPhonesController);
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
 
