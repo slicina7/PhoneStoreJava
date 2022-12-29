@@ -9,7 +9,7 @@ import java.util.Objects;
  * @author Selma Licina
  */
 
-public class Phone {
+public class Phone implements IdField{
     private int id;
     private Brand brand;
     private String version;

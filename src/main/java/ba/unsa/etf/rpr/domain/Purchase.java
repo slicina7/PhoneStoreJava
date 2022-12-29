@@ -3,12 +3,12 @@ package ba.unsa.etf.rpr.domain;
 import java.util.Objects;
 
 /**
- * List of all purchases
+ * Holds all purchases made by buyers
  *
  * @author Selma Licina
  */
 
-public class Purchase {
+public class Purchase implements IdField{
     private int id;
     private Buyer buyer;
     private Phone phone;

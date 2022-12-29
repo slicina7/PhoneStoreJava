@@ -8,7 +8,7 @@ import java.util.Objects;
  * @author Selma Licina
  */
 
-public class Buyer {
+public class Buyer implements IdField{
     private int id;
     private String name;
     private String surname;
@@ -74,15 +74,12 @@ public class Buyer {
     }
     @Override
     public String toString(){
-        return "Buyer{" +
-                "id=" + id +
-                ", name=" +  name +
-                ", surname=" +  surname +
-                ", email=" + email +
-                ",account_number="+account_number+
-                ", password=" + password +
-                ", account_balance=" + account_balance +
-                '}';
+        return  "First name :       " + name + "\n"+
+                "Last name :        " + surname +"\n"+
+                "Email :            " + email +"\n"+
+                "Account number :   " + account_number+"\n"+
+                "Password :         " + password +"\n"+
+                "Account balance :  " + account_balance ;
     }
 
     @Override

@@ -8,7 +8,7 @@ import java.util.Objects;
  * @author Selma Licina
  */
 
-public class Brand {
+public class Brand implements IdField{
     private int id;
     private String name;
     public int getId(){
@@ -28,10 +28,7 @@ public class Brand {
 
     @Override
     public String toString(){
-        return "Brand{" +
-                "id=" + id +
-                ", name=" + name + '\'' +
-                '}';
+        return name;
     }
 
     @Override

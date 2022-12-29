@@ -1,5 +1,7 @@
 package ba.unsa.etf.rpr.dao;
 
+import ba.unsa.etf.rpr.exception.BuyerException;
+
 import java.util.List;
 
 /**
@@ -15,7 +17,7 @@ public interface Dao<T> {
      * @param id primary key of entity
      * @return Entity from database
      */
-    T getById(int id);
+    T getById(int id) throws BuyerException;
 
     /**
      * Saves entity into database
@@ -42,5 +44,4 @@ public interface Dao<T> {
      * @return List of entities from database
      */
     List<T> getAll();
-    void  tableView();
 }
