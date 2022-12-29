@@ -15,8 +15,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="550.0" style="-fx-background-color: #2196f3;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="550.0" style="-fx-background-color: #2196f3;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.controllers.EditPhonesController">
    <center>
       <GridPane prefHeight="401.0" prefWidth="566.0" style="-fx-background-color: #ffffff;" BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -49,7 +48,7 @@
                   <Font size="17.0" />
                </font>
             </Label>
-            <ChoiceBox prefHeight="26.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <ChoiceBox fx:id="brandChoiceBox" prefHeight="26.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets right="15.0" />
                </GridPane.margin>
@@ -62,7 +61,7 @@
                   <Font size="17.0" />
                </font>
             </Label>
-            <TextField prefHeight="26.0" prefWidth="270.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <TextField fx:id="versionTextField" prefHeight="26.0" prefWidth="270.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets right="15.0" />
                </GridPane.margin>
@@ -75,7 +74,7 @@
                   <Font size="17.0" />
                </font>
             </Label>
-            <DatePicker prefHeight="26.0" prefWidth="287.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <DatePicker fx:id="releaseDate" prefHeight="26.0" prefWidth="287.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <GridPane.margin>
                   <Insets right="15.0" />
                </GridPane.margin>
@@ -96,21 +95,21 @@
                   <Font size="17.0" />
                </font>
             </Label>
-            <Spinner maxWidth="-Infinity" minWidth="-Infinity" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <Spinner prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Spinner fx:id="priceSpinner" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Spinner fx:id="stockSpinner" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
                <children>
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="26.0" prefWidth="82.0" style="-fx-background-color: #2196f3;" text="Add" textFill="WHITE">
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#addButtonAction" prefHeight="26.0" prefWidth="82.0" style="-fx-background-color: #2196f3;" text="Add" textFill="WHITE">
                      <HBox.margin>
                         <Insets right="15.0" />
                      </HBox.margin>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="82.0" style="-fx-background-color: #2196f3;" text="Update" textFill="WHITE">
+                  <Button mnemonicParsing="false" onAction="#updateButtonAction" prefHeight="26.0" prefWidth="82.0" style="-fx-background-color: #2196f3;" text="Update" textFill="WHITE">
                      <HBox.margin>
                         <Insets right="15.0" />
                      </HBox.margin>
                   </Button>
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="55.2" text="Cancel">
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#cancelButtonAction" prefWidth="55.2" text="Cancel">
                      <HBox.margin>
                         <Insets right="15.0" />
                      </HBox.margin>
