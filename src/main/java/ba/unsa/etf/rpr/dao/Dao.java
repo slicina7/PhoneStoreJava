@@ -24,24 +24,24 @@ public interface Dao<T> {
      * @param item bean for saving to database
      * @return saved item with id field populated
      */
-    T insert(T item);
+    T insert(T item) throws BuyerException;
 
     /**
      * Fully updates entity in database based on id (primary) match.
      * @param item - bean to be updated. id must be populated
      * @return updated version of bean
      */
-    T update(T item);
+    T update(T item) throws BuyerException;
 
     /**
      * Hard delete of item from database with given id
      * @param id - primary key of entity
      */
-    void delete(int id);
+    void delete(int id) throws BuyerException;
 
     /**
      * Lists all entities from database. WARNING: Very slow operation because it reads all records.
      * @return List of entities from database
      */
-    List<T> getAll();
+    List<T> getAll() throws BuyerException;
 }
