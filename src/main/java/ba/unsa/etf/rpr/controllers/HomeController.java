@@ -1,26 +1,28 @@
 package ba.unsa.etf.rpr.controllers;
 
-import ba.unsa.etf.rpr.dao.BrandDaoSQLImpl;
-import ba.unsa.etf.rpr.dao.BuyerDao;
-import ba.unsa.etf.rpr.dao.PhoneDaoSQLImpl;
+import ba.unsa.etf.rpr.dao.*;
 import ba.unsa.etf.rpr.domain.Brand;
 import ba.unsa.etf.rpr.domain.Buyer;
 import ba.unsa.etf.rpr.domain.Phone;
+import ba.unsa.etf.rpr.domain.Purchase;
 import ba.unsa.etf.rpr.exception.BuyerException;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
@@ -42,20 +44,21 @@ public class HomeController {
     public Buyer buyer;
 
     public HomeController(){
-        brandDaoSQL=new BrandDaoSQLImpl();
-        phoneDaoSQL=new PhoneDaoSQLImpl();
-        brands=FXCollections.observableArrayList(brandDaoSQL.getAll());
-        phones=FXCollections.observableArrayList();
+        try {
+            brandDaoSQL=new BrandDaoSQLImpl();
+            phoneDaoSQL=new PhoneDaoSQLImpl();
+            brands=FXCollections.observableArrayList(brandDaoSQL.getAll());
+            phones=FXCollections.observableArrayList();
+        }catch (BuyerException e){
+
+        }
+
         buyer=new Buyer();
 
     }
-    public void setBuyer(Buyer b) {
-        this.buyer = b;
 
-    }
-
-    public Buyer getBuyer() {
-        return buyer;
+    public void setBuyer(Buyer buyer) {
+        this.buyer = buyer;
     }
 
     @FXML
@@ -80,6 +83,15 @@ public class HomeController {
             } catch (BuyerException e) {
                 System.out.println("Something went wrong with searchByCategory method from quoteDaoSQlImpl");
                 throw new RuntimeException(e);
+            }
+        });
+        phonesTableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                Phone p=phonesTableView.getItems().get(
+                        phonesTableView.getSelectionModel().getSelectedIndex()
+                );
+                confirmationDialog(p);
             }
         });
         minPrice.valueProperty().addListener(new ChangeListener<Integer>() {
@@ -111,7 +123,49 @@ public class HomeController {
             }
         });
     }
+    public void confirmationDialog(Phone p){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation Dialog");
+        alert.setHeaderText("Do you want to buy this phone?");
+        alert.setContentText(p.getBrand().getName()+" "+p.getVersion()+" is worth "+p.getPrice()+" and you have "+buyer.getAccount_balance()+" in your account");
 
+        ButtonType buttonTypeYes = new ButtonType("Yes");
+        ButtonType buttonTypeNo = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+        alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == buttonTypeYes){
+            if(buyer.getAccount_balance()<p.getPrice()) {
+                Alert error = new Alert(Alert.AlertType.ERROR);
+                error.setTitle("Error Dialog");
+                error.setHeaderText(null);
+                error.setContentText("You don't have enough money , sorry");
+                error.showAndWait();
+            }else{
+                try {
+                    PurchaseDaoSQLImpl purchaseDaoSQL=new PurchaseDaoSQLImpl();
+                    Purchase purchase=new Purchase();
+                    purchase.setBuyer(buyer);
+                    purchase.setPhone(p);
+                    purchaseDaoSQL.insert(purchase);
+                    int s=buyer.getAccount_balance();
+                    buyer.setAccount_balance(s-p.getPrice());
+                    BuyerDaoSQLImpl buyerDaoSQL=new BuyerDaoSQLImpl();
+                    buyerDaoSQL.update(buyer);
+                    int a=p.getIn_stock();
+                    p.setIn_stock(a-1);
+                    phoneDaoSQL.update(p);
+                }catch (BuyerException e){
+
+                }
+
+            }
+        } else {
+            // ... user chose to close the dialog
+        }
+
+    }
     public void brandsEdit(ActionEvent actionEvent) {
         try {
             Stage stage = new Stage();
@@ -159,7 +213,7 @@ public class HomeController {
             stage.setTitle("User profile");
             stage.setScene(scene);
             stage.setResizable(false);
-            UserProfileController userProfileController=new UserProfileController();
+            UserProfileController userProfileController=loader.getController();
             userProfileController.setBuyer(buyer);
             loader.setController(userProfileController);
             stage.show();
@@ -185,7 +239,5 @@ public class HomeController {
         }
     }
 
-    public void searchButtonAction(ActionEvent actionEvent) {
-    }
 }
 
