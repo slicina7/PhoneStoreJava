@@ -10,15 +10,13 @@ public class UserProfileController {
     public Buyer buyer;
 
     public UserProfileController() {
+        System.out.println("kon");
         buyer=new Buyer();
     }
 
     public void setBuyer(Buyer buyer) {
         this.buyer = buyer;
-
-    }
-    @FXML
-    public void initialize(){
         userInformation.setText(buyer.toString());
     }
+
 }
