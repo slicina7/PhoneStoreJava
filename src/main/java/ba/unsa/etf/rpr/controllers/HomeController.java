@@ -6,6 +6,7 @@ import ba.unsa.etf.rpr.domain.Buyer;
 import ba.unsa.etf.rpr.domain.Phone;
 import ba.unsa.etf.rpr.domain.Purchase;
 import ba.unsa.etf.rpr.exception.BuyerException;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -30,7 +31,6 @@ public class HomeController {
     public ListView<Brand> brandsListView;
     public Spinner<Integer> minPrice;
     public Spinner<Integer> maxPrice;
-    public MenuItem IdBrandsEdit;
     private BrandDaoSQLImpl brandDaoSQL;
     private ObservableList<Brand> brands;
     private PhoneDaoSQLImpl phoneDaoSQL;
@@ -64,9 +64,9 @@ public class HomeController {
     @FXML
     public void initialize(){
 
-        SpinnerValueFactory<Integer> minvalueFactory=new SpinnerValueFactory.IntegerSpinnerValueFactory(0,3900,0,100);
+        SpinnerValueFactory<Integer> minvalueFactory=new SpinnerValueFactory.IntegerSpinnerValueFactory(0,3500,0,500);
         minPrice.setValueFactory(minvalueFactory);
-        SpinnerValueFactory<Integer> maxvalueFactory=new SpinnerValueFactory.IntegerSpinnerValueFactory(100,4000,4000,100);
+        SpinnerValueFactory<Integer> maxvalueFactory=new SpinnerValueFactory.IntegerSpinnerValueFactory(500,4000,4000,500);
         maxPrice.setValueFactory(maxvalueFactory);
         brandsListView.setItems(brands);
         colPhonesId.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -157,9 +157,7 @@ public class HomeController {
                     p.setIn_stock(a-1);
                     phoneDaoSQL.update(p);
                 }catch (BuyerException e){
-
                 }
-
             }
         } else {
             // ... user chose to close the dialog
@@ -202,6 +200,8 @@ public class HomeController {
     }
 
     public void exitAction(ActionEvent actionEvent) {
+        Platform.exit();
+        System.exit(0);
     }
 
     public void userButtonAction(ActionEvent actionEvent) {
@@ -231,7 +231,8 @@ public class HomeController {
             stage.setTitle("User profile");
             stage.setScene(scene);
             stage.setResizable(false);
-            CartController cartController=new CartController();
+            CartController cartController=loader.getController();
+            cartController.setBuyer(buyer);
             loader.setController(cartController);
             stage.show();
         } catch (IOException e) {
@@ -239,5 +240,36 @@ public class HomeController {
         }
     }
 
+    public void aboutAction(ActionEvent actionEvent) {
+        try {
+        Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/about.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
+        stage.setTitle("About");
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void usersAction(ActionEvent actionEvent) {
+        try {
+            Stage stage = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/users.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
+            stage.setTitle("Users");
+            stage.setScene(scene);
+            stage.setResizable(false);
+            UsersController usersController=new UsersController();
+            loader.setController(usersController);
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
 
