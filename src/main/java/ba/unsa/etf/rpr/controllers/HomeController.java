@@ -164,39 +164,30 @@ public class HomeController {
         }
 
     }
-    public void brandsEdit(ActionEvent actionEvent) {
+    private void openDialog(String file,Object controller,String title){
         try {
             Stage stage = new Stage();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/edit_brands.fxml"));
-            Parent root = loader.load();
-            Scene scene = new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
-            stage.setTitle("Edit brands");
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/"+file));
+            Scene scene = new Scene(loader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
+            stage.setTitle(title);
             stage.setScene(scene);
             stage.setResizable(false);
-            EditBrandsController editBrandsController=new EditBrandsController();
-            loader.setController(editBrandsController);
+            loader.setController(controller);
             stage.show();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            Alert alert=new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(e.getMessage());
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
         }
-
+    }
+    public void brandsEdit(ActionEvent actionEvent) {
+        openDialog("edit_brands.fxml",new EditBrandsController(),"Edit brands");
     }
 
     public void phonesEdit(ActionEvent actionEvent) {
-        try {
-            Stage stage = new Stage();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/edit_phones.fxml"));
-            Parent root = loader.load();
-            Scene scene = new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
-            stage.setTitle("Edit phones");
-            stage.setScene(scene);
-            stage.setResizable(false);
-            EditPhonesController editPhonesController=new EditPhonesController();
-            loader.setController(editPhonesController);
-            stage.show();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        openDialog("edit_phones.fxml",new EditPhonesController(),"Edit phones");
     }
 
     public void exitAction(ActionEvent actionEvent) {
@@ -241,35 +232,11 @@ public class HomeController {
     }
 
     public void aboutAction(ActionEvent actionEvent) {
-        try {
-        Stage stage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/about.fxml"));
-        Parent root = loader.load();
-        Scene scene = new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
-        stage.setTitle("About");
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.show();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        openDialog("about.fxml",new AboutController(),"About");
     }
 
     public void usersAction(ActionEvent actionEvent) {
-        try {
-            Stage stage = new Stage();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/users.fxml"));
-            Parent root = loader.load();
-            Scene scene = new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
-            stage.setTitle("Users");
-            stage.setScene(scene);
-            stage.setResizable(false);
-            UsersController usersController=new UsersController();
-            loader.setController(usersController);
-            stage.show();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        openDialog("users.fxml",new UsersController(),"Users");
     }
 }
 
