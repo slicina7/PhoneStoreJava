@@ -2,6 +2,7 @@ package ba.unsa.etf.rpr.dao;
 
 import ba.unsa.etf.rpr.domain.Brand;
 import ba.unsa.etf.rpr.domain.Phone;
+import ba.unsa.etf.rpr.domain.Purchase;
 import ba.unsa.etf.rpr.exception.BuyerException;
 
 import java.util.List;
@@ -21,4 +22,5 @@ public interface PhoneDao extends Dao<Phone>{
      */
     List<Phone> searchByBrand(Brand brand) throws BuyerException;
     List<Phone> searchByPrice(Integer min,Integer max) throws BuyerException;
+
 }

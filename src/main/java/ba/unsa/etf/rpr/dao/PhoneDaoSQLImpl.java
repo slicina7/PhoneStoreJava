@@ -2,13 +2,11 @@ package ba.unsa.etf.rpr.dao;
 
 import ba.unsa.etf.rpr.domain.Brand;
 import ba.unsa.etf.rpr.domain.Phone;
+import ba.unsa.etf.rpr.domain.Purchase;
 import ba.unsa.etf.rpr.exception.BuyerException;
 
-import java.io.FileReader;
 import java.sql.*;
-import java.sql.Date;
 import java.util.*;
-import java.util.concurrent.TimeoutException;
 
 public class PhoneDaoSQLImpl extends AbstractDao<Phone> implements PhoneDao{
 
@@ -19,7 +17,7 @@ public class PhoneDaoSQLImpl extends AbstractDao<Phone> implements PhoneDao{
         try {
             Phone phone = new Phone();
             phone.setId(rs.getInt("id"));
-            phone.setBrand(DaoFactory.brandDao().getById(rs.getInt(2)));
+            phone.setBrand(DaoFactory.brandDao().getById(rs.getInt("brand_id")));
             phone.setVersion(rs.getString("version"));
             phone.setPrice(rs.getInt("price"));
             phone.setIn_stock(rs.getInt("in_stock"));
@@ -51,5 +49,6 @@ public class PhoneDaoSQLImpl extends AbstractDao<Phone> implements PhoneDao{
     public List<Phone> searchByPrice(Integer min, Integer max) throws BuyerException {
         return executeQuery("SELECT * FROM phones WHERE price BETWEEN ? AND ?",new Object[]{min,max});
     }
+
 
 }
