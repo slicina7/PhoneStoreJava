@@ -1,5 +1,8 @@
 package ba.unsa.etf.rpr.controllers;
 
+import ba.unsa.etf.rpr.business.BuyerManager;
+import ba.unsa.etf.rpr.business.PhoneManager;
+import ba.unsa.etf.rpr.business.PurchaseManager;
 import ba.unsa.etf.rpr.dao.*;
 import ba.unsa.etf.rpr.domain.Brand;
 import ba.unsa.etf.rpr.domain.Buyer;
@@ -28,12 +31,12 @@ import java.util.Optional;
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 public class HomeController {
+    private final PurchaseManager purchaseManager=new PurchaseManager();
+    private final PhoneManager phoneManager=new PhoneManager();
     public ListView<Brand> brandsListView;
     public Spinner<Integer> minPrice;
     public Spinner<Integer> maxPrice;
-    private BrandDaoSQLImpl brandDaoSQL;
     private ObservableList<Brand> brands;
-    private PhoneDaoSQLImpl phoneDaoSQL;
     private ObservableList<Phone> phones;
     public TableView<Phone> phonesTableView;
     public TableColumn<Phone,String> colPhonesId;
@@ -45,16 +48,12 @@ public class HomeController {
 
     public HomeController(){
         try {
-            brandDaoSQL=new BrandDaoSQLImpl();
-            phoneDaoSQL=new PhoneDaoSQLImpl();
-            brands=FXCollections.observableArrayList(brandDaoSQL.getAll());
+            brands=FXCollections.observableArrayList(DaoFactory.brandDao().getAll());
             phones=FXCollections.observableArrayList();
         }catch (BuyerException e){
-
+            new BuyerException(e.getMessage(),e);
         }
-
         buyer=new Buyer();
-
     }
 
     public void setBuyer(Buyer buyer) {
@@ -77,7 +76,7 @@ public class HomeController {
         brandsListView.getSelectionModel().selectedItemProperty().addListener((obs, oldCat, newCat) -> {
             try {
                 phonesTableView.getItems().clear();
-                phones.addAll(phoneDaoSQL.searchByBrand(newCat));
+                phones.addAll(DaoFactory.phoneDao().searchByBrand(newCat));
                 phonesTableView.refresh();
                 phonesTableView.setItems(phones);
             } catch (BuyerException e) {
@@ -99,7 +98,7 @@ public class HomeController {
             public void changed(ObservableValue<? extends Integer> observableValue, Integer integer, Integer t1) {
                 try {
                     phonesTableView.getItems().clear();
-                    phones.addAll(phoneDaoSQL.searchByPrice(minPrice.getValue(),maxPrice.getValue()));
+                    phones.addAll(DaoFactory.phoneDao().searchByPrice(minPrice.getValue(),maxPrice.getValue()));
                     phonesTableView.refresh();
                     phonesTableView.setItems(phones);
                 } catch (BuyerException e) {
@@ -113,7 +112,7 @@ public class HomeController {
             public void changed(ObservableValue<? extends Integer> observableValue, Integer integer, Integer t1) {
                 try {
                     phonesTableView.getItems().clear();
-                    phones.addAll(phoneDaoSQL.searchByPrice(minPrice.getValue(),maxPrice.getValue()));
+                    phones.addAll(DaoFactory.phoneDao().searchByPrice(minPrice.getValue(),maxPrice.getValue()));
                     phonesTableView.refresh();
                     phonesTableView.setItems(phones);
                 } catch (BuyerException e) {
@@ -144,6 +143,7 @@ public class HomeController {
                 error.showAndWait();
             }else{
                 try {
+                    purchaseManager.insert(new Purchase(buyer,p));
                     PurchaseDaoSQLImpl purchaseDaoSQL=new PurchaseDaoSQLImpl();
                     Purchase purchase=new Purchase();
                     purchase.setBuyer(buyer);
@@ -155,7 +155,7 @@ public class HomeController {
                     buyerDaoSQL.update(buyer);
                     int a=p.getIn_stock();
                     p.setIn_stock(a-1);
-                    phoneDaoSQL.update(p);
+                    phoneManager.update(p);
                 }catch (BuyerException e){
                 }
             }

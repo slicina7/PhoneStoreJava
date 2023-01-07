@@ -1,5 +1,6 @@
 package ba.unsa.etf.rpr.controllers;
 
+import ba.unsa.etf.rpr.business.BuyerManager;
 import ba.unsa.etf.rpr.dao.BuyerDaoSQLImpl;
 import ba.unsa.etf.rpr.domain.Buyer;
 import ba.unsa.etf.rpr.exception.BuyerException;
@@ -15,13 +16,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import jdk.jshell.spi.ExecutionControl;
-
 import java.io.IOException;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 public class LoginController {
+    private final BuyerManager buyerManager=new BuyerManager();
+    public Buyer buyer;
     public TextField idEmail;
     public PasswordField idPassword;
     public Button idLogin;
@@ -58,10 +59,9 @@ public class LoginController {
     }
 
     public void loginButtonAction(ActionEvent actionEvent) throws BuyerException {
-
-        Buyer buyer=null;
+        buyer=null;
         try {
-            buyer = new BuyerDaoSQLImpl().searchByEmailAndPassword(idEmail.getText(), idPassword.getText());
+            buyer=buyerManager.searchByEmailAndPassword(idEmail.getText(), idPassword.getText());
         }catch(BuyerException message){
             Alert alert=new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
@@ -72,22 +72,21 @@ public class LoginController {
         }
         try {
             Stage stage = new Stage();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/search_phones.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/home.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root,USE_COMPUTED_SIZE,USE_COMPUTED_SIZE);
-            stage.setTitle("Search");
+            stage.setTitle("Home page");
             stage.setScene(scene);
             stage.setResizable(false);
-            SearchPhonesController searchPhonesController=new SearchPhonesController(buyer);
-            loader.setController(searchPhonesController);
+            HomeController homeController=loader.getController();
+            homeController.setBuyer(buyer);
+            loader.setController(homeController);
             stage.show();
             Stage primaryStage = (Stage) idLogin.getScene().getWindow();
             primaryStage.hide();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+           System.out.println(e.getMessage());
         }
-
-
     }
 
     public void signupButtonAction(ActionEvent actionEvent) throws IOException {

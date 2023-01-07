@@ -1,7 +1,9 @@
 package ba.unsa.etf.rpr.controllers;
 
+import ba.unsa.etf.rpr.business.BuyerManager;
 import ba.unsa.etf.rpr.dao.BuyerDaoSQLImpl;
 import ba.unsa.etf.rpr.domain.Buyer;
+import ba.unsa.etf.rpr.exception.BuyerException;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -20,7 +22,7 @@ import java.util.Random;
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 public class SignupController {
-
+    private final BuyerManager buyerManager=new BuyerManager();
     public TextField idName;
     public TextField idSurname;
     public TextField idEmail;
@@ -40,7 +42,7 @@ public class SignupController {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String o, String n) {
 
-                if (idName.getText().trim().isEmpty() || !idName.getText().matches("^[a-zA-ZčćđžšČĆŽŠĐ]{2,20}$")) {
+                if (idName.getText().trim().isEmpty() || !idName.getText().matches("^[a-zA-Z]{2,20}$")) {
                     idName.getStyleClass().removeAll("rightTextField");
                     idName.getStyleClass().add("wrongTextField");
                 } else {
@@ -52,7 +54,7 @@ public class SignupController {
         idSurname.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String o, String n) {
-                if (idSurname.getText().trim().isEmpty() || !idSurname.getText().matches("^[a-zA-ZčćđžšČĆŽŠĐd]{2,20}$")) {
+                if (idSurname.getText().trim().isEmpty() || !idSurname.getText().matches("^[a-zA-Z]{2,20}$")) {
                     idSurname.getStyleClass().removeAll("rightTextField");
                     idSurname.getStyleClass().add("wrongTextField");
                 } else {
@@ -119,11 +121,11 @@ public class SignupController {
     public void signupButtonAction(ActionEvent actionEvent) {
         boolean tacan_unos=true;
         String greska="";
-        if(!idName.getText().matches("^[a-zA-ZčćđžšČĆŽŠĐ]{2,20}$") || idName.getText().isEmpty()){
+        if(!idName.getText().matches("^[a-zA-Z]{2,20}$") || idName.getText().isEmpty()){
             tacan_unos=false;
             greska=greska+"Name can only contain letters and has to be longer than one letter!\n";
         }
-        if(!idSurname.getText().matches("^[a-zA-ZčćđžšČĆŽŠĐd]{2,20}$") || idSurname.getText().isEmpty()){
+        if(!idSurname.getText().matches("^[a-zA-Z]{2,20}$") || idSurname.getText().isEmpty()){
             tacan_unos=false;
             greska=greska+"Surname can only contain letters and has to be longer than one letter!\n";
         }
@@ -140,16 +142,13 @@ public class SignupController {
             greska=greska+"Password must be longer than 7! \n";
         }
         if(tacan_unos){
-            Buyer buyer=new Buyer();
-            buyer.setName(idName.getText());
-            buyer.setSurname(idSurname.getText());
-            buyer.setEmail(idEmail.getText());
-            buyer.setAccount_number(idAccountNumber.getText());
-            buyer.setPassword(idPassword.getText());
             Random random=new Random();
-            buyer.setAccount_balance(random.nextInt(5000));
-            BuyerDaoSQLImpl buyerDaoSQL=new BuyerDaoSQLImpl();
-            buyerDaoSQL.insert(buyer);
+            Buyer buyer=new Buyer(idName.getText(),idSurname.getText(),idEmail.getText(),idAccountNumber.getText(),idPassword.getText(),random.nextInt(9000));
+            try {
+                buyerManager.insert(buyer);
+            }catch (BuyerException e){
+                System.out.println(e.getMessage());
+            }
             try {
                 Stage stage = new Stage();
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/home.fxml"));
@@ -158,7 +157,7 @@ public class SignupController {
                 stage.setTitle("Home page");
                 stage.setScene(scene);
                 stage.setResizable(false);
-                HomeController homeController=new HomeController();
+                HomeController homeController=loader.getController();
                 homeController.setBuyer(buyer);
                 loader.setController(homeController);
                 stage.show();
