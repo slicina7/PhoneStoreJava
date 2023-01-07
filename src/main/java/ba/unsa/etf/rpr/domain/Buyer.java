@@ -17,6 +17,18 @@ public class Buyer implements IdField{
     private String password;
     private int account_balance;
 
+    public Buyer() {
+    }
+
+    public Buyer(String name, String surname, String email, String account_number, String password, int account_balance) {
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.account_number = account_number;
+        this.password = password;
+        this.account_balance = account_balance;
+    }
+
     public int getId() {
         return id;
     }

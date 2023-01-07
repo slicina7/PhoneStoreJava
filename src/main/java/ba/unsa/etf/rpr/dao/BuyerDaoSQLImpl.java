@@ -42,6 +42,6 @@ public class BuyerDaoSQLImpl extends AbstractDao<Buyer> implements BuyerDao{
 
     @Override
     public Buyer searchByEmailAndPassword(String email,String password) throws BuyerException {
-        return executeQueryUnique("\"SELECT * FROM buyers WHERE email = ? AND password = ?",new Object[]{email,password});
+        return executeQueryUnique("SELECT * FROM buyers WHERE email = ? AND password = ?",new Object[]{email,password});
     }
 }
