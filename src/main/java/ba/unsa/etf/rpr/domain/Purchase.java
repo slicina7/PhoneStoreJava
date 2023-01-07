@@ -13,6 +13,14 @@ public class Purchase implements IdField{
     private Buyer buyer;
     private Phone phone;
 
+    public Purchase() {
+    }
+
+    public Purchase(Buyer buyer, Phone phone) {
+        this.buyer = buyer;
+        this.phone = phone;
+    }
+
     public int getId() {
         return id;
     }
@@ -38,11 +46,7 @@ public class Purchase implements IdField{
     }
     @Override
     public String toString(){
-        return "Phone{" +
-                "id=" + id +
-                ", buyer=" +  buyer +
-                ", phone=" +  phone +
-                '}';
+        return phone.getId()+"";
     }
 
     @Override

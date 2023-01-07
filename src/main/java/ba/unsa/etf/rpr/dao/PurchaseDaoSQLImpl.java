@@ -18,8 +18,8 @@ public class PurchaseDaoSQLImpl extends AbstractDao<Purchase> implements Purchas
         try{
             Purchase purchase=new Purchase();
             purchase.setId(rs.getInt("id"));
-            purchase.setBuyer(DaoFactory.buyerDao().getById(rs.getInt(1)));
-            purchase.setPhone(DaoFactory.phoneDao().getById(rs.getInt(1)));
+            purchase.setPhone(DaoFactory.phoneDao().getById(rs.getInt("phone_id")));
+            purchase.setBuyer(DaoFactory.buyerDao().getById(rs.getInt("buyer_id")));
             return purchase;
         }catch(SQLException e){
             throw new BuyerException(e.getMessage(),e);
@@ -30,8 +30,8 @@ public class PurchaseDaoSQLImpl extends AbstractDao<Purchase> implements Purchas
     public Map<String, Object> objectToRow(Purchase object) {
         Map<String, Object> item = new TreeMap<>();
         item.put("id", object.getId());
-        item.put("buyer_id", object.getBuyer().getId());
         item.put("phone_id", object.getPhone().getId());
+        item.put("buyer_id", object.getBuyer().getId());
         return item;
     }
 
@@ -42,6 +42,6 @@ public class PurchaseDaoSQLImpl extends AbstractDao<Purchase> implements Purchas
 
     @Override
     public List<Purchase> searchByBuyer(Buyer buyer) throws BuyerException{
-        return executeQuery("SELECT * FROM purchases WHERE buyer_id = ?",new Object[]{buyer.getId()});
+        return executeQuery("SELECT * FROM purchases WHERE buyer_id=?",new Object[]{buyer.getId()});
     }
 }
