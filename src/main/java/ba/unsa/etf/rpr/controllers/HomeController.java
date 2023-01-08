@@ -172,14 +172,19 @@ public class HomeController {
             stage.setTitle(title);
             stage.setScene(scene);
             stage.setResizable(false);
-            loader.setController(controller);
+            if(title.equals("User profile")) {
+                UserProfileController userProfileController=loader.getController();
+                userProfileController.setBuyer(buyer);
+                loader.setController(userProfileController);
+            }else if(title.equals("Cart")) {
+                CartController cartController=loader.getController();
+                cartController.setBuyer(buyer);
+                loader.setController(cartController);
+            }
+            else  loader.setController(controller);
             stage.show();
         } catch (IOException e) {
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText(e.getMessage());
-            alert.setContentText(e.getMessage());
-            alert.showAndWait();
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
         }
     }
     public void brandsEdit(ActionEvent actionEvent) {
@@ -196,39 +201,11 @@ public class HomeController {
     }
 
     public void userButtonAction(ActionEvent actionEvent) {
-        try {
-            Stage stage = new Stage();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/user_profile.fxml"));
-            Parent root = loader.load();
-            Scene scene = new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
-            stage.setTitle("User profile");
-            stage.setScene(scene);
-            stage.setResizable(false);
-            UserProfileController userProfileController=loader.getController();
-            userProfileController.setBuyer(buyer);
-            loader.setController(userProfileController);
-            stage.show();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        openDialog("user_profile.fxml",new UserProfileController(),"User profile");
     }
 
     public void cartButtonAction(ActionEvent actionEvent) {
-        try {
-            Stage stage = new Stage();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/cart.fxml"));
-            Parent root = loader.load();
-            Scene scene = new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
-            stage.setTitle("User profile");
-            stage.setScene(scene);
-            stage.setResizable(false);
-            CartController cartController=loader.getController();
-            cartController.setBuyer(buyer);
-            loader.setController(cartController);
-            stage.show();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        openDialog("cart.fxml",new CartController(),"Cart");
     }
 
     public void aboutAction(ActionEvent actionEvent) {
