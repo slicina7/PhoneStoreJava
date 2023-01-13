@@ -15,6 +15,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Random;
@@ -111,6 +112,7 @@ public class SignupController {
             stage.setTitle("Log in");
             stage.setScene(scene);
             stage.setResizable(false);
+            stage.getIcons().add(new Image("/img/login.png"));
             stage.show();
             Stage primaryStage = (Stage) idLogin.getScene().getWindow();
             primaryStage.hide();
@@ -143,7 +145,7 @@ public class SignupController {
         }
         if(tacan_unos){
             Random random=new Random();
-            Buyer buyer=new Buyer(idName.getText(),idSurname.getText(),idEmail.getText(),idAccountNumber.getText(),idPassword.getText(),random.nextInt(9000));
+            Buyer buyer=new Buyer(idName.getText(),idSurname.getText(),idEmail.getText(),idAccountNumber.getText(),idPassword.getText(),random.nextInt(50000));
             try {
                 buyerManager.insert(buyer);
             }catch (BuyerException e){
@@ -168,11 +170,8 @@ public class SignupController {
             }
         }
         else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
+            Alert alert=new Alert(Alert.AlertType.ERROR, greska);
             alert.getDialogPane().setPrefSize(400, 250);
-            alert.setTitle("Incorrect input");
-            alert.setHeaderText("Error");
-            alert.setContentText(greska);
             alert.showAndWait();
         }
     }

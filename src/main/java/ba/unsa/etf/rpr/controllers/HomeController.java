@@ -1,6 +1,5 @@
 package ba.unsa.etf.rpr.controllers;
 
-import ba.unsa.etf.rpr.business.BuyerManager;
 import ba.unsa.etf.rpr.business.PhoneManager;
 import ba.unsa.etf.rpr.business.PurchaseManager;
 import ba.unsa.etf.rpr.dao.*;
@@ -18,10 +17,10 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -63,7 +62,7 @@ public class HomeController {
     @FXML
     public void initialize(){
 
-        SpinnerValueFactory<Integer> minvalueFactory=new SpinnerValueFactory.IntegerSpinnerValueFactory(0,3500,0,500);
+        SpinnerValueFactory<Integer> minvalueFactory=new SpinnerValueFactory.IntegerSpinnerValueFactory(0,0,3500,500);
         minPrice.setValueFactory(minvalueFactory);
         SpinnerValueFactory<Integer> maxvalueFactory=new SpinnerValueFactory.IntegerSpinnerValueFactory(500,4000,4000,500);
         maxPrice.setValueFactory(maxvalueFactory);
@@ -136,19 +135,10 @@ public class HomeController {
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == buttonTypeYes){
             if(buyer.getAccount_balance()<p.getPrice()) {
-                Alert error = new Alert(Alert.AlertType.ERROR);
-                error.setTitle("Error Dialog");
-                error.setHeaderText(null);
-                error.setContentText("You don't have enough money , sorry");
-                error.showAndWait();
+                new Alert(Alert.AlertType.ERROR,"You don't have enough money , sorry").show();
             }else{
                 try {
                     purchaseManager.insert(new Purchase(buyer,p));
-                    PurchaseDaoSQLImpl purchaseDaoSQL=new PurchaseDaoSQLImpl();
-                    Purchase purchase=new Purchase();
-                    purchase.setBuyer(buyer);
-                    purchase.setPhone(p);
-                    purchaseDaoSQL.insert(purchase);
                     int s=buyer.getAccount_balance();
                     buyer.setAccount_balance(s-p.getPrice());
                     BuyerDaoSQLImpl buyerDaoSQL=new BuyerDaoSQLImpl();
@@ -164,7 +154,7 @@ public class HomeController {
         }
 
     }
-    private void openDialog(String file,Object controller,String title){
+    private void openDialog(String file,Object controller,String title,String icon){
         try {
             Stage stage = new Stage();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/"+file));
@@ -172,6 +162,7 @@ public class HomeController {
             stage.setTitle(title);
             stage.setScene(scene);
             stage.setResizable(false);
+            stage.getIcons().add(new Image("/img/"+icon));
             if(title.equals("User profile")) {
                 UserProfileController userProfileController=loader.getController();
                 userProfileController.setBuyer(buyer);
@@ -188,11 +179,11 @@ public class HomeController {
         }
     }
     public void brandsEdit(ActionEvent actionEvent) {
-        openDialog("edit_brands.fxml",new EditBrandsController(),"Edit brands");
+        openDialog("edit_brands.fxml",new EditBrandsController(),"Edit brands","phone.png");
     }
 
     public void phonesEdit(ActionEvent actionEvent) {
-        openDialog("edit_phones.fxml",new EditPhonesController(),"Edit phones");
+        openDialog("edit_phones.fxml",new EditPhonesController(),"Edit phones","phone.png");
     }
 
     public void exitAction(ActionEvent actionEvent) {
@@ -201,19 +192,19 @@ public class HomeController {
     }
 
     public void userButtonAction(ActionEvent actionEvent) {
-        openDialog("user_profile.fxml",new UserProfileController(),"User profile");
+        openDialog("user_profile.fxml",new UserProfileController(),"User profile","user.png");
     }
 
     public void cartButtonAction(ActionEvent actionEvent) {
-        openDialog("cart.fxml",new CartController(),"Cart");
+        openDialog("cart.fxml",new CartController(),"Cart","cart.png");
     }
 
     public void aboutAction(ActionEvent actionEvent) {
-        openDialog("about.fxml",new AboutController(),"About");
+        openDialog("about.fxml",new AboutController(),"About","about.png");
     }
 
     public void usersAction(ActionEvent actionEvent) {
-        openDialog("users.fxml",new UsersController(),"Users");
+        openDialog("users.fxml",new UsersController(),"Users","users.png");
     }
 }
 

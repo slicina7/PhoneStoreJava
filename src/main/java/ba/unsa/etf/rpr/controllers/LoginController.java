@@ -15,6 +15,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import java.io.IOException;
 
@@ -63,11 +64,7 @@ public class LoginController {
         try {
             buyer=buyerManager.searchByEmailAndPassword(idEmail.getText(), idPassword.getText());
         }catch(BuyerException message){
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText(message.getMessage());
-            alert.setContentText("Try again");
-            alert.showAndWait();
+            new Alert(Alert.AlertType.ERROR,message.getMessage()).show();
             return;
         }
         try {
@@ -78,6 +75,7 @@ public class LoginController {
             stage.setTitle("Home page");
             stage.setScene(scene);
             stage.setResizable(false);
+            stage.getIcons().add(new Image("/img/home.png"));
             HomeController homeController=loader.getController();
             homeController.setBuyer(buyer);
             loader.setController(homeController);
@@ -98,6 +96,7 @@ public class LoginController {
             stage.setTitle("Sing up");
             stage.setScene(scene);
             stage.setResizable(false);
+            stage.getIcons().add(new Image("/img/login.png"));
             stage.show();
             Stage primaryStage = (Stage) idSignup.getScene().getWindow();
             primaryStage.hide();
