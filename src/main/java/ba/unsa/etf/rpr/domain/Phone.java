@@ -1,6 +1,6 @@
 package ba.unsa.etf.rpr.domain;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.Objects;
 
 /**
@@ -16,6 +16,15 @@ public class Phone implements IdField{
     private int price;
     private int in_stock;
     private java.sql.Date release_date;
+
+    public Phone(){}
+    public Phone(Brand brand, String version, int price, int in_stock, Date release_date) {
+        this.brand = brand;
+        this.version = version;
+        this.price = price;
+        this.in_stock = in_stock;
+        this.release_date = release_date;
+    }
 
     public int getId() {
         return id;
