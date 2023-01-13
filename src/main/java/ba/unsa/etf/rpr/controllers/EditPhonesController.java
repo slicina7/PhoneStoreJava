@@ -1,9 +1,11 @@
 package ba.unsa.etf.rpr.controllers;
 
+import ba.unsa.etf.rpr.business.PhoneManager;
 import ba.unsa.etf.rpr.dao.BrandDaoSQLImpl;
 import ba.unsa.etf.rpr.dao.PhoneDaoSQLImpl;
 import ba.unsa.etf.rpr.domain.Brand;
 import ba.unsa.etf.rpr.domain.Phone;
+import ba.unsa.etf.rpr.exception.BuyerException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import java.sql.Date;
+import java.util.List;
 
 public class EditPhonesController {
     public ChoiceBox<Brand> brandChoiceBox;
@@ -20,14 +23,16 @@ public class EditPhonesController {
     public DatePicker releaseDate;
     public Spinner<Integer> priceSpinner;
     public Spinner<Integer> stockSpinner;
-    Phone phone;
-    PhoneDaoSQLImpl phoneDaoSQL;
+    public PhoneManager phoneManager=new PhoneManager();
 
     public EditPhonesController() {
-        brandDaoSQL=new BrandDaoSQLImpl();
-        brands= FXCollections.observableArrayList(brandDaoSQL.getAll());
-        phone=new Phone();
-        phoneDaoSQL=new PhoneDaoSQLImpl();
+        try {
+            brandDaoSQL=new BrandDaoSQLImpl();
+            brands= FXCollections.observableArrayList(brandDaoSQL.getAll());
+        }catch (BuyerException e){
+
+        }
+
     }
 
     @FXML
@@ -39,18 +44,17 @@ public class EditPhonesController {
         stockSpinner.setValueFactory(stockFactory);
     }
     public void addButtonAction(ActionEvent actionEvent) {
-        phone.setVersion(versionTextField.getText());
-        phone.setBrand(brandChoiceBox.getValue());
-        phone.setPrice(priceSpinner.getValue());
-        phone.setIn_stock(stockSpinner.getValue());
-        phone.setRelease_date(Date.valueOf(releaseDate.getValue()));
-        System.out.println(phone);
-        phoneDaoSQL.insert(phone);
-    }
-
-    public void updateButtonAction(ActionEvent actionEvent) {
+        try{
+            if(phoneManager.searchByBrandAndVersion(brandChoiceBox.getValue(),versionTextField.getText()).size()!=0)
+                new Alert(Alert.AlertType.ERROR,"That phone already exists!");
+            else {
+                phoneManager.insert(new Phone(brandChoiceBox.getValue(),versionTextField.getText(),priceSpinner.getValue(),stockSpinner.getValue(),Date.valueOf(releaseDate.getValue())));
+            }
+        }catch (BuyerException e){
+        }
     }
 
     public void cancelButtonAction(ActionEvent actionEvent) {
+        versionTextField.getScene().getWindow().hide();
     }
 }
