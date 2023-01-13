@@ -1,6 +1,10 @@
 package ba.unsa.etf.rpr.dao;
 
 import ba.unsa.etf.rpr.domain.Brand;
+import ba.unsa.etf.rpr.domain.Buyer;
+import ba.unsa.etf.rpr.exception.BuyerException;
+
+import java.util.List;
 
 /**
  * Dao interface for Brand domain bean
@@ -9,4 +13,10 @@ import ba.unsa.etf.rpr.domain.Brand;
  */
 
 public interface BrandDao extends Dao<Brand>{
+    /**
+     * Search brands in database based on name
+     * @param name brand name
+     * @return Brand with that name
+     */
+    public List<Brand> searchByName(String name) throws BuyerException;
 }

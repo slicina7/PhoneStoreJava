@@ -44,4 +44,13 @@ public class BrandDaoSQLImpl extends AbstractDao<Brand> implements BrandDao{
         return row;
     }
 
+    /**
+     * Search brands in database based on name
+     * @param name brand name
+     * @return Brand with that name
+     */
+    @Override
+    public List<Brand> searchByName(String name) throws BuyerException {
+        return executeQuery("SELECT * FROM brands WHERE name = ?",new Object[]{name});
+    }
 }

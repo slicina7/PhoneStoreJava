@@ -24,7 +24,7 @@ public class BrandManager {
     public void insert(Brand brand) throws BuyerException{
         DaoFactory.brandDao().insert(brand);
     }
-    public Brand searchByName(String name) throws BuyerException{
+    public List<Brand> searchByName(String name) throws BuyerException{
         return DaoFactory.brandDao().searchByName(name);
     }
 }
