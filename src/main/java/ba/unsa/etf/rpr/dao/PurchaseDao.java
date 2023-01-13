@@ -15,16 +15,14 @@ import java.util.List;
 public interface PurchaseDao extends Dao<Purchase> {
     /**
      * Returns all purchases  of that phone.
-     *
      * @param phone search string for purchases
-     * @return list of purchases
+     * @return List of purchases
      */
     List<Purchase> searchByPhone(Phone phone) throws BuyerException;
     /**
      * Returns all purchases of that buyer.
-     *
      * @param buyer search string for purchases
-     * @return list of purchases
+     * @return List of purchases
      */
     List<Purchase> searchByBuyer(Buyer buyer) throws BuyerException;
 }

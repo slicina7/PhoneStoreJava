@@ -3,17 +3,22 @@ package ba.unsa.etf.rpr.dao;
 import ba.unsa.etf.rpr.domain.Brand;
 import ba.unsa.etf.rpr.exception.BuyerException;
 
-import java.io.FileReader;
 import java.sql.*;
 import java.util.*;
-
+/**
+ * MySQL implementation of the DAO
+ */
 public class BrandDaoSQLImpl extends AbstractDao<Brand> implements BrandDao{
 
-    private Connection connection;
 
     public BrandDaoSQLImpl(){super("brands");}
 
-
+    /**
+     * Method for mapping ResultSet into Object
+     * @param rs - result set from database
+     * @return a Bean object for specific table
+     * @throws BuyerException in case of error
+     */
     @Override
     public Brand rowToObject(ResultSet rs) throws BuyerException {
         try{
@@ -26,6 +31,11 @@ public class BrandDaoSQLImpl extends AbstractDao<Brand> implements BrandDao{
         }
     }
 
+    /**
+     * Method for mapping Object into Map
+     * @param object - a bean object for specific table
+     * @return key, value sorted map of object
+     */
     @Override
     public Map<String, Object> objectToRow(Brand object) {
         Map<String, Object> row=new TreeMap<>();

@@ -8,10 +8,19 @@ import ba.unsa.etf.rpr.exception.BuyerException;
 import java.sql.*;
 import java.util.*;
 
+/**
+ * MySQL implementation of the DAO
+ */
 public class PhoneDaoSQLImpl extends AbstractDao<Phone> implements PhoneDao{
 
     public PhoneDaoSQLImpl(){super("phones");}
 
+    /**
+     * Method for mapping ResultSet into Object
+     * @param rs - result set from database
+     * @return a Bean object for specific table
+     * @throws BuyerException in case of error
+     */
     @Override
     public Phone rowToObject(ResultSet rs) throws BuyerException {
         try {
@@ -28,6 +37,11 @@ public class PhoneDaoSQLImpl extends AbstractDao<Phone> implements PhoneDao{
         }
     }
 
+    /**
+     * Method for mapping Object into Map
+     * @param object - a bean object for specific table
+     * @return key, value sorted map of object
+     */
     @Override
     public Map<String, Object> objectToRow(Phone object) {
         Map<String,Object> item=new TreeMap<>();
@@ -40,11 +54,22 @@ public class PhoneDaoSQLImpl extends AbstractDao<Phone> implements PhoneDao{
         return item;
     }
 
+    /**
+     * Returns all phones that are given brand.
+     * @param brand phone brand
+     * @return List of phones
+     */
     @Override
     public List<Phone> searchByBrand(Brand brand) throws BuyerException {
         return executeQuery("SELECT * FROM phones WHERE brand_id=?",new Object[]{brand.getId()});
     }
 
+    /**
+     * Search phones in database based on price range
+     * @param min minimum price
+     * @param max maximum price
+     * @return List of phones from table
+     */
     @Override
     public List<Phone> searchByPrice(Integer min, Integer max) throws BuyerException {
         return executeQuery("SELECT * FROM phones WHERE price BETWEEN ? AND ?",new Object[]{min,max});

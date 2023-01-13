@@ -10,5 +10,11 @@ import ba.unsa.etf.rpr.exception.BuyerException;
  */
 
 public interface BuyerDao extends Dao<Buyer>{
-    Buyer searchByEmailAndPassword(String email,String password) throws BuyerException;
+    /**
+     * Search buyers in database based email and password
+     * @param email user email
+     * @param password user password
+     * @return Buyer with that email and password
+     */
+    public Buyer searchByEmailAndPassword(String email,String password) throws BuyerException;
 }

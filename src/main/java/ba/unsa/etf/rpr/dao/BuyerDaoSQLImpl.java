@@ -5,11 +5,19 @@ import ba.unsa.etf.rpr.exception.BuyerException;
 import java.sql.*;
 import java.util.Map;
 import java.util.TreeMap;
-
+/**
+ * MySQL implementation of the DAO
+ */
 public class BuyerDaoSQLImpl extends AbstractDao<Buyer> implements BuyerDao{
 
     public BuyerDaoSQLImpl(){super("buyers");}
 
+    /**
+     * Method for mapping ResultSet into Object
+     * @param rs - result set from database
+     * @return a Bean object for specific table
+     * @throws BuyerException in case of error
+     */
     @Override
     public Buyer rowToObject(ResultSet rs) throws BuyerException {
         try{
@@ -27,6 +35,11 @@ public class BuyerDaoSQLImpl extends AbstractDao<Buyer> implements BuyerDao{
         }
     }
 
+    /**
+     * Method for mapping Object into Map
+     * @param object - a bean object for specific table
+     * @return key, value sorted map of object
+     */
     @Override
     public Map<String, Object> objectToRow(Buyer object) {
         Map<String,Object> item=new TreeMap<>();
@@ -40,6 +53,12 @@ public class BuyerDaoSQLImpl extends AbstractDao<Buyer> implements BuyerDao{
         return item;
     }
 
+    /**
+     * Search buyers in database based email and password
+     * @param email user email
+     * @param password user password
+     * @return Buyer with that email and password
+     */
     @Override
     public Buyer searchByEmailAndPassword(String email,String password) throws BuyerException {
         return executeQueryUnique("SELECT * FROM buyers WHERE email = ? AND password = ?",new Object[]{email,password});

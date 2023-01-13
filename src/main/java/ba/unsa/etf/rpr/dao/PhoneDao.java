@@ -16,11 +16,16 @@ import java.util.List;
 public interface PhoneDao extends Dao<Phone>{
     /**
      * Returns all phones that are given brand.
-     *
-     * @param brand search string for phones
-     * @return list of phones
+     * @param brand phone brand
+     * @return List of phones
      */
     List<Phone> searchByBrand(Brand brand) throws BuyerException;
+    /**
+     * Search phones in database based on price range
+     * @param min minimum price
+     * @param max maximum price
+     * @return List of phones from table
+     */
     List<Phone> searchByPrice(Integer min,Integer max) throws BuyerException;
 
 }
