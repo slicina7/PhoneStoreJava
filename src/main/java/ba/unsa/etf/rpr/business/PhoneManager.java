@@ -12,11 +12,14 @@ public class PhoneManager {
     public List<Phone> getAll() throws BuyerException{
         return DaoFactory.phoneDao().getAll();
     }
-    List<Phone> searchByBrand(Brand brand) throws BuyerException {
+    public  List<Phone> searchByBrand(Brand brand) throws BuyerException {
         return DaoFactory.phoneDao().searchByBrand(brand);
     }
-    List<Phone> searchByPrice(Integer min,Integer max) throws BuyerException{
+    public List<Phone> searchByPrice(Integer min,Integer max) throws BuyerException{
         return DaoFactory.phoneDao().searchByPrice(min,max);
+    }
+     public List<Phone> searchByBrandAndVersion(Brand brand,String version) throws BuyerException{
+        return DaoFactory.phoneDao().searchByBrandAndVersion(brand,version);
     }
     public void delete(int id) throws BuyerException{
         DaoFactory.phoneDao().delete(id);
@@ -30,4 +33,5 @@ public class PhoneManager {
     public void insert(Phone phone) throws BuyerException{
         DaoFactory.phoneDao().insert(phone);
     }
+
 }

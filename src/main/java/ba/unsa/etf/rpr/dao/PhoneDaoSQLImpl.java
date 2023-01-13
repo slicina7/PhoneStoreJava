@@ -74,6 +74,15 @@ public class PhoneDaoSQLImpl extends AbstractDao<Phone> implements PhoneDao{
     public List<Phone> searchByPrice(Integer min, Integer max) throws BuyerException {
         return executeQuery("SELECT * FROM phones WHERE price BETWEEN ? AND ?",new Object[]{min,max});
     }
+    /**
+     * Search phones in database based on version
+     * @param version , phone version
+     * @return List of phones from table
+     */
+    @Override
+    public List<Phone> searchByBrandAndVersion(Brand brand,String version) throws BuyerException {
+        return executeQuery("SELECT * FROM phones WHERE brand_id = ? AND version = ?",new Object[]{brand.getId(),version});
+    }
 
 
 }
