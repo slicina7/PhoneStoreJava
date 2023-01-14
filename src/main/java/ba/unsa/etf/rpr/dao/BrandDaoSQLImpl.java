@@ -9,9 +9,19 @@ import java.util.*;
  * MySQL implementation of the DAO
  */
 public class BrandDaoSQLImpl extends AbstractDao<Brand> implements BrandDao{
-
-
+    private static BrandDaoSQLImpl instance=null;
     public BrandDaoSQLImpl(){super("brands");}
+
+    public static BrandDaoSQLImpl getInstance(){
+        if(instance==null)
+            instance=new BrandDaoSQLImpl();
+        return instance;
+    }
+
+    public static void removeInstance(){
+        if(instance!=null)
+            instance=null;
+    }
 
     /**
      * Method for mapping ResultSet into Object

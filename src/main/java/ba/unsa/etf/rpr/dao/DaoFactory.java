@@ -3,10 +3,10 @@ package ba.unsa.etf.rpr.dao;
  * Factory method for singleton implementation of DAOs
  */
 public class DaoFactory {
-    private static final BrandDao brandDao=new BrandDaoSQLImpl();
-    private static final BuyerDao buyerDao=new BuyerDaoSQLImpl();
-    private static final PhoneDao phoneDao=new PhoneDaoSQLImpl();
-    private static final PurchaseDao purchaseDao=new PurchaseDaoSQLImpl();
+    private static final BrandDao brandDao=BrandDaoSQLImpl.getInstance();
+    private static final BuyerDao buyerDao=BuyerDaoSQLImpl.getInstance();
+    private static final PhoneDao phoneDao=PhoneDaoSQLImpl.getInstance();
+    private static final PurchaseDao purchaseDao=PurchaseDaoSQLImpl.getInstance();
 
     private DaoFactory(){
     }

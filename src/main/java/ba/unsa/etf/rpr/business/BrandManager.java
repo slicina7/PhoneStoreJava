@@ -2,7 +2,6 @@ package ba.unsa.etf.rpr.business;
 
 import ba.unsa.etf.rpr.dao.DaoFactory;
 import ba.unsa.etf.rpr.domain.Brand;
-import ba.unsa.etf.rpr.domain.Buyer;
 import ba.unsa.etf.rpr.exception.BuyerException;
 
 import java.util.List;

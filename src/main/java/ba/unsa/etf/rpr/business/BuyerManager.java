@@ -11,7 +11,7 @@ public class BuyerManager {
     public List<Buyer> getAll() throws BuyerException{
         return DaoFactory.buyerDao().getAll();
     }
-    Buyer searchByEmailAndPassword(String email,String password) throws BuyerException{
+    public Buyer searchByEmailAndPassword(String email,String password) throws BuyerException{
         return DaoFactory.buyerDao().searchByEmailAndPassword(email,password);
     }
     public void delete(int id) throws BuyerException{
@@ -26,4 +26,6 @@ public class BuyerManager {
     public void insert(Buyer buyer) throws BuyerException{
         DaoFactory.buyerDao().insert(buyer);
     }
+
+
 }

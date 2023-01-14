@@ -9,8 +9,17 @@ import java.util.TreeMap;
  * MySQL implementation of the DAO
  */
 public class BuyerDaoSQLImpl extends AbstractDao<Buyer> implements BuyerDao{
-
+    private static BuyerDaoSQLImpl instance=null;
     public BuyerDaoSQLImpl(){super("buyers");}
+    public static BuyerDaoSQLImpl getInstance(){
+        if(instance==null)
+            instance=new BuyerDaoSQLImpl();
+        return instance;
+    }
+    public static void removeInstance(){
+        if(instance!=null)
+            instance=null;
+    }
 
     /**
      * Method for mapping ResultSet into Object
