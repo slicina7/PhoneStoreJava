@@ -9,6 +9,8 @@ import ba.unsa.etf.rpr.domain.Phone;
 import ba.unsa.etf.rpr.domain.Purchase;
 import ba.unsa.etf.rpr.exception.BuyerException;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -34,6 +36,8 @@ public class HomeController {
     public Label status;
     public TextField minPrice;
     public TextField maxPrice;
+    int min=0;
+    int max=4000;
     private ObservableList<Brand> brands;
     private ObservableList<Phone> phones;
     public TableView<Phone> phonesTableView;
@@ -88,7 +92,6 @@ public class HomeController {
                 confirmationDialog(p);
             }
         });
-
     }
     public void confirmationDialog(Phone p){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -184,11 +187,17 @@ public class HomeController {
 
     public void priceRangeSearch(ActionEvent actionEvent) {
         try {
-            status.setText("Searching for phones with price range : "+minPrice.getText()+" - "+maxPrice.getText());
-            phonesTableView.getItems().clear();
-            phones.addAll(DaoFactory.phoneDao().searchByPrice(Integer.parseInt(minPrice.getText()),Integer.parseInt(maxPrice.getText())));
-            phonesTableView.refresh();
-            phonesTableView.setItems(phones);
+            if((!minPrice.getText().matches("^[0-9]{1,20}$") && !minPrice.getText().isEmpty()) || (!maxPrice.getText().matches("^[0-9]{1,20}$") && !maxPrice.getText().isEmpty()))
+                new Alert(Alert.AlertType.ERROR,"Invalid input , try again ").show();
+            else {
+                if (!minPrice.getText().isEmpty()) min = Integer.parseInt(minPrice.getText()); else min=0;
+                if (!maxPrice.getText().isEmpty()) max = Integer.parseInt(maxPrice.getText()); else max=4000;
+                status.setText("Searching for phones with price range : " + minPrice.getText() + " - " + maxPrice.getText());
+                phonesTableView.getItems().clear();
+                phones.addAll(DaoFactory.phoneDao().searchByPrice(min, max));
+                phonesTableView.refresh();
+                phonesTableView.setItems(phones);
+            }
         } catch (BuyerException e) {
             System.out.println("Something went wrong with searchByCategory method from quoteDaoSQlImpl");
             throw new RuntimeException(e);
