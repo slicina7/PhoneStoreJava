@@ -9,8 +9,6 @@ import ba.unsa.etf.rpr.domain.Phone;
 import ba.unsa.etf.rpr.domain.Purchase;
 import ba.unsa.etf.rpr.exception.BuyerException;
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -33,8 +31,9 @@ public class HomeController {
     private final PurchaseManager purchaseManager=new PurchaseManager();
     private final PhoneManager phoneManager=new PhoneManager();
     public ListView<Brand> brandsListView;
-    public Spinner<Integer> minPrice;
-    public Spinner<Integer> maxPrice;
+    public Label status;
+    public TextField minPrice;
+    public TextField maxPrice;
     private ObservableList<Brand> brands;
     private ObservableList<Phone> phones;
     public TableView<Phone> phonesTableView;
@@ -62,10 +61,6 @@ public class HomeController {
     @FXML
     public void initialize(){
 
-        SpinnerValueFactory<Integer> minvalueFactory=new SpinnerValueFactory.IntegerSpinnerValueFactory(0,0,3500,500);
-        minPrice.setValueFactory(minvalueFactory);
-        SpinnerValueFactory<Integer> maxvalueFactory=new SpinnerValueFactory.IntegerSpinnerValueFactory(500,4000,4000,500);
-        maxPrice.setValueFactory(maxvalueFactory);
         brandsListView.setItems(brands);
         colPhonesId.setCellValueFactory(new PropertyValueFactory<>("id"));
         colPhonesVersion.setCellValueFactory(new PropertyValueFactory<>("version"));
@@ -74,6 +69,7 @@ public class HomeController {
         colPhonesPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
         brandsListView.getSelectionModel().selectedItemProperty().addListener((obs, oldCat, newCat) -> {
             try {
+                status.setText("Searching for phones with "+newCat.toString()+" brand.");
                 phonesTableView.getItems().clear();
                 phones.addAll(DaoFactory.phoneDao().searchByBrand(newCat));
                 phonesTableView.refresh();
@@ -92,34 +88,7 @@ public class HomeController {
                 confirmationDialog(p);
             }
         });
-        minPrice.valueProperty().addListener(new ChangeListener<Integer>() {
-            @Override
-            public void changed(ObservableValue<? extends Integer> observableValue, Integer integer, Integer t1) {
-                try {
-                    phonesTableView.getItems().clear();
-                    phones.addAll(DaoFactory.phoneDao().searchByPrice(minPrice.getValue(),maxPrice.getValue()));
-                    phonesTableView.refresh();
-                    phonesTableView.setItems(phones);
-                } catch (BuyerException e) {
-                    System.out.println("Something went wrong with searchByCategory method from quoteDaoSQlImpl");
-                    throw new RuntimeException(e);
-                }
-            }
-        });
-        maxPrice.valueProperty().addListener(new ChangeListener<Integer>() {
-            @Override
-            public void changed(ObservableValue<? extends Integer> observableValue, Integer integer, Integer t1) {
-                try {
-                    phonesTableView.getItems().clear();
-                    phones.addAll(DaoFactory.phoneDao().searchByPrice(minPrice.getValue(),maxPrice.getValue()));
-                    phonesTableView.refresh();
-                    phonesTableView.setItems(phones);
-                } catch (BuyerException e) {
-                    System.out.println("Something went wrong with searchByCategory method from quoteDaoSQlImpl");
-                    throw new RuntimeException(e);
-                }
-            }
-        });
+
     }
     public void confirmationDialog(Phone p){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -179,10 +148,12 @@ public class HomeController {
         }
     }
     public void brandsEdit(ActionEvent actionEvent) {
+        status.setText("Opening edit brands");
         openDialog("edit_brands.fxml",new EditBrandsController(),"Edit brands","phone.png");
     }
 
     public void phonesEdit(ActionEvent actionEvent) {
+        status.setText("Opening edit phones");
         openDialog("edit_phones.fxml",new EditPhonesController(),"Edit phones","phone.png");
     }
 
@@ -192,19 +163,36 @@ public class HomeController {
     }
 
     public void userButtonAction(ActionEvent actionEvent) {
+        status.setText("Opening user profile");
         openDialog("user_profile.fxml",new UserProfileController(),"User profile","user.png");
     }
 
     public void cartButtonAction(ActionEvent actionEvent) {
+        status.setText("Opening cart");
         openDialog("cart.fxml",new CartController(),"Cart","cart.png");
     }
 
     public void aboutAction(ActionEvent actionEvent) {
+        status.setText("Opening cart");
         openDialog("about.fxml",new AboutController(),"About","about.png");
     }
 
     public void usersAction(ActionEvent actionEvent) {
+        status.setText("Viewing all app users");
         openDialog("users.fxml",new UsersController(),"Users","users.png");
+    }
+
+    public void priceRangeSearch(ActionEvent actionEvent) {
+        try {
+            status.setText("Searching for phones with price range : "+minPrice.getText()+" - "+maxPrice.getText());
+            phonesTableView.getItems().clear();
+            phones.addAll(DaoFactory.phoneDao().searchByPrice(Integer.parseInt(minPrice.getText()),Integer.parseInt(maxPrice.getText())));
+            phonesTableView.refresh();
+            phonesTableView.setItems(phones);
+        } catch (BuyerException e) {
+            System.out.println("Something went wrong with searchByCategory method from quoteDaoSQlImpl");
+            throw new RuntimeException(e);
+        }
     }
 }
 

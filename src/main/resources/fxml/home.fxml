@@ -9,9 +9,9 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -25,7 +25,7 @@
     <bottom>
       <HBox prefHeight="24.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" prefHeight="24.0" prefWidth="904.0" text="Label" />
+            <Label fx:id="status" alignment="CENTER" prefHeight="24.0" prefWidth="904.0" text="Application status" />
          </children>
       </HBox>
    </bottom>
@@ -41,7 +41,7 @@
                 </Menu>
                 <Menu text="_Edit">
                   <items>
-                    <MenuItem onAction="#brandsEdit" text="Brands" />
+                    <MenuItem onAction="#brandsEdit" text="_Brands" />
                         <MenuItem onAction="#phonesEdit" text="_Phones" />
                   </items>
                 </Menu>
@@ -68,14 +68,14 @@
       </VBox>
    </top>
    <center>
-      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="515.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="510.4" prefWidth="515.0" BorderPane.alignment="CENTER">
          <children>
             <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="22.0" prefWidth="501.0" text="All phones available">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <TableView fx:id="phonesTableView" prefHeight="485.0" prefWidth="518.0">
+            <TableView fx:id="phonesTableView" prefHeight="483.0" prefWidth="515.0">
               <columns>
                 <TableColumn fx:id="colPhonesId" prefWidth="36.79998779296875" text="ID" />
                 <TableColumn fx:id="colPhonesVersion" minWidth="1.5999755859375" prefWidth="211.1999740600586" text="Version" />
@@ -88,38 +88,37 @@
       </VBox>
    </center>
    <left>
-      <VBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="385.0" BorderPane.alignment="CENTER">
+      <VBox minWidth="-Infinity" prefWidth="385.0" BorderPane.alignment="CENTER">
          <children>
-            <Label text="Price range:">
+            <Label text="Price between ">
                <font>
                   <Font size="15.0" />
                </font>
                <VBox.margin>
-                  <Insets left="5.0" top="5.0" />
+                  <Insets left="10.0" top="5.0" />
                </VBox.margin>
             </Label>
-            <HBox prefHeight="20.0" prefWidth="386.0">
-               <children>
-                  <Label text="Min price">
-                     <HBox.margin>
-                        <Insets left="15.0" right="95.0" />
-                     </HBox.margin>
-                  </Label>
-                  <Label text="Max price">
-                     <HBox.margin>
-                        <Insets left="15.0" />
-                     </HBox.margin>
-                  </Label>
-               </children>
-            </HBox>
             <HBox prefHeight="46.0" prefWidth="386.0">
                <children>
-                  <Spinner fx:id="minPrice" prefWidth="175.2">
+                  <TextField fx:id="minPrice" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="120.0" promptText="min price : 0">
                      <HBox.margin>
-                        <Insets left="5.0" right="15.0" />
+                        <Insets left="5.0" right="5.0" />
                      </HBox.margin>
-                  </Spinner>
-                  <Spinner fx:id="maxPrice" prefWidth="175.2" />
+                  </TextField>
+                  <Label prefHeight="25.0" prefWidth="32.0" text="and">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="3.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField fx:id="maxPrice" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="120.0" promptText="max price : 4000">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </TextField>
+                  <Button mnemonicParsing="false" onAction="#priceRangeSearch" text="Search " />
                </children>
             </HBox>
             <Separator prefWidth="200.0" />
@@ -128,10 +127,10 @@
                   <Font size="15.0" />
                </font>
                <VBox.margin>
-                  <Insets bottom="5.0" left="5.0" top="5.0" />
+                  <Insets bottom="5.0" left="10.0" top="5.0" />
                </VBox.margin>
             </Label>
-            <ListView fx:id="brandsListView" prefHeight="378.0" prefWidth="386.0" />
+            <ListView fx:id="brandsListView" prefHeight="382.0" prefWidth="386.0" />
          </children>
       </VBox>
    </left>
