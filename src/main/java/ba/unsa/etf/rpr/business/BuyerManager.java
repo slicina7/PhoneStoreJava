@@ -2,18 +2,19 @@ package ba.unsa.etf.rpr.business;
 
 import ba.unsa.etf.rpr.dao.DaoFactory;
 import ba.unsa.etf.rpr.domain.Buyer;
-import ba.unsa.etf.rpr.domain.Phone;
+
 import ba.unsa.etf.rpr.exception.BuyerException;
 
 import java.util.List;
+import java.util.Objects;
 
 public class BuyerManager {
     public void validateName(String name) throws BuyerException{
-        if(name==null || name.length()<1 || name.length()>30 || !name.matches("^[a-zA-Z]{2,20}$") || name.isEmpty())
-            throw new BuyerException("Name can only contain letters and has to be longer than one letter and shorter than 30 letters!");
+        if(name==null || name.length()<2 || name.length()>30 || !name.matches("^[a-zA-Z]{2,20}$") || name.isEmpty())
+            throw new BuyerException("Name can only contain letters and has to be longer than two letter and shorter than 30 letters!");
     }
     public void validateSurname(String surname) throws BuyerException{
-        if(surname==null || surname.length()>30 || !surname.matches("^[a-zA-Z]{2,20}$") || surname.isEmpty())
+        if(surname==null || surname.length()<2 || surname.length()>30 || !surname.matches("^[a-zA-Z]{2,20}$") || surname.isEmpty())
             throw new BuyerException("Last name can only contain letters and has to be longer than one letter and shorter than 30 letters!");
     }
     public void validateEmail(String email) throws BuyerException{
@@ -41,9 +42,22 @@ public class BuyerManager {
         return DaoFactory.buyerDao().getById(id);
     }
     public void update(Buyer buyer) throws  BuyerException{
+        validateName(buyer.getName());
+        validateSurname(buyer.getSurname());
+        validateEmail(buyer.getEmail());
+        validateAccountNumber(buyer.getAccount_number());
+        validatePassword(buyer.getPassword());
         DaoFactory.buyerDao().update(buyer);
     }
     public void insert(Buyer buyer) throws BuyerException{
+        validateName(buyer.getName());
+        validateSurname(buyer.getSurname());
+        validateEmail(buyer.getEmail());
+        validateAccountNumber(buyer.getAccount_number());
+        validatePassword(buyer.getPassword());
+        for(Buyer b: getAll())
+            if(Objects.equals(buyer.getEmail(),b.getEmail()) || Objects.equals(buyer.getAccount_number(),b.getAccount_number()))
+                throw new BuyerException("Buyer with that email or account number already exists !");
         DaoFactory.buyerDao().insert(buyer);
     }
 
