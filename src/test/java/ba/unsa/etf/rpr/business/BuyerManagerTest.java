@@ -9,6 +9,8 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -22,8 +24,11 @@ class BuyerManagerTest {
     @BeforeEach
     public void initializeObjectsWeNeed(){
         buyerManager= Mockito.mock(BuyerManager.class);
-        buyer=new Buyer("Name","Surename","email","account","Password",12345);
+        buyer=new Buyer("Name","Surename","email@gmail.com","123456","Password",12345);
         buyerDaoSQLMock=Mockito.mock(BuyerDaoSQLImpl.class);
+        buyers=new ArrayList<>();
+        buyers.addAll(Arrays.asList(new Buyer("Name2","Surename2","email2@gmail.com","1234567","Password",12345),
+                new Buyer("Name3","Surename3","email3@gmail.com","12345678","Password",12345)));
     }
     @Test
     void validateName() throws BuyerException{
@@ -124,5 +129,14 @@ class BuyerManagerTest {
             buyerManager.validateEmail(incorrect2);
         }, "Invalid email input !");
         Assertions.assertEquals("Invalid email input !", buyerException2.getMessage());
-    }
+        }
+
+        @Test
+        void insert() throws BuyerException{
+        Buyer newBuyer=new Buyer("Name","Surename","email@gmail.com","123456","Password",12345);
+        buyerManager.insert(newBuyer);
+        Assertions.assertTrue(true);
+        Mockito.verify(buyerManager).insert(newBuyer);
+        }
+
     }
