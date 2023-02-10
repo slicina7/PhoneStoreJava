@@ -93,4 +93,36 @@ class BuyerManagerTest {
         Assertions.assertEquals("Password must be longer than 7 and shorter than 30!",buyerException.getMessage());
     }
 
-}
+    @Test
+    void validateEmail() throws BuyerException {
+        String correctEmail1 = "email@gmail.com";
+        String correctEmail2 = "email@etf.unsa.ba";
+        try {
+            Mockito.doCallRealMethod().when(buyerManager).validateEmail(correctEmail1);
+        } catch (BuyerException e) {
+            e.printStackTrace();
+            Assertions.assertTrue(false);
+        }
+
+        try {
+            Mockito.doCallRealMethod().when(buyerManager).validateEmail(correctEmail2);
+        } catch (BuyerException e) {
+            e.printStackTrace();
+            Assertions.assertTrue(false);
+        }
+
+        String incorrect1 = "email";
+        Mockito.doCallRealMethod().when(buyerManager).validateEmail(incorrect1);
+        BuyerException buyerException1 = assertThrows(BuyerException.class, () -> {
+            buyerManager.validateEmail(incorrect1);
+        }, "Invalid email input !");
+        Assertions.assertEquals("Invalid email input !", buyerException1.getMessage());
+
+        String incorrect2 = "email@";
+        Mockito.doCallRealMethod().when(buyerManager).validateEmail(incorrect2);
+        BuyerException buyerException2 = assertThrows(BuyerException.class, () -> {
+            buyerManager.validateEmail(incorrect2);
+        }, "Invalid email input !");
+        Assertions.assertEquals("Invalid email input !", buyerException2.getMessage());
+    }
+    }
