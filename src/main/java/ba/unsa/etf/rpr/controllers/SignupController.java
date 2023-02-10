@@ -43,7 +43,7 @@ public class SignupController {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String o, String n) {
 
-                if (idName.getText().trim().isEmpty() || !idName.getText().matches("^[a-zA-Z]{2,20}$")) {
+                if (idName.getText().trim().isEmpty() || !idName.getText().matches("^[a-zA-Z]{2,20}$") || idName.getText().length()<2 || idName.getText().length()>30) {
                     idName.getStyleClass().removeAll("rightTextField");
                     idName.getStyleClass().add("wrongTextField");
                 } else {
@@ -55,7 +55,7 @@ public class SignupController {
         idSurname.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String o, String n) {
-                if (idSurname.getText().trim().isEmpty() || !idSurname.getText().matches("^[a-zA-Z]{2,20}$")) {
+                if (idSurname.getText().trim().isEmpty() || !idSurname.getText().matches("^[a-zA-Z]{2,20}$") || idSurname.getText().length()<2 || idSurname.getText().length()>30) {
                     idSurname.getStyleClass().removeAll("rightTextField");
                     idSurname.getStyleClass().add("wrongTextField");
                 } else {
@@ -122,27 +122,19 @@ public class SignupController {
     }
     public void signupButtonAction(ActionEvent actionEvent) {
         boolean tacan_unos=true;
-        String greska="";
-        if(!idName.getText().matches("^[a-zA-Z]{2,20}$") || idName.getText().isEmpty()){
-            tacan_unos=false;
-            greska=greska+"Name can only contain letters and has to be longer than one letter!\n";
+        try {
+        buyerManager.validateName(idName.getText());
+        buyerManager.validateSurname(idSurname.getText());
+        buyerManager.validateEmail(idEmail.getText());
+        buyerManager.validateAccountNumber(idAccountNumber.getText());
+        buyerManager.validatePassword(idPassword.getText());
         }
-        if(!idSurname.getText().matches("^[a-zA-Z]{2,20}$") || idSurname.getText().isEmpty()){
+        catch(BuyerException e){
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
             tacan_unos=false;
-            greska=greska+"Surname can only contain letters and has to be longer than one letter!\n";
         }
-        if(!idEmail.getText().matches("^[\\w-]+(?:\\.[a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:\\.[a-zA-Z0-9]+)*$") || idEmail.getText().isEmpty()){
-            tacan_unos=false;
-            greska=greska+"Invalid email input! \n";
-        }
-        if(!idAccountNumber.getText().matches("^[0-9]{5,30}$") || idAccountNumber.getText().isEmpty()){
-            tacan_unos=false;
-            greska=greska+"Account Number can only contain numbers!\n";
-        }
-        if(idPassword.getText().length()<8){
-            tacan_unos=false;
-            greska=greska+"Password must be longer than 7! \n";
-        }
+
+
         if(tacan_unos){
             Random random=new Random();
             Buyer buyer=new Buyer(idName.getText(),idSurname.getText(),idEmail.getText(),idAccountNumber.getText(),idPassword.getText(),random.nextInt(50000));
@@ -168,11 +160,6 @@ public class SignupController {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-        }
-        else {
-            Alert alert=new Alert(Alert.AlertType.ERROR, greska);
-            alert.getDialogPane().setPrefSize(400, 250);
-            alert.showAndWait();
         }
     }
 }
