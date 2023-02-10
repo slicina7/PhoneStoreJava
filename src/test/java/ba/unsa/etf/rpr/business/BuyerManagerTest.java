@@ -85,4 +85,12 @@ class BuyerManagerTest {
 
     }
 
+    @Test
+    void validatePassword() throws BuyerException{
+        String inccorectShort="123";
+        Mockito.doCallRealMethod().when(buyerManager).validatePassword(inccorectShort);
+        BuyerException buyerException=assertThrows(BuyerException.class,()->{ buyerManager.validatePassword(inccorectShort);},"Password must be longer than 7 and shorter than 30!");
+        Assertions.assertEquals("Password must be longer than 7 and shorter than 30!",buyerException.getMessage());
+    }
+
 }
