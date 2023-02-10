@@ -151,4 +151,9 @@ class BuyerManagerTest {
         Mockito.verify(buyerManager).insert(b);
         }
 
+        @Test
+        void getAll() throws BuyerException{
+        when(buyerManager.getAll()).thenReturn(buyers);
+        Assertions.assertEquals(buyers,buyerManager.getAll());
+        }
     }
