@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
 
 class BuyerManagerTest {
     private BuyerManager buyerManager;
@@ -137,6 +138,17 @@ class BuyerManagerTest {
         buyerManager.insert(newBuyer);
         Assertions.assertTrue(true);
         Mockito.verify(buyerManager).insert(newBuyer);
+        }
+
+        @Test
+        void insertExisting() throws BuyerException{
+        when(buyerManager.getAll()).thenReturn(buyers);
+        Buyer b=new Buyer("Name2","Surename2","email2@gmail.com","1234567","Password",12345);
+        Mockito.doCallRealMethod().when(buyerManager).insert(b);
+        BuyerException buyerException=Assertions.assertThrows(BuyerException.class,()->{buyerManager.insert(b);});
+
+        Assertions.assertEquals("Buyer with that email or account number already exists !",buyerException.getMessage());
+        Mockito.verify(buyerManager).insert(b);
         }
 
     }
