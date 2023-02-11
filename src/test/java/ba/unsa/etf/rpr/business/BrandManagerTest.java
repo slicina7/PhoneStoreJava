@@ -14,6 +14,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
+
 public class BrandManagerTest {
     private BrandManager brandManager;
     private Brand brand;
@@ -49,7 +51,11 @@ public class BrandManagerTest {
         Brand brand=new Brand("Samsung");
         assertThrows(BuyerException.class,()->new BrandManager().insert(brand));
     }
-
+    @Test
+    void getAll() throws BuyerException{
+        when(brandManager.getAll()).thenReturn(brands);
+        Assertions.assertEquals(brands,brandManager.getAll());
+    }
     @Test
     void insert() throws BuyerException{
         Brand b=new Brand("Name");
