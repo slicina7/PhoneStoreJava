@@ -18,4 +18,29 @@ public class BrandManagerTest {
     private BrandDaoSQLImpl brandDaoSQLMock;
     private List<Brand> brands;
 
+    @BeforeEach
+    public void initializeObjectsWeNeed(){
+        brandManager= Mockito.mock(BrandManager.class);
+        brand=new Brand("Name");
+        brandDaoSQLMock=Mockito.mock(BrandDaoSQLImpl.class);
+        brands=new ArrayList<>();
+        brands.addAll(Arrays.asList(new Brand("Name2"),new Brand("Name3")));
+    }
+    @Test
+    void insertException() {
+        Brand brand=new Brand("Samsung");
+        assertThrows(BuyerException.class,()->new BrandManager().insert(brand));
+    }
+
+    @Test
+    void getById() throws Exception{
+        BrandManager bm=new BrandManager();
+        assertEquals(bm.getById(1).getName(),"Apple");
+    }
+
+    @Test
+    void searchByName() throws Exception{
+        List lista =new BrandManager().searchByName("Apple");
+        assertEquals("[Apple]",lista.toString());
+    }
 }
