@@ -12,6 +12,7 @@ public class Brand implements Idable {
     private int id;
     private String name;
 
+    public Brand(){}
     public Brand(String name) {
         this.name = name;
     }
