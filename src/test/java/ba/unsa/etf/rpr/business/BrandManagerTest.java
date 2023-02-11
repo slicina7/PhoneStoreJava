@@ -1,6 +1,7 @@
 package ba.unsa.etf.rpr.business;
 import ba.unsa.etf.rpr.dao.BrandDaoSQLImpl;
 import ba.unsa.etf.rpr.domain.Brand;
+import ba.unsa.etf.rpr.domain.Buyer;
 import ba.unsa.etf.rpr.exception.BuyerException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -47,6 +48,14 @@ public class BrandManagerTest {
     void insertException() {
         Brand brand=new Brand("Samsung");
         assertThrows(BuyerException.class,()->new BrandManager().insert(brand));
+    }
+
+    @Test
+    void insert() throws BuyerException{
+        Brand b=new Brand("Name");
+        brandManager.insert(b);
+        Assertions.assertTrue(true);
+        Mockito.verify(brandManager).insert(b);
     }
 
     @Test
