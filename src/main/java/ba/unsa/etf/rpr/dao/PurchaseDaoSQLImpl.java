@@ -12,7 +12,19 @@ import java.util.*;
  */
 public class PurchaseDaoSQLImpl extends AbstractDao<Purchase> implements PurchaseDao {
 
+    private static PurchaseDaoSQLImpl instance=null;
     public PurchaseDaoSQLImpl(){ super("purchases");}
+
+    public static PurchaseDaoSQLImpl getInstance(){
+        if(instance==null)
+            instance=new PurchaseDaoSQLImpl();
+        return instance;
+    }
+
+    public static void removeInstance(){
+        if(instance!=null)
+            instance=null;
+    }
 
     /**
      * Method for mapping ResultSet into Object

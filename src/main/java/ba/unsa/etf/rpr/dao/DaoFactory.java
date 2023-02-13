@@ -1,6 +1,7 @@
 package ba.unsa.etf.rpr.dao;
 /**
  * Factory method for singleton implementation of DAOs
+ * @author Selma Licina
  */
 public class DaoFactory {
     private static final BrandDao brandDao=BrandDaoSQLImpl.getInstance();

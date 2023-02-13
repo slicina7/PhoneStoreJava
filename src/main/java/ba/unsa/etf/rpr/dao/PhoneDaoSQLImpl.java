@@ -2,7 +2,6 @@ package ba.unsa.etf.rpr.dao;
 
 import ba.unsa.etf.rpr.domain.Brand;
 import ba.unsa.etf.rpr.domain.Phone;
-import ba.unsa.etf.rpr.domain.Purchase;
 import ba.unsa.etf.rpr.exception.BuyerException;
 
 import java.sql.*;
@@ -12,8 +11,18 @@ import java.util.*;
  * MySQL implementation of the DAO
  */
 public class PhoneDaoSQLImpl extends AbstractDao<Phone> implements PhoneDao{
-
+    private static PhoneDaoSQLImpl instance=null;
     public PhoneDaoSQLImpl(){super("phones");}
+
+    public static PhoneDaoSQLImpl getInstance(){
+        if(instance==null)
+            instance=new PhoneDaoSQLImpl();
+        return instance;
+    }
+    public static void removeInstance(){
+        if(instance!=null)
+            instance=null;
+    }
 
     /**
      * Method for mapping ResultSet into Object

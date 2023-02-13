@@ -1,6 +1,6 @@
 package ba.unsa.etf.rpr.dao;
 
-import ba.unsa.etf.rpr.domain.IdField;
+import ba.unsa.etf.rpr.domain.Idable;
 import ba.unsa.etf.rpr.exception.BuyerException;
 
 import java.io.FileReader;
@@ -9,8 +9,9 @@ import java.util.*;
 
 /**
  * Abstract class that implements core DAO CRUD methods for every entity
+ * @author Selma Licina
  */
-public abstract class AbstractDao<T extends IdField> implements Dao<T>{
+public abstract class AbstractDao<T extends Idable> implements Dao<T>{
     private static Connection connection =null;
     private String tableName;
 
@@ -33,10 +34,17 @@ public abstract class AbstractDao<T extends IdField> implements Dao<T>{
             System.exit(0);
         }
     }
-
+    /**
+     * Gets the connection
+     * @return Connection
+     */
     public static Connection getConnection() {
         return AbstractDao.connection;
     }
+    /**
+     * Sets the connection
+     * @param connection the connection to be set.
+     */
     public void setConnection(Connection connection){
         if(AbstractDao.connection!=null) {
             try {
@@ -48,6 +56,9 @@ public abstract class AbstractDao<T extends IdField> implements Dao<T>{
         AbstractDao.connection = connection;
     }
 
+    /**
+     * Removes connection
+     */
     public void removeConnection(){
         if(this.connection!=null) {
             try {
