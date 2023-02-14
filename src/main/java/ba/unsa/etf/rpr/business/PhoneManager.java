@@ -11,7 +11,7 @@ import java.util.Objects;
 public class PhoneManager {
 
     public void validateVersion(String version) throws BuyerException{
-        if(version==null || version.length()<2 || version.length()>30 || !version.matches("^[a-zA-Z0-9]{2,20}$") || version.isEmpty())
+        if(version==null || version.length()<2 || version.length()>30 || !version.matches("^[a-zA-Z0-9 ]{2,20}$") || version.isEmpty())
             throw new BuyerException("Phone version can only contain letters and numbers and has to be longer than two and shorter than 30 letters and numbers!");
     }
     public List<Phone> getAll() throws BuyerException{
@@ -23,7 +23,7 @@ public class PhoneManager {
     public List<Phone> searchByPrice(Integer min,Integer max) throws BuyerException{
         return DaoFactory.phoneDao().searchByPrice(min,max);
     }
-     public List<Phone> searchByBrandAndVersion(Brand brand,String version) throws BuyerException{
+     public Phone searchByBrandAndVersion(Brand brand,String version) throws BuyerException{
         return DaoFactory.phoneDao().searchByBrandAndVersion(brand,version);
     }
     public void delete(int id) throws BuyerException{

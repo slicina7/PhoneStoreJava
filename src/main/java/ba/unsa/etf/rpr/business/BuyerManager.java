@@ -33,7 +33,7 @@ public class BuyerManager {
         return DaoFactory.buyerDao().getAll();
     }
     public Buyer searchByEmailAndPassword(String email,String password) throws BuyerException{
-        return DaoFactory.buyerDao().searchByEmailAndPassword(email,password);
+        return DaoFactory.buyerDao().searchByEmailAndPassword(email, password);
     }
     public void delete(int id) throws BuyerException{
         DaoFactory.buyerDao().delete(id);

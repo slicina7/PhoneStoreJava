@@ -2,7 +2,6 @@ package ba.unsa.etf.rpr.business;
 
 import ba.unsa.etf.rpr.dao.DaoFactory;
 import ba.unsa.etf.rpr.domain.Brand;
-import ba.unsa.etf.rpr.domain.Buyer;
 import ba.unsa.etf.rpr.exception.BuyerException;
 
 import java.util.List;
@@ -34,7 +33,7 @@ public class BrandManager {
                 throw new BuyerException("Brand with that name already exists !");
         DaoFactory.brandDao().insert(brand);
     }
-    public List<Brand> searchByName(String name) throws BuyerException{
+    public Brand searchByName(String name) throws BuyerException{
         return DaoFactory.brandDao().searchByName(name);
     }
 }

@@ -60,7 +60,7 @@ public class BrandDaoSQLImpl extends AbstractDao<Brand> implements BrandDao{
      * @return Brand with that name
      */
     @Override
-    public List<Brand> searchByName(String name) throws BuyerException {
-        return executeQuery("SELECT * FROM brands WHERE name = ?",new Object[]{name});
+    public Brand searchByName(String name) throws BuyerException {
+        return executeQueryUnique("SELECT * FROM brands WHERE name = ?",new Object[]{name});
     }
 }

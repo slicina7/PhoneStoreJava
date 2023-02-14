@@ -89,8 +89,8 @@ public class PhoneDaoSQLImpl extends AbstractDao<Phone> implements PhoneDao{
      * @return List of phones from table
      */
     @Override
-    public List<Phone> searchByBrandAndVersion(Brand brand,String version) throws BuyerException {
-        return executeQuery("SELECT * FROM phones WHERE brand_id = ? AND version = ?",new Object[]{brand.getId(),version});
+    public Phone searchByBrandAndVersion(Brand brand,String version) throws BuyerException {
+        return executeQueryUnique("SELECT * FROM phones WHERE brand_id = ? AND version = ?",new Object[]{brand.getId(),version});
     }
 
 

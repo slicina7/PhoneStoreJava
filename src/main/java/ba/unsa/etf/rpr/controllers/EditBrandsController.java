@@ -1,7 +1,6 @@
 package ba.unsa.etf.rpr.controllers;
 
 import ba.unsa.etf.rpr.business.BrandManager;
-import ba.unsa.etf.rpr.dao.BrandDaoSQLImpl;
 import ba.unsa.etf.rpr.domain.Brand;
 import ba.unsa.etf.rpr.exception.BuyerException;
 import javafx.event.ActionEvent;
@@ -14,7 +13,7 @@ public class EditBrandsController {
 
     public void addButtonAction(ActionEvent actionEvent)  {
         try {
-            if(brandManager.searchByName(brandTextField.getText()).size()!=0)
+            if(brandManager.searchByName(brandTextField.getText())!=null)
                 new Alert(Alert.AlertType.ERROR,"That brand already exists!");
             else{
                 Brand brand=new Brand();

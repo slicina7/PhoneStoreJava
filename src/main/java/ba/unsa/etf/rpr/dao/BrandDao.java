@@ -17,5 +17,5 @@ public interface BrandDao extends Dao<Brand>{
      * @param name brand name
      * @return Brand with that name
      */
-    List<Brand> searchByName(String name) throws BuyerException;
+    Brand searchByName(String name) throws BuyerException;
 }
