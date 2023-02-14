@@ -1,10 +1,8 @@
 package ba.unsa.etf.rpr.business;
 import ba.unsa.etf.rpr.dao.BrandDaoSQLImpl;
 import ba.unsa.etf.rpr.domain.Brand;
-import ba.unsa.etf.rpr.domain.Buyer;
 import ba.unsa.etf.rpr.exception.BuyerException;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
