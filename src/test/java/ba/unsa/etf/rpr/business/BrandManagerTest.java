@@ -70,7 +70,7 @@ public class BrandManagerTest {
 
     @Test
     void searchByName() throws Exception{
-        List lista =new BrandManager().searchByName("Apple");
-        assertEquals("[Apple]",lista.toString());
+        Brand b =new BrandManager().searchByName("Apple");
+        assertEquals("Apple",b.getName());
     }
 }
