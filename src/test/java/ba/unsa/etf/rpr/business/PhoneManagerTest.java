@@ -13,11 +13,11 @@ import static org.junit.jupiter.api.Assertions.*;
 class PhoneManagerTest {
 
     PhoneManager phoneManager=new PhoneManager();
+    BrandManager brandManager=new BrandManager();
 
     @Test
     void uniqueVersion() throws BuyerException {
-        BrandManager bm=new BrandManager();
-        Brand b=bm.searchByName("Huawei");
+        Brand b=brandManager.searchByName("Huawei");
         Phone phone=new Phone(b,"Unique version",100,10,new Date(2000,3,5));
         phoneManager.insert(phone);
         assertThrows(BuyerException.class, ()->
@@ -26,6 +26,8 @@ class PhoneManagerTest {
     }
     @Test
     void validateVersion() {
+        String shortNameForVersion="P";
+       assertThrows(BuyerException.class,()->phoneManager.insert(new Phone(brandManager.searchByName("Samsung"),shortNameForVersion,1000,10,new Date(2010,10,10))));
     }
 
     @Test
@@ -58,10 +60,9 @@ class PhoneManagerTest {
 
     @Test
     void insert() throws BuyerException{
-        BrandManager bm=new BrandManager();
-        Phone p=new Phone(bm.searchByName("Apple"),"Version",1000,20,new Date(2020,10,10));
+        Phone p=new Phone(brandManager.searchByName("Apple"),"Version",1000,20,new Date(2020,10,10));
         phoneManager.insert(p);
-        Phone p2=phoneManager.searchByBrandAndVersion(bm.searchByName("Apple"),"Version");
+        Phone p2=phoneManager.searchByBrandAndVersion(brandManager.searchByName("Apple"),"Version");
         assertTrue(p2!=null);
         phoneManager.delete(p2.getId());
     }
