@@ -57,6 +57,12 @@ class PhoneManagerTest {
     }
 
     @Test
-    void insert() {
+    void insert() throws BuyerException{
+        BrandManager bm=new BrandManager();
+        Phone p=new Phone(bm.searchByName("Apple"),"Version",1000,20,new Date(2020,10,10));
+        phoneManager.insert(p);
+        Phone p2=phoneManager.searchByBrandAndVersion(bm.searchByName("Apple"),"Version");
+        assertTrue(p2!=null);
+        phoneManager.delete(p2.getId());
     }
 }
