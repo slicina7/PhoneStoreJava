@@ -8,7 +8,9 @@ import ba.unsa.etf.rpr.exception.BuyerException;
 import java.sql.*;
 import java.util.*;
 /**
- * MySQL implementation of the DAO
+ * MySQL implementation of DAO
+ * Singleton pattern
+ * @author Selma Ličina
  */
 public class PurchaseDaoSQLImpl extends AbstractDao<Purchase> implements PurchaseDao {
 

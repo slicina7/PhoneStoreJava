@@ -27,9 +27,10 @@ public interface PhoneDao extends Dao<Phone>{
      */
     List<Phone> searchByPrice(Integer min,Integer max) throws BuyerException;
     /**
-     * Search phones in database based on version
+     * Search phones in database based on brand and version
+     * @param brand ,phone brand
      * @param version , phone version
-     * @return List of phones from table
+     * @return Phone with that brand and version
      */
     Phone searchByBrandAndVersion(Brand brand,String version) throws BuyerException;
 

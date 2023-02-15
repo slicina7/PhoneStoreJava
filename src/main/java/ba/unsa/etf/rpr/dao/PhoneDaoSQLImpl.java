@@ -8,7 +8,9 @@ import java.sql.*;
 import java.util.*;
 
 /**
- * MySQL implementation of the DAO
+ * MySQL implementation of DAO
+ * Singleton pattern
+ * @author Selma Ličina
  */
 public class PhoneDaoSQLImpl extends AbstractDao<Phone> implements PhoneDao{
     private static PhoneDaoSQLImpl instance=null;
@@ -84,9 +86,10 @@ public class PhoneDaoSQLImpl extends AbstractDao<Phone> implements PhoneDao{
         return executeQuery("SELECT * FROM phones WHERE price BETWEEN ? AND ?",new Object[]{min,max});
     }
     /**
-     * Search phones in database based on version
+     * Search phones in database based on brand and version
+     * @param brand ,phone brand
      * @param version , phone version
-     * @return List of phones from table
+     * @return Phone with that brand and version
      */
     @Override
     public Phone searchByBrandAndVersion(Brand brand,String version) throws BuyerException {

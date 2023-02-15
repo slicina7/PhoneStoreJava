@@ -6,11 +6,14 @@ import ba.unsa.etf.rpr.exception.BuyerException;
 import java.sql.*;
 import java.util.*;
 /**
- * MySQL implementation of the DAO
+ * MySQL implementation of DAO
+ * Singleton pattern
+ * @author Selma Ličina
  */
 public class BrandDaoSQLImpl extends AbstractDao<Brand> implements BrandDao{
     private static BrandDaoSQLImpl instance=null;
-    public BrandDaoSQLImpl(){super("brands");}
+    public BrandDaoSQLImpl(){
+        super("brands");}
 
     public static BrandDaoSQLImpl getInstance(){
         if(instance==null)

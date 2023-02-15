@@ -6,6 +6,7 @@ import java.util.List;
 
 /**
  * Root interface for all DAO classes
+ * @param <T>
  */
 
 public interface Dao<T> {

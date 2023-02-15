@@ -6,7 +6,9 @@ import java.sql.*;
 import java.util.Map;
 import java.util.TreeMap;
 /**
- * MySQL implementation of the DAO
+ * MySQL implementation of DAO
+ * Singleton pattern
+ * @author Selma Ličina
  */
 public class BuyerDaoSQLImpl extends AbstractDao<Buyer> implements BuyerDao{
     private static BuyerDaoSQLImpl instance=null;
