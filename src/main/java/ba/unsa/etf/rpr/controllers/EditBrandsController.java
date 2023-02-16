@@ -6,11 +6,22 @@ import ba.unsa.etf.rpr.exception.BuyerException;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
-
+/**
+ * JavaFX controller for edit brands
+ * @author Selma Ličina
+ */
 public class EditBrandsController {
-    public TextField brandTextField;
-    public BrandManager brandManager=new BrandManager();
+    //manager
+    private final BrandManager brandManager=new BrandManager();
 
+    //form components
+    public TextField brandTextField;
+
+    /**
+     * Add button event handler
+     * Adds new brands
+     * @param actionEvent
+     */
     public void addButtonAction(ActionEvent actionEvent)  {
         try {
             if(brandManager.searchByName(brandTextField.getText())!=null)
@@ -25,6 +36,11 @@ public class EditBrandsController {
         }
 
     }
+    /**
+     * Cancel button event handler
+     * Closes edit brands dialog
+     * @param actionEvent
+     */
     public void cancelButtonAction(ActionEvent actionEvent) {
         brandTextField.getScene().getWindow().hide();
     }

@@ -15,23 +15,28 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.util.List;
-
+/**
+ * JavaFX controller for cart
+ * @author Selma Ličina
+ */
 public class CartController {
+
+    //form components
     public TableView<Phone> purchasesTableView;
     public TableColumn<Phone,String>  colPhone;
     public TableColumn<Phone,String>  colPrice;
-    private ObservableList<Phone> phones;
-    private PurchaseDaoSQLImpl purchaseDaoSQL;
-    private PhoneDaoSQLImpl phoneDaoSQL;
 
+    private ObservableList<Phone> phones;
     public Buyer buyer;
 
     public CartController() {
-        purchaseDaoSQL=new PurchaseDaoSQLImpl();
         phones= FXCollections.observableArrayList();
-        phoneDaoSQL=new PhoneDaoSQLImpl();
         buyer=new Buyer();
     }
+    /**
+     * Sets buyer
+     * @param buyer -buyer to be set
+     */
     public void setBuyer(Buyer buyer) {
         this.buyer = buyer;
         setTable();
@@ -43,6 +48,9 @@ public class CartController {
         purchasesTableView.getItems().clear();
 
     }
+    /**
+     * Sets rows into table of buyers purchases
+     */
     public void setTable(){
         try {
             purchasesTableView.getItems().clear();
