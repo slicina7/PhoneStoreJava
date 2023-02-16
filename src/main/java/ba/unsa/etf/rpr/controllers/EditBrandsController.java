@@ -24,17 +24,10 @@ public class EditBrandsController {
      */
     public void addButtonAction(ActionEvent actionEvent)  {
         try {
-            if(brandManager.searchByName(brandTextField.getText())!=null)
-                new Alert(Alert.AlertType.ERROR,"That brand already exists!");
-            else{
-                Brand brand=new Brand();
-                brand.setName(brandTextField.getText());
-                brandManager.insert(brand);
-            }
+            brandManager.insert(new Brand(brandTextField.getText()));
         }catch(BuyerException e){
-
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
         }
-
     }
     /**
      * Cancel button event handler
@@ -43,5 +36,14 @@ public class EditBrandsController {
      */
     public void cancelButtonAction(ActionEvent actionEvent) {
         brandTextField.getScene().getWindow().hide();
+    }
+
+    public void deleteButtonAction(ActionEvent actionEvent) {
+        try {
+            brandManager.delete(brandManager.searchByName(brandTextField.getText()).getId());
+        }catch (BuyerException e){
+            new Alert(Alert.AlertType.ERROR,"That brand doesn't exist!").show();
+        }
+
     }
 }
