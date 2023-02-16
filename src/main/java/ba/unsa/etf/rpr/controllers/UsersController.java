@@ -9,8 +9,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-
+/**
+ * JavaFX controller for users
+ * @author Selma Ličina
+ */
 public class UsersController {
+
+    //form components
     public TableView<Buyer> usersTableView;
     public TableColumn<Buyer,String> colName;
     public TableColumn<Buyer,String> colSurname;
