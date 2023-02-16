@@ -25,6 +25,7 @@ public class EditBrandsController {
     public void addButtonAction(ActionEvent actionEvent)  {
         try {
             brandManager.insert(new Brand(brandTextField.getText()));
+            new Alert(Alert.AlertType.CONFIRMATION,"Brand "+brandTextField.getText()+" successfully added.").show();
         }catch(BuyerException e){
             new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
         }
@@ -37,10 +38,15 @@ public class EditBrandsController {
     public void cancelButtonAction(ActionEvent actionEvent) {
         brandTextField.getScene().getWindow().hide();
     }
-
+    /**
+     * Delete button event handler
+     * Delete brand
+     * @param actionEvent
+     */
     public void deleteButtonAction(ActionEvent actionEvent) {
         try {
             brandManager.delete(brandManager.searchByName(brandTextField.getText()).getId());
+            new Alert(Alert.AlertType.CONFIRMATION,"Brand "+brandTextField.getText()+" successfully deleted.").show();
         }catch (BuyerException e){
             new Alert(Alert.AlertType.ERROR,"That brand doesn't exist!").show();
         }

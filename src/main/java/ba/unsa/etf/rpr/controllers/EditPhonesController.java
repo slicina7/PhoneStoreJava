@@ -57,18 +57,10 @@ public class EditPhonesController {
      */
     public void addButtonAction(ActionEvent actionEvent) {
         try{
-            phoneManager.validateVersion(versionTextField.getText());
-            if(brandChoiceBox.getValue()==null || versionTextField.getText().isEmpty() || releaseDate.getValue()==null || priceSpinner.getValue()==0 || stockSpinner.getValue()==0) {
-                new Alert(Alert.AlertType.ERROR,"Invalid input!").show();
-                System.out.println("sdfg");
-            }
-            if(phoneManager.searchByBrandAndVersion(brandChoiceBox.getValue(),versionTextField.getText())!=null)
-                new Alert(Alert.AlertType.ERROR,"That phone already exists!").show();
-            else {
-                phoneManager.insert(new Phone(brandChoiceBox.getValue(),versionTextField.getText(),priceSpinner.getValue(),stockSpinner.getValue(),Date.valueOf(releaseDate.getValue())));
-                new Alert(Alert.AlertType.CONFIRMATION,"Phone "+brandChoiceBox.getValue().getName()+" "+versionTextField.getText()+" successfully added.").show();
-
-            }
+            if(brandChoiceBox.getValue()==null || releaseDate.getValue()==null)
+                throw new BuyerException("Invalid input!");
+            phoneManager.insert(new Phone(brandChoiceBox.getValue(),versionTextField.getText(),priceSpinner.getValue(),stockSpinner.getValue(),Date.valueOf(releaseDate.getValue())));
+            new Alert(Alert.AlertType.CONFIRMATION,"Phone "+brandChoiceBox.getValue().getName()+" "+versionTextField.getText()+" successfully added.").show();
         }catch (BuyerException e){
             new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
         }
@@ -80,5 +72,38 @@ public class EditPhonesController {
      */
     public void cancelButtonAction(ActionEvent actionEvent) {
         versionTextField.getScene().getWindow().hide();
+    }
+    /**
+     * Update button event handler
+     * Update phone in stock number, price and date
+     * @param actionEvent
+     */
+    public void updateButtonAction(ActionEvent actionEvent) {
+        try{
+            if(brandChoiceBox.getValue()==null || releaseDate.getValue()==null)
+                throw new BuyerException("Invalid input!");
+            Phone p=phoneManager.searchByBrandAndVersion(brandChoiceBox.getValue(),versionTextField.getText());
+            p.setIn_stock(stockSpinner.getValue());
+            p.setPrice(priceSpinner.getValue());
+            p.setRelease_date(Date.valueOf(releaseDate.getValue()));
+            phoneManager.update(p);
+            new Alert(Alert.AlertType.CONFIRMATION,"Phone "+brandChoiceBox.getValue().getName()+" "+versionTextField.getText()+" successfully updated.").show();
+        }catch (BuyerException e){
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        }
+    }
+    /**
+     * Delete button event handler
+     * Delete phone
+     * @param actionEvent
+     */
+    public void deleteButtonAction(ActionEvent actionEvent) {
+        try{
+            Phone p=phoneManager.searchByBrandAndVersion(brandChoiceBox.getValue(),versionTextField.getText());
+            phoneManager.delete(p.getId());
+            new Alert(Alert.AlertType.CONFIRMATION,"Phone "+brandChoiceBox.getValue().getName()+" "+versionTextField.getText()+" successfully deleted.").show();
+        }catch (BuyerException e){
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        }
     }
 }
