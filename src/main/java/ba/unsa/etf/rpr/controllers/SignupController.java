@@ -1,7 +1,6 @@
 package ba.unsa.etf.rpr.controllers;
 
 import ba.unsa.etf.rpr.business.BuyerManager;
-import ba.unsa.etf.rpr.dao.BuyerDaoSQLImpl;
 import ba.unsa.etf.rpr.domain.Buyer;
 import ba.unsa.etf.rpr.exception.BuyerException;
 import javafx.beans.value.ChangeListener;
@@ -21,9 +20,16 @@ import java.io.IOException;
 import java.util.Random;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
-
+/**
+ * JavaFX controller for signup
+ * @author Selma Ličina
+ */
 public class SignupController {
+
+    //manager
     private final BuyerManager buyerManager=new BuyerManager();
+
+    //form components
     public TextField idName;
     public TextField idSurname;
     public TextField idEmail;
@@ -102,13 +108,17 @@ public class SignupController {
         });
     }
 
-
-    public void loginButtonAction(ActionEvent actionEvent) throws IOException{
+    /**
+     * Login button event handler
+     * opens login dialog
+     * @param actionEvent
+     */
+    public void loginButtonAction(ActionEvent actionEvent) {
         try {
             Stage stage = new Stage();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/login.fxml"));
             Parent root = loader.load();
-            Scene scene = new Scene(root,USE_COMPUTED_SIZE,USE_COMPUTED_SIZE);
+            Scene scene = new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
             stage.setTitle("Log in");
             stage.setScene(scene);
             stage.setResizable(false);
@@ -120,6 +130,11 @@ public class SignupController {
             throw new RuntimeException(e);
         }
     }
+    /**
+     * Signup button event handler
+     * checks if entered name,surname,email,account number and password are valid and opens home dialog
+     * @param actionEvent
+     */
     public void signupButtonAction(ActionEvent actionEvent) {
         boolean tacan_unos=true;
         try {
@@ -147,7 +162,7 @@ public class SignupController {
                 Stage stage = new Stage();
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/home.fxml"));
                 Parent root = loader.load();
-                Scene scene = new Scene(root,USE_COMPUTED_SIZE,USE_COMPUTED_SIZE);
+                Scene scene = new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
                 stage.setTitle("Home page");
                 stage.setScene(scene);
                 stage.setResizable(false);

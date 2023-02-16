@@ -1,7 +1,6 @@
 package ba.unsa.etf.rpr.controllers;
 
 import ba.unsa.etf.rpr.business.BuyerManager;
-import ba.unsa.etf.rpr.dao.BuyerDaoSQLImpl;
 import ba.unsa.etf.rpr.domain.Buyer;
 import ba.unsa.etf.rpr.exception.BuyerException;
 import javafx.beans.value.ChangeListener;
@@ -21,13 +20,21 @@ import java.io.IOException;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
+/**
+ * JavaFX controller for login
+ * @author Selma Ličina
+ */
 public class LoginController {
+    //manager
     private final BuyerManager buyerManager=new BuyerManager();
-    public Buyer buyer;
+
+    //form components
     public TextField idEmail;
     public PasswordField idPassword;
     public Button idLogin;
     public Button idSignup;
+
+    public Buyer buyer;
 
     @FXML
     public void initialize() {
@@ -58,20 +65,25 @@ public class LoginController {
             }
         });
     }
-
+    /**
+     * Login button event handler
+     * checks if entered email and password are valid and opens home dialog
+     * @param actionEvent
+     * @throws BuyerException e
+     */
     public void loginButtonAction(ActionEvent actionEvent) throws BuyerException {
         buyer=null;
         try {
             buyer=buyerManager.searchByEmailAndPassword(idEmail.getText(), idPassword.getText());
         }catch(BuyerException message){
-            new Alert(Alert.AlertType.ERROR,message.getMessage()).show();
+            new Alert(Alert.AlertType.ERROR,"Profile not found").show();
             return;
         }
         try {
             Stage stage = new Stage();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/home.fxml"));
             Parent root = loader.load();
-            Scene scene = new Scene(root,USE_COMPUTED_SIZE,USE_COMPUTED_SIZE);
+            Scene scene = new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
             stage.setTitle("Home page");
             stage.setScene(scene);
             stage.setResizable(false);
@@ -86,13 +98,17 @@ public class LoginController {
            System.out.println(e.getMessage());
         }
     }
-
-    public void signupButtonAction(ActionEvent actionEvent) throws IOException {
+    /**
+     * Signup button event handler
+     * opens signup dialog
+     * @param actionEvent
+     */
+    public void signupButtonAction(ActionEvent actionEvent)  {
         try {
             Stage stage = new Stage();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/signup.fxml"));
             Parent root = loader.load();
-            Scene scene = new Scene(root,USE_COMPUTED_SIZE,USE_COMPUTED_SIZE);
+            Scene scene = new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
             stage.setTitle("Sing up");
             stage.setScene(scene);
             stage.setResizable(false);
