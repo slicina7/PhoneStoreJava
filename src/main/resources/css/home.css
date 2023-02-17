@@ -4,3 +4,6 @@
 #userButton{
     -fx-graphic: url("/img/user.png");
 }
+#refreshButton{
+    -fx-graphic: url("/img/refresh.png");
+}

@@ -75,8 +75,9 @@ public class HomeController {
         try {
             phones.addAll(phoneManager.getAll());
         }catch (BuyerException e){
-
+            System.out.println(e.getMessage());
         }
+        phonesTableView.setItems(phones);
         brandsListView.setItems(brands);
         colPhonesId.setCellValueFactory(new PropertyValueFactory<>("id"));
         colPhonesVersion.setCellValueFactory(new PropertyValueFactory<>("version"));
@@ -281,6 +282,21 @@ public class HomeController {
             }
         } catch (BuyerException e) {
             throw new RuntimeException(e);
+        }
+    }
+    /**
+     * Refresh button event handler
+     * Refreshes the phones table view
+     * @param actionEvent
+     */
+    public void refreshButtonAction(ActionEvent actionEvent) {
+        try {
+            phones.clear();
+            phones.addAll(phoneManager.getAll());
+            phonesTableView.setItems(phones);
+            status.setText("Refreshing phones table view.");
+        }catch (BuyerException e){
+            System.out.println(e.getMessage());
         }
     }
 }

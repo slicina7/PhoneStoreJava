@@ -62,6 +62,8 @@
                   <Button fx:id="userButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#userButtonAction" prefHeight="30.0" prefWidth="30.0" />
                   <Separator orientation="VERTICAL" prefHeight="30.0" />
                 <Button fx:id="cartButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#cartButtonAction" prefHeight="30.0" prefWidth="30.0" />
+                  <Separator orientation="VERTICAL" prefHeight="30.0" />
+                  <Button fx:id="refreshButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#refreshButtonAction" prefHeight="30.0" prefWidth="30.0" />
               </items>
             </ToolBar>
          </children>
@@ -130,7 +132,7 @@
                   <Insets bottom="5.0" left="10.0" top="5.0" />
                </VBox.margin>
             </Label>
-            <ListView fx:id="brandsListView" prefHeight="382.0" prefWidth="386.0" />
+            <ListView fx:id="brandsListView" prefHeight="401.0" prefWidth="386.0" />
          </children>
       </VBox>
    </left>
