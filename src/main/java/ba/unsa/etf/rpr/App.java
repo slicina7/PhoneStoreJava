@@ -15,11 +15,9 @@ public class App {
     private static final Option addBrand=new Option("addBr","add-brand",false,"Adding new brand in phone-store database");
     private static final Option addPhone=new Option("addPh","add-phone",false,"Adding new phone in phone-store database");
     private static final Option addBuyer=new Option("addBu","add-buyer",false,"Adding new buyer in phone-store database");
-    private static final Option addPurchase=new Option("addPu","add-purchase",false,"Adding new purchase in phone-store database");
     private static final Option getBrand=new Option("getBr","get-brand",false,"Printing all brands from phone-store database");
     private static final Option getPhone=new Option("getPh","get-phone",false,"Printing all phones from phone-store database");
     private static final Option getBuyer=new Option("getBu","get-buyer",false,"Printing all buyers from phone-store database");
-    private static final Option getPurchase=new Option("getPu","get-purchase",false,"Printing purchases brands from phone-store database");
 
     public static void printFormattedOptions(Options options) {
         HelpFormatter helpFormatter = new HelpFormatter();
@@ -34,11 +32,9 @@ public class App {
         options.addOption(addBrand);
         options.addOption(addPhone);
         options.addOption(addBuyer);
-        options.addOption(addPurchase);
         options.addOption(getBrand);
         options.addOption(getPhone);
         options.addOption(getBuyer);
-        options.addOption(getPurchase);
         return options;
     }
     public static void main(String[] args) throws Exception {
@@ -47,8 +43,19 @@ public class App {
         CommandLineParser commandLineParser = new DefaultParser();
 
         CommandLine cl = commandLineParser.parse(options, args);
+        if((cl.hasOption(addBrand.getOpt()) || cl.hasOption(addBrand.getLongOpt()))){
+            BrandManager brandManager=new BrandManager();
+            try{
+                Brand brand=new Brand(cl.getArgList().get(0));
+                brandManager.insert(brand);
+            }catch (Exception e){
+                System.out.println("Problem with adding to db");
+            }
+        }else if(cl.hasOption(getBrand.getOpt()) || cl.hasOption(getBrand.getLongOpt())){
+            BrandManager brandManager=new BrandManager();
+            brandManager.getAll().forEach(q -> System.out.println(q.getName()));
 
-        if((cl.hasOption(addPhone.getOpt()) || cl.hasOption(addPhone.getLongOpt()))){
+        } else if((cl.hasOption(addPhone.getOpt()) || cl.hasOption(addPhone.getLongOpt()))){
             PhoneManager phoneManager=new PhoneManager();
             BrandManager brandManager=new BrandManager();
             try {
@@ -78,12 +85,11 @@ public class App {
             }catch(Exception e) {
                 System.out.println("Problem with adding to db");
             }
+        } else if(cl.hasOption(getBuyer.getOpt()) || cl.hasOption(getBuyer.getLongOpt())){
+            BuyerManager buyerManager=new BuyerManager();
+            buyerManager.getAll().forEach(q -> System.out.println(q.getName()+" "+q.getSurname()));
 
-        } else if(cl.hasOption(getBrand.getOpt()) || cl.hasOption(getBrand.getLongOpt())){
-            BrandManager brandManager=new BrandManager();
-            brandManager.getAll().forEach(q -> System.out.println(q.getName()));
-
-        } else {
+        }else {
             printFormattedOptions(options);
             System.exit(-1);
 
