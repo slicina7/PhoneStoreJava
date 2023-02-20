@@ -147,12 +147,12 @@ public class Buyer implements Idable {
      */
     @Override
     public String toString(){
-        return  "First name :       " + name + "\n"+
-                "Last name :        " + surname +"\n"+
-                "Email :            " + email +"\n"+
+        return  "First name :          " + name + "\n"+
+                "Last name :         " + surname +"\n"+
+                "Email :                 " + email +"\n"+
                 "Account number :   " + account_number+"\n"+
-                "Password :         " + password +"\n"+
-                "Account balance :  " + account_balance ;
+                "Password :            " + password +"\n"+
+                "Account balance :   " + account_balance ;
     }
 
     /**

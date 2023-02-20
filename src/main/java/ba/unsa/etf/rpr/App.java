@@ -9,16 +9,26 @@ import org.apache.commons.cli.*;
 
 import java.io.PrintWriter;
 import java.sql.Date;
-import java.util.List;
 
+/**
+ * @author Selma Licina
+ * CLI
+ */
 public class App {
+    /**
+     * Defining final variables to describe all code having options
+     */
     private static final Option addBrand=new Option("addBr","add-brand",false,"Adding new brand in phone-store database");
     private static final Option addPhone=new Option("addPh","add-phone",false,"Adding new phone in phone-store database");
     private static final Option addBuyer=new Option("addBu","add-buyer",false,"Adding new buyer in phone-store database");
     private static final Option getBrand=new Option("getBr","get-brand",false,"Printing all brands from phone-store database");
     private static final Option getPhone=new Option("getPh","get-phone",false,"Printing all phones from phone-store database");
     private static final Option getBuyer=new Option("getBu","get-buyer",false,"Printing all buyers from phone-store database");
-
+    /**
+     * Print formatted options.
+     *
+     * @param options the options
+     */
     public static void printFormattedOptions(Options options) {
         HelpFormatter helpFormatter = new HelpFormatter();
         PrintWriter printWriter = new PrintWriter(System.out);
@@ -26,7 +36,11 @@ public class App {
         helpFormatter.printOptions(printWriter, 150, options, 2, 7);
         printWriter.close();
     }
-
+    /**
+     * Add options.
+     *
+     * @return the options
+     */
     public static Options addOptions() {
         Options options = new Options();
         options.addOption(addBrand);
@@ -37,6 +51,12 @@ public class App {
         options.addOption(getBuyer);
         return options;
     }
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     * @throws Exception
+     */
     public static void main(String[] args) throws Exception {
         Options options = addOptions();
 

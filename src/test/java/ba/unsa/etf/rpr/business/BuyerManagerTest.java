@@ -1,5 +1,6 @@
 package ba.unsa.etf.rpr.business;
 
+import ba.unsa.etf.rpr.business.BuyerManager;
 import ba.unsa.etf.rpr.dao.BuyerDaoSQLImpl;
 import ba.unsa.etf.rpr.domain.Buyer;
 import ba.unsa.etf.rpr.exception.BuyerException;
@@ -14,12 +15,17 @@ import java.util.List;
 
 import static org.mockito.Mockito.when;
 
+/**
+ * @author Selma Licina
+ */
 class BuyerManagerTest {
     private BuyerManager buyerManager;
     private Buyer buyer;
     private BuyerDaoSQLImpl buyerDaoSQLMock;
     private List<Buyer> buyers;
-
+    /**
+     * This method will be called before each test method
+     */
     @BeforeEach
     public void initializeObjectsWeNeed(){
         buyerManager= Mockito.mock(BuyerManager.class);
@@ -29,6 +35,10 @@ class BuyerManagerTest {
         buyers.addAll(Arrays.asList(new Buyer("Name2","Surename2","email2@gmail.com","1234567","Password",12345),
                 new Buyer("Name3","Surename3","email3@gmail.com","12345678","Password",12345)));
     }
+    /**
+     * In this method we will test validateName(String name) for correct and incorrect passed parameters
+     * @throws BuyerException
+     */
     @Test
     void validateName() throws BuyerException{
         String correctName="Name";
@@ -58,7 +68,10 @@ class BuyerManagerTest {
         Assertions.assertEquals("Name can only contain letters and has to be longer than two letters and shorter than 30 letters!",buyerException3.getMessage());
 
     }
-
+    /**
+     * In this method we will test validateSurname(String surname) for correct and incorrect passed parameters
+     * @throws BuyerException
+     */
     @Test
     void validateSurname() throws BuyerException{
         String correctSurname="Surname";
@@ -88,7 +101,10 @@ class BuyerManagerTest {
         Assertions.assertEquals("Last name can only contain letters and has to be longer than two letters and shorter than 30 letters!",buyerException3.getMessage());
 
     }
-
+    /**
+     * In this method we will test validatePassword(String password) for correct and incorrect passed parameters
+     * @throws BuyerException
+     */
     @Test
     void validatePassword() throws BuyerException{
         String inccorectShort="123";
@@ -96,7 +112,10 @@ class BuyerManagerTest {
         BuyerException buyerException=Assertions.assertThrows(BuyerException.class,()->{ buyerManager.validatePassword(inccorectShort);},"Password must be longer than 7 and shorter than 30!");
         Assertions.assertEquals("Password must be longer than 7 and shorter than 30!",buyerException.getMessage());
     }
-
+    /**
+     * In this method we will test validateEmail(String email) for correct and incorrect passed parameters
+     * @throws BuyerException
+     */
     @Test
     void validateEmail() throws BuyerException {
         String correctEmail1 = "email@gmail.com";
@@ -129,7 +148,10 @@ class BuyerManagerTest {
         }, "Invalid email input !");
         Assertions.assertEquals("Invalid email input !", buyerException2.getMessage());
         }
-
+    /**
+     * Adding a new buyer
+     * @throws BuyerException
+     */
         @Test
         void insert() throws BuyerException{
         Buyer newBuyer=new Buyer("Name","Surename","email@gmail.com","123456","Password",12345);
@@ -137,7 +159,10 @@ class BuyerManagerTest {
         Assertions.assertTrue(true);
         Mockito.verify(buyerManager).insert(newBuyer);
         }
-
+    /**
+     * Adding a new buyer
+     * @throws BuyerException
+     */
         @Test
         void insertExisting() throws BuyerException{
         when(buyerManager.getAll()).thenReturn(buyers);
@@ -148,7 +173,10 @@ class BuyerManagerTest {
         Assertions.assertEquals("Buyer with that email or account number already exists !",buyerException.getMessage());
         Mockito.verify(buyerManager).insert(b);
         }
-
+    /**
+     * Gets all buyers
+     * @throws BuyerException
+     */
         @Test
         void getAll() throws BuyerException{
         when(buyerManager.getAll()).thenReturn(buyers);

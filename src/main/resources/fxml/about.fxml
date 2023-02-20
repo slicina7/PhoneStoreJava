@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.controllers.AboutController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.controllers.AboutController">
    <center>
-      <Label text="Phone app" BorderPane.alignment="CENTER">
+      <TextArea editable="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="126.0" prefWidth="300.0" text="This application is designed &#10;as a model of a phone store &#10;used to buy phones." BorderPane.alignment="CENTER">
          <font>
-            <Font size="33.0" />
+            <Font size="21.0" />
          </font>
-      </Label>
+      </TextArea>
    </center>
 </BorderPane>
