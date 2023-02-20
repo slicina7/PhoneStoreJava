@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
@@ -13,7 +13,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<?import java.net.URL?>
 <GridPane prefHeight="590.0" prefWidth="568.0" style="-fx-background-color: #2196f3;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.controllers.SignupController">
    <stylesheets>
       <URL value="@/css/login.css" />
@@ -99,7 +98,7 @@
                   <Insets left="15.0" right="15.0" top="15.0" />
                </VBox.margin>
             </HBox>
-            <Button fx:id="idSignup" mnemonicParsing="false" onAction="#signupButtonAction" prefHeight="26.0" prefWidth="270.0" style="-fx-background-color: #2196f3;" text="Sing up" textFill="WHITE">
+            <Button fx:id="idSignup" mnemonicParsing="false" onAction="#signupButtonAction" prefHeight="26.0" prefWidth="270.0" style="-fx-background-color: #2196f3;" text="Sign up" textFill="WHITE">
                <VBox.margin>
                   <Insets left="15.0" right="15.0" top="15.0" />
                </VBox.margin>

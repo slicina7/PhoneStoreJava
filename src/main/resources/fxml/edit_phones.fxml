@@ -7,127 +7,116 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="570.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.controllers.EditPhonesController">
-   <center>
-      <GridPane maxHeight="-Infinity" prefHeight="442.0" prefWidth="450.0" BorderPane.alignment="CENTER">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="292.800048828125" minWidth="10.0" prefWidth="151.9999755859375" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="427.199951171875" minWidth="10.0" prefWidth="248.8000244140625" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
+
+<GridPane maxHeight="-Infinity" prefHeight="442.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.controllers.EditPhonesController">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="292.800048828125" minWidth="10.0" prefWidth="151.9999755859375" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="427.199951171875" minWidth="10.0" prefWidth="248.8000244140625" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="442.0" text="Add or update phones" textFill="#2196f3" GridPane.columnSpan="2">
+         <GridPane.margin>
+            <Insets left="15.0" right="15.0" />
+         </GridPane.margin>
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label text="Choose brand :" textFill="#2196f3" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets left="15.0" />
+         </GridPane.margin>
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <ChoiceBox fx:id="brandChoiceBox" prefHeight="26.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets right="15.0" />
+         </GridPane.margin>
+      </ChoiceBox>
+      <Label text="Version :" textFill="#2196f3" GridPane.rowIndex="2">
+         <GridPane.margin>
+            <Insets left="15.0" />
+         </GridPane.margin>
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <TextField fx:id="versionTextField" prefHeight="26.0" prefWidth="270.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+         <GridPane.margin>
+            <Insets right="15.0" />
+         </GridPane.margin>
+      </TextField>
+      <Label text="Release date :" textFill="#2196f3" GridPane.rowIndex="3">
+         <GridPane.margin>
+            <Insets left="15.0" />
+         </GridPane.margin>
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <DatePicker fx:id="releaseDate" prefHeight="26.0" prefWidth="287.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+         <GridPane.margin>
+            <Insets right="15.0" />
+         </GridPane.margin>
+      </DatePicker>
+      <Label text="Price :" textFill="#2196f3" GridPane.rowIndex="4">
+         <GridPane.margin>
+            <Insets left="15.0" />
+         </GridPane.margin>
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label text="How many in stock :" textFill="#2196f3" GridPane.rowIndex="5">
+         <GridPane.margin>
+            <Insets left="15.0" />
+         </GridPane.margin>
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Spinner fx:id="priceSpinner" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+      <Spinner fx:id="stockSpinner" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+      <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="442.0" text="Add or update phones" textFill="#2196f3" GridPane.columnSpan="2">
-               <GridPane.margin>
-                  <Insets left="15.0" right="15.0" />
-               </GridPane.margin>
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
-            <Label text="Choose brand :" textFill="#2196f3" GridPane.rowIndex="1">
-               <GridPane.margin>
-                  <Insets left="15.0" />
-               </GridPane.margin>
-               <font>
-                  <Font size="17.0" />
-               </font>
-            </Label>
-            <ChoiceBox fx:id="brandChoiceBox" prefHeight="26.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-               <GridPane.margin>
+            <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#addButtonAction" prefHeight="25.0" prefWidth="55.0" style="-fx-background-color: #2196f3;" text="Add" textFill="WHITE">
+               <HBox.margin>
                   <Insets right="15.0" />
-               </GridPane.margin>
-            </ChoiceBox>
-            <Label text="Version :" textFill="#2196f3" GridPane.rowIndex="2">
-               <GridPane.margin>
-                  <Insets left="15.0" />
-               </GridPane.margin>
-               <font>
-                  <Font size="17.0" />
-               </font>
-            </Label>
-            <TextField fx:id="versionTextField" prefHeight="26.0" prefWidth="270.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-               <GridPane.margin>
+               </HBox.margin>
+            </Button>
+            <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#updateButtonAction" prefHeight="25.0" prefWidth="55.0" style="-fx-background-color: #2196f3;" text="Update" textFill="WHITE">
+               <HBox.margin>
                   <Insets right="15.0" />
-               </GridPane.margin>
-            </TextField>
-            <Label text="Release date :" textFill="#2196f3" GridPane.rowIndex="3">
-               <GridPane.margin>
-                  <Insets left="15.0" />
-               </GridPane.margin>
-               <font>
-                  <Font size="17.0" />
-               </font>
-            </Label>
-            <DatePicker fx:id="releaseDate" prefHeight="26.0" prefWidth="287.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
-               <GridPane.margin>
+               </HBox.margin>
+            </Button>
+            <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#deleteButtonAction" prefHeight="25.0" prefWidth="55.0" style="-fx-background-color: #2196f3;" text="Delete" textFill="WHITE">
+               <HBox.margin>
                   <Insets right="15.0" />
-               </GridPane.margin>
-            </DatePicker>
-            <Label text="Price :" textFill="#2196f3" GridPane.rowIndex="4">
-               <GridPane.margin>
-                  <Insets left="15.0" />
-               </GridPane.margin>
-               <font>
-                  <Font size="17.0" />
-               </font>
-            </Label>
-            <Label text="How many in stock :" textFill="#2196f3" GridPane.rowIndex="5">
-               <GridPane.margin>
-                  <Insets left="15.0" />
-               </GridPane.margin>
-               <font>
-                  <Font size="17.0" />
-               </font>
-            </Label>
-            <Spinner fx:id="priceSpinner" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <Spinner fx:id="stockSpinner" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
-               <children>
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#addButtonAction" prefHeight="25.0" prefWidth="55.0" style="-fx-background-color: #2196f3;" text="Add" textFill="WHITE">
-                     <HBox.margin>
-                        <Insets right="15.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#updateButtonAction" prefHeight="25.0" prefWidth="55.0" style="-fx-background-color: #2196f3;" text="Update" textFill="WHITE">
-                     <HBox.margin>
-                        <Insets right="15.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#deleteButtonAction" prefHeight="25.0" prefWidth="55.0" style="-fx-background-color: #2196f3;" text="Delete" textFill="WHITE">
-                     <HBox.margin>
-                        <Insets right="15.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#cancelButtonAction" prefHeight="25.0" prefWidth="55.0" style="-fx-background-color: #2196f3;" text="Cancel" textFill="WHITE">
-                     <HBox.margin>
-                        <Insets right="15.0" />
-                     </HBox.margin>
-                  </Button>
-               </children>
-            </HBox>
+               </HBox.margin>
+            </Button>
+            <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#cancelButtonAction" prefHeight="25.0" prefWidth="55.0" style="-fx-background-color: #2196f3;" text="Cancel" textFill="WHITE">
+               <HBox.margin>
+                  <Insets right="15.0" />
+               </HBox.margin>
+            </Button>
          </children>
-      </GridPane>
-   </center>
-   <left>
-      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="60.0" style="-fx-background-color: #2196f3;" BorderPane.alignment="CENTER" />
-   </left>
-   <right>
-      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="60.0" style="-fx-background-color: #2196f3;" BorderPane.alignment="CENTER" />
-   </right>
-</BorderPane>
+      </HBox>
+   </children>
+</GridPane>

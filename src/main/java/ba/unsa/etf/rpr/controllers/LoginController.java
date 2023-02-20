@@ -69,7 +69,7 @@ public class LoginController {
      * Login button event handler
      * checks if entered email and password are valid and opens home dialog
      * @param actionEvent
-     * @throws BuyerException e
+     * @throws BuyerException
      */
     public void loginButtonAction(ActionEvent actionEvent) throws BuyerException {
         buyer=null;

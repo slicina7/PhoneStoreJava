@@ -1,8 +1,6 @@
 package ba.unsa.etf.rpr.controllers;
 
 import ba.unsa.etf.rpr.dao.DaoFactory;
-import ba.unsa.etf.rpr.dao.PhoneDaoSQLImpl;
-import ba.unsa.etf.rpr.dao.PurchaseDaoSQLImpl;
 import ba.unsa.etf.rpr.domain.Buyer;
 import ba.unsa.etf.rpr.domain.Phone;
 import ba.unsa.etf.rpr.domain.Purchase;
@@ -46,7 +44,6 @@ public class CartController {
         colPhone.setCellValueFactory(new PropertyValueFactory<>("version"));
         colPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
         purchasesTableView.getItems().clear();
-
     }
     /**
      * Sets rows into table of buyers purchases

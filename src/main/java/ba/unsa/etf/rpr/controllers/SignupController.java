@@ -152,11 +152,12 @@ public class SignupController {
 
         if(tacan_unos){
             Random random=new Random();
-            Buyer buyer=new Buyer(idName.getText(),idSurname.getText(),idEmail.getText(),idAccountNumber.getText(),idPassword.getText(),random.nextInt(50000));
+            Buyer buyer=new Buyer(idName.getText(),idSurname.getText(),idEmail.getText(),idAccountNumber.getText(),idPassword.getText(),random.nextInt(10000));
             try {
                 buyerManager.insert(buyer);
             }catch (BuyerException e){
-                System.out.println(e.getMessage());
+                new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+                return;
             }
             try {
                 Stage stage = new Stage();
@@ -166,6 +167,7 @@ public class SignupController {
                 stage.setTitle("Home page");
                 stage.setScene(scene);
                 stage.setResizable(false);
+                stage.getIcons().add(new Image("/img/home.png"));
                 HomeController homeController=loader.getController();
                 homeController.setBuyer(buyer);
                 loader.setController(homeController);

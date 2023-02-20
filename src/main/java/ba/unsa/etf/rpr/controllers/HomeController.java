@@ -46,6 +46,7 @@ public class HomeController {
     public TableColumn<Phone,String> colPhonesDate;
     public TableColumn<Phone,String> colPhonesStock;
     public TableColumn<Phone,String> colPhonesPrice;
+    public TableColumn<Phone,String> colPhonesBrand;
 
     int min=0;
     int max=4000;
@@ -80,6 +81,7 @@ public class HomeController {
         phonesTableView.setItems(phones);
         brandsListView.setItems(brands);
         colPhonesId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colPhonesBrand.setCellValueFactory(new PropertyValueFactory<>("brand"));
         colPhonesVersion.setCellValueFactory(new PropertyValueFactory<>("version"));
         colPhonesDate.setCellValueFactory(new PropertyValueFactory<>("release_date"));
         colPhonesStock.setCellValueFactory(new PropertyValueFactory<>("in_stock"));
@@ -140,6 +142,7 @@ public class HomeController {
                     int a=p.getIn_stock();
                     p.setIn_stock(a-1);
                     phoneManager.update(p);
+                    refreshButtonAction(new ActionEvent());
                 }catch (BuyerException e){
                 }
             }
@@ -159,7 +162,7 @@ public class HomeController {
         try {
             Stage stage = new Stage();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/"+file));
-            Scene scene = new Scene(loader.load(), USE_COMPUTED_SIZE,USE_COMPUTED_SIZE);
+            Scene scene = new Scene(loader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
             stage.setTitle(title);
             stage.setScene(scene);
             stage.setResizable(false);

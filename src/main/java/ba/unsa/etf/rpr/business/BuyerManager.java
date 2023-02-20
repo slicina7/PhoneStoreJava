@@ -16,8 +16,8 @@ public class BuyerManager {
      * @throws BuyerException
      */
     public void validateName(String name) throws BuyerException{
-        if(name==null || name.length()<2 || name.length()>30 || !name.matches("^[a-zA-Z]{2,20}$") || name.isEmpty())
-            throw new BuyerException("Name can only contain letters and has to be longer than two letter and shorter than 30 letters!");
+        if(name==null || name.length()<=2 || name.length()>30 || !name.matches("^[a-zA-Z]{2,20}$") || name.isEmpty())
+            throw new BuyerException("Name can only contain letters and has to be longer than two letters and shorter than 30 letters!");
     }
     /**
      * method for surname validation
@@ -25,8 +25,8 @@ public class BuyerManager {
      * @throws BuyerException
      */
     public void validateSurname(String surname) throws BuyerException{
-        if(surname==null || surname.length()<2 || surname.length()>30 || !surname.matches("^[a-zA-Z]{2,20}$") || surname.isEmpty())
-            throw new BuyerException("Last name can only contain letters and has to be longer than one letter and shorter than 30 letters!");
+        if(surname==null || surname.length()<=2 || surname.length()>30 || !surname.matches("^[a-zA-Z]{2,20}$") || surname.isEmpty())
+            throw new BuyerException("Last name can only contain letters and has to be longer than two letters and shorter than 30 letters!");
     }
     /**
      * method for email validation
@@ -105,8 +105,9 @@ public class BuyerManager {
         validateAccountNumber(buyer.getAccount_number());
         validatePassword(buyer.getPassword());
         for(Buyer b: getAll())
-            if(Objects.equals(buyer.getEmail(),b.getEmail()) || Objects.equals(buyer.getAccount_number(),b.getAccount_number()))
+            if(Objects.equals(buyer.getEmail(),b.getEmail()) || Objects.equals(buyer.getAccount_number(),b.getAccount_number())) {
                 throw new BuyerException("Buyer with that email or account number already exists !");
+            }
         DaoFactory.buyerDao().insert(buyer);
     }
     /**
