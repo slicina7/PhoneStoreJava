@@ -21,7 +21,6 @@ public class App {
     private static final Option getBuyer=new Option("getBu","get-buyer",false,"Printing all buyers from phone-store database");
     private static final Option getPurchase=new Option("getPu","get-purchase",false,"Printing purchases brands from phone-store database");
 
-
     public static void printFormattedOptions(Options options) {
         HelpFormatter helpFormatter = new HelpFormatter();
         PrintWriter printWriter = new PrintWriter(System.out);
@@ -41,11 +40,6 @@ public class App {
         options.addOption(getBuyer);
         options.addOption(getPurchase);
         return options;
-    }
-    public static Brand searchThroughBrands(List<Brand> listOfBrands, String brandName) {
-        Brand brand = null;
-        brand = listOfBrands.stream().filter(cat -> cat.getName().toLowerCase().equals(brandName.toLowerCase())).findAny().get();
-        return brand;
     }
     public static void main(String[] args) throws Exception {
         Options options = addOptions();
@@ -77,7 +71,7 @@ public class App {
         } else if(cl.hasOption(addBuyer.getOpt()) || cl.hasOption(addBuyer.getLongOpt())){
             try {
                 BuyerManager buyerManager=new BuyerManager();
-                Buyer buyer=new Buyer(cl.getArgList().get(0),cl.getArgList().get(1),cl.getArgList().get(3),cl.getArgList().get(4),cl.getArgList().get(5),Integer.parseInt(cl.getArgList().get(6)));
+                Buyer buyer=new Buyer(cl.getArgList().get(0),cl.getArgList().get(1),cl.getArgList().get(2),cl.getArgList().get(3),cl.getArgList().get(4),Integer.parseInt(cl.getArgList().get(5)));
                 buyerManager.insert(buyer);
                 System.out.println("You successfully added buyer to database!");
 
