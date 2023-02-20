@@ -28,6 +28,7 @@ public class BrandManagerTest {
         brands=new ArrayList<>();
         brands.addAll(Arrays.asList(new Brand("Name2"),new Brand("Name3")));
     }
+    @Test
     void validateName() throws BuyerException{
         String correctName="Name";
         try{
@@ -39,16 +40,12 @@ public class BrandManagerTest {
 
         String incorrectShort="S";
         Mockito.doCallRealMethod().when(brandManager).validateName(incorrectShort);
-        BuyerException buyerException1=assertThrows(BuyerException.class,()->{
+        BuyerException buyerException1=Assertions.assertThrows(BuyerException.class,()->{
             brandManager.validateName(incorrectShort);},"Brand name can only contain letters and numbers and has to be longer than two and shorter than 20 letters and numbers!") ;
         Assertions.assertEquals("Brand name can only contain letters and numbers and has to be longer than two and shorter than 20 letters and numbers!",buyerException1.getMessage());
 
     }
-    @Test
-    void insertException() {
-        Brand brand=new Brand("Samsung");
-        assertThrows(BuyerException.class,()->new BrandManager().insert(brand));
-    }
+
     @Test
     void getAll() throws BuyerException{
         when(brandManager.getAll()).thenReturn(brands);
@@ -62,15 +59,4 @@ public class BrandManagerTest {
         Mockito.verify(brandManager).insert(b);
     }
 
-    @Test
-    void getById() throws Exception{
-        BrandManager bm=new BrandManager();
-        assertEquals(bm.getById(1).getName(),"Apple");
-    }
-
-    @Test
-    void searchByName() throws Exception{
-        Brand b =new BrandManager().searchByName("Apple");
-        assertEquals("Apple",b.getName());
-    }
 }

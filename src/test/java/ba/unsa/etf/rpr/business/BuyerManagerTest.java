@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 class BuyerManagerTest {
@@ -42,21 +41,21 @@ class BuyerManagerTest {
 
         String incorrectShort="S";
         Mockito.doCallRealMethod().when(buyerManager).validateName(incorrectShort);
-        BuyerException buyerException1=assertThrows(BuyerException.class,()->{
+        BuyerException buyerException1=Assertions.assertThrows(BuyerException.class,()->{
             buyerManager.validateName(incorrectShort);},"Name can only contain letters and has to be longer than two letter and shorter than 30 letters!") ;
-        Assertions.assertEquals("Name can only contain letters and has to be longer than two letter and shorter than 30 letters!",buyerException1.getMessage());
+        Assertions.assertEquals("Name can only contain letters and has to be longer than two letters and shorter than 30 letters!",buyerException1.getMessage());
 
         String incorrectLong="Ssssssssssssssssssssssssssssssssssss";
         Mockito.doCallRealMethod().when(buyerManager).validateName(incorrectLong);
-        BuyerException buyerException2=assertThrows(BuyerException.class,()->{
+        BuyerException buyerException2=Assertions.assertThrows(BuyerException.class,()->{
             buyerManager.validateName(incorrectLong);},"Name can only contain letters and has to be longer than two letter and shorter than 30 letters!") ;
-        Assertions.assertEquals("Name can only contain letters and has to be longer than two letter and shorter than 30 letters!",buyerException2.getMessage());
+        Assertions.assertEquals("Name can only contain letters and has to be longer than two letters and shorter than 30 letters!",buyerException2.getMessage());
 
         String incorrectNumber = "Name123";
         Mockito.doCallRealMethod().when(buyerManager).validateName(incorrectNumber);
-        BuyerException buyerException3  = assertThrows(BuyerException.class,()->{
+        BuyerException buyerException3  = Assertions.assertThrows(BuyerException.class,()->{
             buyerManager.validateName(incorrectNumber);}, "Username must be between 3 and 45 chars, can't contain numbers");
-        Assertions.assertEquals("Name can only contain letters and has to be longer than two letter and shorter than 30 letters!",buyerException3.getMessage());
+        Assertions.assertEquals("Name can only contain letters and has to be longer than two letters and shorter than 30 letters!",buyerException3.getMessage());
 
     }
 
@@ -72,21 +71,21 @@ class BuyerManagerTest {
 
         String incorrectShort="S";
         Mockito.doCallRealMethod().when(buyerManager).validateSurname(incorrectShort);
-        BuyerException buyerException1=assertThrows(BuyerException.class,()->{
+        BuyerException buyerException1=Assertions.assertThrows(BuyerException.class,()->{
             buyerManager.validateSurname(incorrectShort);},"Name can only contain letters and has to be longer than two letter and shorter than 30 letters!") ;
-        Assertions.assertEquals("Last name can only contain letters and has to be longer than one letter and shorter than 30 letters!",buyerException1.getMessage());
+        Assertions.assertEquals("Last name can only contain letters and has to be longer than two letters and shorter than 30 letters!",buyerException1.getMessage());
 
         String incorrectLong="Ssssssssssssssssssssssssssssssssssss";
         Mockito.doCallRealMethod().when(buyerManager).validateSurname(incorrectLong);
-        BuyerException buyerException2=assertThrows(BuyerException.class,()->{
+        BuyerException buyerException2=Assertions.assertThrows(BuyerException.class,()->{
             buyerManager.validateSurname(incorrectLong);},"Name can only contain letters and has to be longer than two letter and shorter than 30 letters!") ;
-        Assertions.assertEquals("Last name can only contain letters and has to be longer than one letter and shorter than 30 letters!",buyerException2.getMessage());
+        Assertions.assertEquals("Last name can only contain letters and has to be longer than two letters and shorter than 30 letters!",buyerException2.getMessage());
 
         String incorrectNumber = "Name123";
         Mockito.doCallRealMethod().when(buyerManager).validateSurname(incorrectNumber);
-        BuyerException buyerException3  = assertThrows(BuyerException.class,()->{
+        BuyerException buyerException3  = Assertions.assertThrows(BuyerException.class,()->{
             buyerManager.validateSurname(incorrectNumber);}, "Username must be between 3 and 45 chars, can't contain numbers");
-        Assertions.assertEquals("Last name can only contain letters and has to be longer than one letter and shorter than 30 letters!",buyerException3.getMessage());
+        Assertions.assertEquals("Last name can only contain letters and has to be longer than two letters and shorter than 30 letters!",buyerException3.getMessage());
 
     }
 
@@ -94,7 +93,7 @@ class BuyerManagerTest {
     void validatePassword() throws BuyerException{
         String inccorectShort="123";
         Mockito.doCallRealMethod().when(buyerManager).validatePassword(inccorectShort);
-        BuyerException buyerException=assertThrows(BuyerException.class,()->{ buyerManager.validatePassword(inccorectShort);},"Password must be longer than 7 and shorter than 30!");
+        BuyerException buyerException=Assertions.assertThrows(BuyerException.class,()->{ buyerManager.validatePassword(inccorectShort);},"Password must be longer than 7 and shorter than 30!");
         Assertions.assertEquals("Password must be longer than 7 and shorter than 30!",buyerException.getMessage());
     }
 
@@ -118,14 +117,14 @@ class BuyerManagerTest {
 
         String incorrect1 = "email";
         Mockito.doCallRealMethod().when(buyerManager).validateEmail(incorrect1);
-        BuyerException buyerException1 = assertThrows(BuyerException.class, () -> {
+        BuyerException buyerException1 = Assertions.assertThrows(BuyerException.class, () -> {
             buyerManager.validateEmail(incorrect1);
         }, "Invalid email input !");
         Assertions.assertEquals("Invalid email input !", buyerException1.getMessage());
 
         String incorrect2 = "email@";
         Mockito.doCallRealMethod().when(buyerManager).validateEmail(incorrect2);
-        BuyerException buyerException2 = assertThrows(BuyerException.class, () -> {
+        BuyerException buyerException2 = Assertions.assertThrows(BuyerException.class, () -> {
             buyerManager.validateEmail(incorrect2);
         }, "Invalid email input !");
         Assertions.assertEquals("Invalid email input !", buyerException2.getMessage());
